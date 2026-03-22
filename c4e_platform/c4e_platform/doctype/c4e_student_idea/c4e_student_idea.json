@@ -1,0 +1,129 @@
+{
+ "actions": [],
+ "autoname": "format:CSI-{MM}-{YY}-{##}",
+ "creation": "2026-03-12 22:09:54.673710",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "student",
+  "onboarding_idea",
+  "onboarding_problem",
+  "onboarding_target_customer",
+  "onboarding_differentiation",
+  "stage",
+  "ai_feedback_tab",
+  "ai_feedback",
+  "ai_feedback_html"
+ ],
+ "fields": [
+  {
+   "fieldname": "student",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "in_list_view": 1,
+   "label": "Student",
+   "options": "C4E Student",
+   "read_only": 1
+  },
+  {
+   "fieldname": "onboarding_idea",
+   "fieldtype": "Small Text",
+   "label": "What is your idea?",
+   "reqd": 1
+  },
+  {
+   "fieldname": "onboarding_problem",
+   "fieldtype": "Small Text",
+   "label": "What problem does it solve?",
+   "reqd": 1
+  },
+  {
+   "fieldname": "onboarding_target_customer",
+   "fieldtype": "Small Text",
+   "label": "Who has this problem?",
+   "reqd": 1
+  },
+  {
+   "fieldname": "onboarding_differentiation",
+   "fieldtype": "Small Text",
+   "label": "What makes your idea different from what already exists?",
+   "reqd": 1
+  },
+  {
+   "fieldname": "stage",
+   "fieldtype": "Select",
+   "label": "What stage are you at?",
+   "options": "Just an idea in my head\nI know the problem well, haven't built anything\nI have a prototype \u2014 something people can see or try\nI've tested it with real users and have feedback\nI already have customers or people using it",
+   "reqd": 1,
+   "width": "100"
+  },
+  {
+   "fieldname": "ai_feedback_tab",
+   "fieldtype": "Tab Break",
+   "label": "AI Feedback"
+  },
+  {
+   "fieldname": "ai_feedback",
+   "fieldtype": "Markdown Editor",
+   "hidden": 1,
+   "label": "AI Feedback"
+  },
+  {
+   "fieldname": "ai_feedback_html",
+   "fieldtype": "HTML",
+   "label": "AI Feedback HTML",
+   "options": "<div class=\"alert alert-warning\" role=\"alert\">\n                            You have not received <strong>AI feedback</strong> for your idea\n                        </div>"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-03-15 13:53:28.560629",
+ "modified_by": "Administrator",
+ "module": "C4E Platform",
+ "name": "C4E Student Idea",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "if_owner": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "C4E Student",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "C4E Mentor",
+   "share": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

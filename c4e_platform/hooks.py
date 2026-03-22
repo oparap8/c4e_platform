@@ -44,7 +44,9 @@ app_license = "mit"
 
 # include js in doctype views
 # doctype_js = {"doctype" : "public/js/doctype.js"}
-# doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
+doctype_list_js = {
+    "C4E Student Idea" : "public/js/c4e_student_idea_list.js",
+    }
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
 
@@ -117,13 +119,14 @@ app_license = "mit"
 # -----------
 # Permissions evaluated in scripted ways
 
-# permission_query_conditions = {
-# 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
-# }
-#
-# has_permission = {
-# 	"Event": "frappe.desk.doctype.event.event.has_permission",
-# }
+permission_query_conditions = {
+	"C4E Student": "c4e_platform.permissions.get_permission_query_conditions_for_c4e_student",
+	"C4E Mentor": "c4e_platform.permissions.get_permission_query_conditions_for_c4e_mentor",
+}
+
+has_permission = {
+	"C4E Student": "c4e_platform.c4e_platform.doctype.c4e_student.c4e_student.student_has_permission",
+}
 
 # DocType Class
 # ---------------
@@ -132,6 +135,20 @@ app_license = "mit"
 # override_doctype_class = {
 # 	"ToDo": "custom_app.overrides.CustomToDo"
 # }
+
+# Fixtures
+fixtures = [
+    {"dt": "User", "filters": [["name", "not in", ["Guest", "Administrator"]]]},
+    {"dt": "Role", "filters": [["name", "like", "%C4E%"]]},
+    {"dt": "Workspace", "filters": [["module", "=", "C4E Platform"]]},
+    # C4E Platform data records
+    {"dt": "C4E Company Memo"},
+    {"dt": "C4E Student Idea"},
+    {"dt": "C4E Platform Settings"},
+    {"dt": "C4E Student"},
+    {"dt": "C4E Mentor"},
+    {"dt": "C4E Program"},
+]
 
 # Document Events
 # ---------------
@@ -241,4 +258,3 @@ app_license = "mit"
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
-

@@ -1,0 +1,340 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-03-13 14:57:25.606892",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_6dlp",
+  "amended_from",
+  "section_break_kbtd",
+  "idea",
+  "section_break_gzxy",
+  "details_html",
+  "purpose_tab",
+  "purpose",
+  "purpose_checklist_section",
+  "has_who_is_helped",
+  "is_described_in_plain_terms",
+  "is_one_sentence",
+  "problem_tab",
+  "problem",
+  "problem_checklist_section",
+  "is_problem_described_concretely",
+  "is_who_in_problem",
+  "is_problem_significant",
+  "solution_tab",
+  "solution",
+  "solution_checklist_section",
+  "is_solution_described_clearly",
+  "is_solution_aligned_with_problem",
+  "is_user_value_clear",
+  "why_now_tab",
+  "why_now",
+  "market_potential_tab",
+  "market_potential",
+  "competition_tab",
+  "competition",
+  "business_model_tab",
+  "business_model",
+  "team_tab",
+  "team",
+  "tab_10_tab",
+  "traction",
+  "what_you_need_tab",
+  "what_you_need",
+  "vision_tab",
+  "vision"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_6dlp",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "C4E Company Memo",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "section_break_kbtd",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "idea",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Idea",
+   "options": "C4E Student Idea",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "purpose_tab",
+   "fieldtype": "Tab Break",
+   "label": "Purpose"
+  },
+  {
+   "description": "Write one sentence: We help [who] do [what]. That's it.",
+   "fieldname": "purpose",
+   "fieldtype": "Small Text",
+   "label": "Purpose",
+   "placeholder": "We help small fashion sellers in Kigali manage orders and payments without needing a bank account."
+  },
+  {
+   "fieldname": "problem_tab",
+   "fieldtype": "Tab Break",
+   "label": "Problem"
+  },
+  {
+   "description": "Describe the problem your customers face. Be specific \u2014 what happens, how often, and what it costs them.\n",
+   "fieldname": "problem",
+   "fieldtype": "Small Text",
+   "label": "Problem",
+   "placeholder": "Sellers take WhatsApp orders but struggle to track payments. They spend hours chasing customers and risk delivering without payment."
+  },
+  {
+   "fieldname": "solution_tab",
+   "fieldtype": "Tab Break",
+   "label": "Solution"
+  },
+  {
+   "description": "Describe what you've built or are building. Focus on what it does, not what technology it uses.",
+   "fieldname": "solution",
+   "fieldtype": "Small Text",
+   "label": "Solution",
+   "placeholder": "A mobile app that lets sellers create payment links for orders and automatically send reminders if customers haven't paid after 24 hours."
+  },
+  {
+   "fieldname": "why_now_tab",
+   "fieldtype": "Tab Break",
+   "label": "Why Now"
+  },
+  {
+   "description": "Why is this the right time to build this? Something has recently changed \u2014 in technology, behaviour, regulation, or the market \u2014 that makes this possible or urgent.",
+   "fieldname": "why_now",
+   "fieldtype": "Small Text",
+   "label": "Why Now",
+   "placeholder": "Mobile money use in Rwanda has doubled since 2020. Sellers use phones for payments, but tools to manage their business are missing."
+  },
+  {
+   "fieldname": "market_potential_tab",
+   "fieldtype": "Tab Break",
+   "label": "Market Potential"
+  },
+  {
+   "description": "How many people or businesses have this problem? Give your best estimate and say where it comes from.",
+   "fieldname": "market_potential",
+   "fieldtype": "Small Text",
+   "label": "Market Potential",
+   "placeholder": "Kigali has ~80,000 informal sellers (RDB 2023). Around half take orders on WhatsApp. That\u2019s our starting market."
+  },
+  {
+   "fieldname": "competition_tab",
+   "fieldtype": "Tab Break",
+   "label": "Competition"
+  },
+  {
+   "description": "Who else is solving this problem, and why would customers choose you instead?",
+   "fieldname": "competition",
+   "fieldtype": "Small Text",
+   "label": "Competition",
+   "placeholder": "Sellers use Excel, notebooks, or nothing. Apps like Wave handle payments but not orders. Our app combines both in one place."
+  },
+  {
+   "fieldname": "business_model_tab",
+   "fieldtype": "Tab Break",
+   "label": "Business Model"
+  },
+  {
+   "description": "How does this make money? Be direct.",
+   "fieldname": "business_model",
+   "fieldtype": "Small Text",
+   "label": "Business Model",
+   "placeholder": "We charge sellers a flat monthly fee of RWF 5,000. We don't take a cut of transactions."
+  },
+  {
+   "description": "Who is working on this and what does each person bring?",
+   "fieldname": "team_tab",
+   "fieldtype": "Tab Break",
+   "label": "Team"
+  },
+  {
+   "description": "Who is working on this and what does each person bring?",
+   "fieldname": "team",
+   "fieldtype": "Small Text",
+   "label": "Team",
+   "placeholder": "Who is working on this and what does each person bring?"
+  },
+  {
+   "fieldname": "tab_10_tab",
+   "fieldtype": "Tab Break",
+   "label": "Traction"
+  },
+  {
+   "description": "What have you done so far? Users, pilots, interviews, revenue, prototypes \u2014 anything counts.",
+   "fieldname": "traction",
+   "fieldtype": "Small Text",
+   "label": "Traction",
+   "placeholder": "We interviewed 12 Kimironko market sellers. 8 would try a free version. A working prototype has already been used by 2 sellers for a week."
+  },
+  {
+   "fieldname": "what_you_need_tab",
+   "fieldtype": "Tab Break",
+   "label": "What You Need"
+  },
+  {
+   "description": "What specifically are you asking for? Mentorship, network connections, workshop access, program application \u2014 be direct.",
+   "fieldname": "what_you_need",
+   "fieldtype": "Small Text",
+   "label": "What Do You Need from C4E",
+   "placeholder": "I'd like feedback on whether my business model makes sense, and I want to apply for Ventures Lab next term."
+  },
+  {
+   "fieldname": "vision_tab",
+   "fieldtype": "Tab Break",
+   "label": "Vision"
+  },
+  {
+   "description": "Where is this in 3 to 5 years if it works?",
+   "fieldname": "vision",
+   "fieldtype": "Small Text",
+   "label": "Vision",
+   "placeholder": "In five years, we aim to be the standard mobile tool informal sellers across East Africa use to manage their businesses."
+  },
+  {
+   "fieldname": "purpose_checklist_section",
+   "fieldtype": "Section Break",
+   "label": "Purpose Checklist"
+  },
+  {
+   "default": "0",
+   "fieldname": "has_who_is_helped",
+   "fieldtype": "Check",
+   "label": "Who you help is named (a specific type of person or business, not 'everyone')",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_described_in_plain_terms",
+   "fieldtype": "Check",
+   "label": "What you help them do is described in plain terms",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_one_sentence",
+   "fieldtype": "Check",
+   "label": "It fits in one sentence",
+   "read_only": 1
+  },
+  {
+   "fieldname": "problem_checklist_section",
+   "fieldtype": "Section Break",
+   "label": "Problem Checklist"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_problem_described_concretely",
+   "fieldtype": "Check",
+   "label": "The problem is described concretely \u2014 what actually happens",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_who_in_problem",
+   "fieldtype": "Check",
+   "label": "You mention who experiences this problem",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_problem_significant",
+   "fieldtype": "Check",
+   "label": "You give a sense of how significant the problem is (frequency, cost, frustration)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_gzxy",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "details_html",
+   "fieldtype": "HTML",
+   "label": "Details HTML",
+   "options": "<div id=\"HTML\" class=\"text-center p-4 rounded m-5\" style=\"background-color: #f8f9fa; font-weight: bold; box-shadow: 0 0 10px rgba(0,0,0,0.1);\">\n    We are currently working on this feature. Stay tuned for updates!\n</div>"
+  },
+  {
+   "fieldname": "solution_checklist_section",
+   "fieldtype": "Section Break",
+   "label": "Solution Checklist"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_solution_described_clearly",
+   "fieldtype": "Check",
+   "label": "What the product or service does is described in plain terms",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_solution_aligned_with_problem",
+   "fieldtype": "Check",
+   "label": "It's clear how the solution connects to the problem you described",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_user_value_clear",
+   "fieldtype": "Check",
+   "label": "You haven't only described the technology \u2014 you've described what it does for the user",
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-03-16 16:20:33.410446",
+ "modified_by": "Administrator",
+ "module": "C4E Platform",
+ "name": "C4E Company Memo",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "C4E Student",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
