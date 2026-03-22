@@ -136,19 +136,6 @@ has_permission = {
 # 	"ToDo": "custom_app.overrides.CustomToDo"
 # }
 
-# Fixtures
-fixtures = [
-    {"dt": "User", "filters": [["name", "not in", ["Guest", "Administrator"]]]},
-    {"dt": "Role", "filters": [["name", "like", "%C4E%"]]},
-    {"dt": "Workspace", "filters": [["module", "=", "C4E Platform"]]},
-    # C4E Platform data records
-    {"dt": "C4E Company Memo"},
-    {"dt": "C4E Student Idea"},
-    {"dt": "C4E Platform Settings"},
-    {"dt": "C4E Student"},
-    {"dt": "C4E Mentor"},
-    {"dt": "C4E Program"},
-]
 
 # Document Events
 # ---------------
