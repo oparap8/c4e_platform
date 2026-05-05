@@ -12,112 +12,113 @@ def get_client():
 
 @frappe.whitelist()
 def get_idea_feedback(onboarding_idea, onboarding_problem, onboarding_target_customer, onboarding_differentiation):
-    prompt = f"""
-        You are an expert business consultant who helps early-stage entrepreneurs refine their business ideas.
+    system_prompt = """You are a startup advisor at a university Center for Entrepreneurship in Rwanda.
+    Your job is to encourage students and help them think clearly about their idea.
+    You are reading a student's first submission — treat it as the beginning of a conversation, not an evaluation.
 
-        Your task is to review the information below and provide a short SWOT-style reflection on the idea. 
-        However, instead of explicitly labeling Strengths, Weaknesses, Opportunities, or Threats, present your feedback as constructive insights that help the student think about the next steps.
+    Respond ONLY with a valid JSON object. No preamble. No markdown. Just JSON.
 
-        Response Structure:
+    Return this exact structure:
+    {
+    "overview_paragraph": "string — under 100 words, warm and specific to their idea",
+    "overview_bullets": ["string", "string", "string"],
+    "industry_tag": "string — one word or short phrase, e.g. fintech, agritech, health",
+    "approach": "Problem first | Solution first | unclear",
+    "ai_stage_recommendation": "string — one sentence on what to focus on next"
+    }
 
-        1. **Summary (3–5 sentences)**
-        - Write one short paragraph summarizing what the student is building.
-        - Personalize the summary based on the idea provided.
-        - Include one line of context about the industry or market if relevant.
+    Rules:
+    - overview_paragraph must feel personal, not generic. Reference their specific idea.
+    - overview_bullets: 3 to 5 bullets. Each under 20 words. Frame as things to explore, not problems to fix.
+    - Never start a bullet with 'However' or 'Unfortunately'. Never use the word 'Unfortunately'.
+    - If the idea sounds very early, say so positively: it is a good start.
+    - If the idea sounds advanced, acknowledge that too.
+    - Never mention scores, ratings, or maturity levels."""
 
-        2. **Key Insights (3–5 bullet points)**
-        - Each bullet should be a short observation, idea, or question worth exploring.
-        - These can highlight strengths, opportunities, or areas to develop further.
-        - Frame everything as something the student could explore or build next.
-        - Do NOT present anything as something “wrong.”
+    user_prompt = f"""Here is a student's business idea submission:
 
-        Tone Guidelines:
-        - Supportive, constructive, and mentor-like.
-        - If the idea seems very early-stage, acknowledge it positively:  
-        "You're at the very beginning — that's a good place to start."
-        - If the idea seems more developed, acknowledge that:  
-        "You've already done more than most people at this stage."
-        - Do NOT mention scoring, ratings, or maturity levels.
-
-        Length Limit:
-        The entire response should take **no more than 30 seconds to read**. If it is longer than that, shorten it.
-
-        Business Idea:
-        {onboarding_idea}
-
-        Problem:
-        {onboarding_problem}
-
-        Target Customer:
-        {onboarding_target_customer}
-
-        Differentiation:
-        {onboarding_differentiation}
-
-        Response:
-        """
+    Business Idea: {onboarding_idea}
+    Problem: {onboarding_problem}
+    Target Customer: {onboarding_target_customer}
+    Differentiation: {onboarding_differentiation}"""
 
     client = get_client()
     message = client.messages.create(
         model="claude-sonnet-4-6",
         max_tokens=1024,
-        messages=[{"role": "user", "content": prompt}],
-    )
-    return message.content[0].text
-
-
-@frappe.whitelist()
-def check_memo(purpose, problem, solution):
-    prompt = f"""
-        You are screening a student proposal purpose for a university entrepreneurship program.
-
-        Evaluate the submission and return ONLY a valid JSON object.
-
-        Do NOT include:
-        - explanations
-        - markdown
-        - comments
-        - extra text
-        - code blocks
-
-        Return ONLY the JSON object.
-
-        Purpose: {purpose} 
-        Problem: {problem}
-        Solution: {solution}
-
-        Respond using EXACTLY this JSON structure:
-
-        {{
-        "purpose": {{
-            "who_you_help_is_named": true,
-            "what_you_help_them_do_is_described_in_plain_terms": true,
-            "it_fits_in_one_sentence": true
-        }},
-        "problem": {{
-            "is_problem_described_concretely": true,
-            "you_mention_who_experiences_this_problem": true,
-            "you_give_a_sense_of_how_significant_the_problem_is": true
-        }},
-        "solution": {{
-            "what_the_product_or_service_does_is_described_in_plain_terms": true,
-            "its_clear_how_the_solution_connects_to_the_problem_you_described": true,
-            "you_havent_only_described_the_technology_youve_described_what_it_does_for_the_user": true
-        }}
-    }}
-    """
-    client = get_client()
-    message = client.messages.create(
-        model="claude-sonnet-4-6",
-        max_tokens=1024,
-        messages=[{"role": "user", "content": prompt}],
+        system=system_prompt,
+        messages=[{"role": "user", "content": user_prompt}],
     )
 
     response = message.content[0].text.strip()
 
-    # strip markdown code fences if Claude wraps it anyway
     if response.startswith("```") and response.endswith("```"):
         response = response[3:-3].strip()
+        if response.startswith("json"):
+            response = response[4:].strip()
+
+    try:
+        result = json.loads(response)
+
+        bullets = "\n".join(f"- {b}" for b in result.pop("overview_bullets", []))
+        paragraph = result.pop("overview_paragraph", "")
+        result["overview"] = f"### Overview\n\n{paragraph}\n\n### Key Insights\n\n{bullets}"
+
+        return result
+    except json.JSONDecodeError:
+        frappe.throw("AI response is not valid JSON: " + response)
+
+
+@frappe.whitelist()
+def check_memo(purpose, problem, solution):
+    system_prompt = """You are screening a student proposal for a university entrepreneurship program.
+
+    Return ONLY a valid JSON object. No preamble. No markdown. No extra text.
+
+    Each checklist item must have two fields:
+    - "pass": true or false
+    - "reason": null if pass is true, or a short friendly suggestion (under 15 words) if false
+
+    Respond using EXACTLY this structure:
+
+    {{
+    "purpose": {{
+        "person_named": {{ "pass": true, "reason": null }},
+        "outcome_clear": {{ "pass": true, "reason": null }},
+        "one_sentence": {{ "pass": true, "reason": null }}
+    }},
+    "problem": {{
+        "concrete": {{ "pass": true, "reason": null }},
+        "who_affected": {{ "pass": true, "reason": null }},
+        "significance_shown": {{ "pass": true, "reason": null }}
+    }},
+    "solution": {{
+        "what_it_does_clear": {{ "pass": true, "reason": null }},
+        "links_to_problem": {{ "pass": true, "reason": null }},
+        "user_benefit_not_just_tech": {{ "pass": true, "reason": null }}
+    }}
+    }}"""
+    
+    user_prompt = f"""
+        Purpose: {purpose}
+        Problem: {problem}
+        Solution: {solution}
+    """
+
+    client = get_client()
+    message = client.messages.create(
+        model="claude-sonnet-4-6",
+        max_tokens=1024,
+        system=system_prompt,
+        messages=[{"role": "user", "content": user_prompt}],
+    )
+
+    response = message.content[0].text.strip()
+
+    if response.startswith("```") and response.endswith("```"):
+        response = response[3:-3].strip()
+        if response.startswith("json"):
+            response = response[4:].strip()
 
     try:
         result = json.loads(response)

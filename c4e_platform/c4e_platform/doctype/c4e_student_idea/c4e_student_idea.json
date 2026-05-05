@@ -13,7 +13,13 @@
   "stage",
   "ai_feedback_tab",
   "ai_feedback",
-  "ai_feedback_html"
+  "ai_feedback_html",
+  "section_break_dwqy",
+  "approach",
+  "column_break_hoji",
+  "industry",
+  "section_break_nhmw",
+  "ai_stage_recommendation"
  ],
  "fields": [
   {
@@ -73,16 +79,46 @@
    "fieldtype": "HTML",
    "label": "AI Feedback HTML",
    "options": "<div class=\"alert alert-warning\" role=\"alert\">\n                            You have not received <strong>AI feedback</strong> for your idea\n                        </div>"
+  },
+  {
+   "fieldname": "section_break_dwqy",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "approach",
+   "fieldtype": "Data",
+   "label": "Approach",
+   "read_only": 1
+  },
+  {
+   "fieldname": "ai_stage_recommendation",
+   "fieldtype": "Small Text",
+   "label": "AI Stage Recommendation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_hoji",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "industry",
+   "fieldtype": "Data",
+   "label": "Industry",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_nhmw",
+   "fieldtype": "Section Break"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-03-15 13:53:28.560629",
+ "modified": "2026-03-24 12:00:42.745569",
  "modified_by": "Administrator",
  "module": "C4E Platform",
  "name": "C4E Student Idea",
- "naming_rule": "Expression",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {

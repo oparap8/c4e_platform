@@ -40,7 +40,7 @@ frappe.ui.form.on("C4E Student Idea", {
 					write_to_ai_feedback(frm, r.message);
 					frappe.msgprint({
 						title: "AI Feedback",
-						message: frappe.markdown(r.message),
+						message: frappe.markdown(r.message.overview),
 						indicator: "green",
 						is_html: true,
 					});
@@ -82,10 +82,13 @@ function validate_char_length(frm) {
 }
 
 
-function write_to_ai_feedback(frm, content) {
-	frm.set_value("ai_feedback", content);
-
-	frm.set_df_property("ai_feedback_html", "options", frappe.markdown(content));
+function write_to_ai_feedback(frm, message) {
+	const {overview, ai_stage_recommendation, approach, industry_tag} = message
+	frm.set_value("ai_feedback", overview);
+	frm.set_value("approach", approach);
+	frm.set_value("industry", industry_tag);
+	frm.set_value("ai_stage_recommendation", ai_stage_recommendation);
+	frm.set_df_property("ai_feedback_html", "options", frappe.markdown(overview));
 }
 
 function are_all_fields_valid(frm) {

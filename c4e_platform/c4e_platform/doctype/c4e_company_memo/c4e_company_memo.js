@@ -43,9 +43,11 @@ frappe.ui.form.on("C4E Company Memo", {
 					solution,
 				} = r.message;
 
-                set_purpose_checklist(frm, purpose);
-                set_problem_checklist(frm, problem);
-                set_solution_checklist(frm, solution);
+				console.log(r.message)
+
+                // set_purpose_checklist(frm, purpose);
+                // set_problem_checklist(frm, problem);
+                // set_solution_checklist(frm, solution);
 			},
 		});
 	},
@@ -53,45 +55,36 @@ frappe.ui.form.on("C4E Company Memo", {
 
 function set_problem_checklist(frm, problem) {
     const {
-        is_problem_described_concretely,
-        you_mention_who_experiences_this_problem,
-        you_give_a_sense_of_how_significant_the_problem_is,
+        concrete,
+        who_affected,
+        significance_shown,
     } = problem;
 
-    frm.set_value("is_problem_described_concretely", is_problem_described_concretely);
-    frm.set_value("is_who_in_problem", you_mention_who_experiences_this_problem);
-    frm.set_value("is_problem_significant", you_give_a_sense_of_how_significant_the_problem_is);
+    frm.set_value("is_problem_described_concretely", concrete.pass);
+    frm.set_value("is_who_in_problem", who_affected.pass);
+    frm.set_value("is_problem_significant", significance_shown.pass);
 }
 
 function set_purpose_checklist(frm, purpose) {
     const {
-        who_you_help_is_named,
-        what_you_help_them_do_is_described_in_plain_terms,
-        it_fits_in_one_sentence,
+        person_named,
+        outcome_clear,
+        one_sentence,
     } = purpose;
 
-    frm.set_value("has_who_is_helped", who_you_help_is_named);
-	frm.set_value(
-		"is_described_in_plain_terms",
-		what_you_help_them_do_is_described_in_plain_terms,
-	);
-	frm.set_value("is_one_sentence", it_fits_in_one_sentence);
+    frm.set_value("has_who_is_helped", person_named.pass);
+	frm.set_value("is_described_in_plain_terms", outcome_clear.pass);
+	frm.set_value("is_one_sentence", one_sentence.pass);
 }
 
 function set_solution_checklist(frm, solution) {
     const {
-		what_the_product_or_service_does_is_described_in_plain_terms,
-		its_clear_how_the_solution_connects_to_the_problem_you_described,
-		you_havent_only_described_the_technology_youve_described_what_it_does_for_the_user,
+		what_it_does_clear,
+		links_to_problem,
+		user_benefit_not_just_tech,
 	} = solution;
 
-    frm.set_value("is_solution_described_clearly", what_the_product_or_service_does_is_described_in_plain_terms);
-    frm.set_value(
-		"is_solution_aligned_with_problem",
-		its_clear_how_the_solution_connects_to_the_problem_you_described,
-	);
-    frm.set_value(
-		"is_user_value_clear",
-		you_havent_only_described_the_technology_youve_described_what_it_does_for_the_user,
-	);
+    frm.set_value("is_solution_described_clearly", what_it_does_clear.pass);
+    frm.set_value("is_solution_aligned_with_problem", links_to_problem.pass);
+    frm.set_value("is_user_value_clear", user_benefit_not_just_tech.pass);
 }
