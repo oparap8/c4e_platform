@@ -17,18 +17,24 @@
   "has_who_is_helped",
   "is_described_in_plain_terms",
   "is_one_sentence",
+  "section_break_zhfo",
+  "purpose_ai_feedback",
   "problem_tab",
   "problem",
   "problem_checklist_section",
   "is_problem_described_concretely",
   "is_who_in_problem",
   "is_problem_significant",
+  "section_break_pmqt",
+  "problem_ai_feedback",
   "solution_tab",
   "solution",
   "solution_checklist_section",
   "is_solution_described_clearly",
   "is_solution_aligned_with_problem",
   "is_user_value_clear",
+  "section_break_emso",
+  "solution_ai_feedback",
   "why_now_tab",
   "why_now",
   "market_potential_tab",
@@ -294,13 +300,40 @@
    "fieldtype": "Check",
    "label": "You haven't only described the technology \u2014 you've described what it does for the user",
    "read_only": 1
+  },
+  {
+   "fieldname": "section_break_zhfo",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "purpose_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Purpose AI Feedback"
+  },
+  {
+   "fieldname": "section_break_pmqt",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "problem_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Problem AI Feedback"
+  },
+  {
+   "fieldname": "section_break_emso",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "solution_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Solution AI Feedback"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-03-16 16:20:33.410446",
+ "modified": "2026-05-05 10:32:16.394050",
  "modified_by": "Administrator",
  "module": "C4E Platform",
  "name": "C4E Company Memo",
