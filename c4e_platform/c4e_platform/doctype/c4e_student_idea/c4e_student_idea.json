@@ -6,10 +6,8 @@
  "engine": "InnoDB",
  "field_order": [
   "student",
-  "onboarding_idea",
   "onboarding_problem",
-  "onboarding_target_customer",
-  "onboarding_differentiation",
+  "onboarding_solution",
   "stage",
   "ai_feedback_tab",
   "ai_feedback",
@@ -28,31 +26,13 @@
    "hidden": 1,
    "in_list_view": 1,
    "label": "Student",
-   "options": "C4E Student",
+   "options": "User",
    "read_only": 1
-  },
-  {
-   "fieldname": "onboarding_idea",
-   "fieldtype": "Small Text",
-   "label": "What is your idea?",
-   "reqd": 1
   },
   {
    "fieldname": "onboarding_problem",
    "fieldtype": "Small Text",
-   "label": "What problem does it solve?",
-   "reqd": 1
-  },
-  {
-   "fieldname": "onboarding_target_customer",
-   "fieldtype": "Small Text",
-   "label": "Who has this problem?",
-   "reqd": 1
-  },
-  {
-   "fieldname": "onboarding_differentiation",
-   "fieldtype": "Small Text",
-   "label": "What makes your idea different from what already exists?",
+   "label": "Problem",
    "reqd": 1
   },
   {
@@ -109,12 +89,18 @@
   {
    "fieldname": "section_break_nhmw",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "onboarding_solution",
+   "fieldtype": "Small Text",
+   "label": "Solution",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-05-06 16:37:11.655601",
+ "modified": "2026-05-29 15:27:25.019081",
  "modified_by": "Administrator",
  "module": "C4E Platform",
  "name": "C4E Student Idea",

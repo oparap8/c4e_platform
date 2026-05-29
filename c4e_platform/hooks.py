@@ -247,3 +247,12 @@ has_permission = {
 # }
 
 website_route_rules = [{'from_route': '/dashboard/<path:app_path>', 'to_route': 'dashboard'},]
+
+fixtures = [
+    {
+        "doctype": "Role",
+        "filters": {
+            "name": ["in", ["C4E Mentor", "C4E Manager", "C4E Student"]]
+        }
+    }
+]

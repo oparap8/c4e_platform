@@ -198,7 +198,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2026-05-24 15:52:30.001246",
+ "modified": "2026-05-29 15:38:41.818319",
  "modified_by": "Administrator",
  "module": "C4E Platform",
  "name": "C4E Data Room Hint",
@@ -211,6 +211,16 @@
    "print": 1,
    "read": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "C4E Manager",
    "share": 1,
    "write": 1
   }

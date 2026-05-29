@@ -17,6 +17,8 @@
   "competition_and_edge_ai_feedback",
   "discovery",
   "discovery_ai_feedback",
+  "section_break_okty",
+  "market_research_comment",
   "product_tab",
   "stage",
   "stage_ai_feedback",
@@ -24,6 +26,8 @@
   "features_ai_feedback",
   "testing",
   "testing_ai_feedback",
+  "section_break_xfdr",
+  "product_comment",
   "sales_and_marketing_tab",
   "uvp",
   "uvp_ai_feedback",
@@ -33,6 +37,8 @@
   "traction_ai_feedback",
   "marketing_assets",
   "marketing_assets_ai_feedback",
+  "section_break_tkoc",
+  "sales_and_marketing_comment",
   "finance_tab",
   "financial_history",
   "financial_history_ai_feedback",
@@ -42,6 +48,8 @@
   "unit_economics_ai_feedback",
   "ask",
   "ask_ai_feedback",
+  "section_break_iiha",
+  "finance_comment",
   "legal_tab",
   "business_registration",
   "registration_certificate",
@@ -57,10 +65,14 @@
   "cap_table",
   "cap_table_atttach",
   "cap_table_ai_feedback",
+  "section_break_vkyi",
+  "legal_comment",
   "pitch_deck_tab",
   "pitch_deck_link",
   "slides",
   "company_hook",
+  "section_break_ouwx",
+  "pitch_comment",
   "impact_and_partnerships_tab",
   "impact_metrics",
   "impact_metrics_ai_feedback",
@@ -68,7 +80,9 @@
   "signed_agreements",
   "partnerships_ai_feedback",
   "testimonials",
-  "testimonials_ai_feedback"
+  "testimonials_ai_feedback",
+  "section_break_asgf",
+  "imapct_comment"
  ],
  "fields": [
   {
@@ -439,12 +453,82 @@
    "fieldtype": "Small Text",
    "label": "Competition and Edge",
    "placeholder": "e.g. No direct SMS-based competitor in Rwanda. Middlemen are the status quo."
+  },
+  {
+   "fieldname": "market_research_comment",
+   "fieldtype": "Small Text",
+   "label": "Market Research Comment",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "section_break_okty",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_xfdr",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "product_comment",
+   "fieldtype": "Small Text",
+   "label": "Product Comment",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "section_break_tkoc",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "sales_and_marketing_comment",
+   "fieldtype": "Small Text",
+   "label": "Sales and Marketing Comment",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "section_break_iiha",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "finance_comment",
+   "fieldtype": "Small Text",
+   "label": "Finance Comment",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "section_break_vkyi",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "legal_comment",
+   "fieldtype": "Small Text",
+   "label": "Legal Comment",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "section_break_ouwx",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "pitch_comment",
+   "fieldtype": "Small Text",
+   "label": "Pitch Comment",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "section_break_asgf",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "imapct_comment",
+   "fieldtype": "Small Text",
+   "label": "Imapct Comment",
+   "permlevel": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-05-25 15:09:55.334659",
+ "modified": "2026-05-29 15:48:24.230113",
  "modified_by": "Administrator",
  "module": "C4E Platform",
  "name": "C4E Data Room",
@@ -462,6 +546,49 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "C4E Student",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "C4E Mentor",
+   "share": 1
+  },
+  {
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "permlevel": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "C4E Mentor",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "permlevel": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "C4E Student",
+   "share": 1
   }
  ],
  "sort_field": "modified",

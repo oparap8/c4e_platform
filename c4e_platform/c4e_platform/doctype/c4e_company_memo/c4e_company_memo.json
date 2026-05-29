@@ -93,7 +93,9 @@
   "future_described",
   "logical_connection",
   "section_break_hthm",
-  "vision_ai_feedback"
+  "vision_ai_feedback",
+  "comment_tab",
+  "comment"
  ],
  "fields": [
   {
@@ -595,13 +597,24 @@
    "fieldname": "payer_named",
    "fieldtype": "Check",
    "label": "You've named who pays"
+  },
+  {
+   "fieldname": "comment_tab",
+   "fieldtype": "Tab Break",
+   "label": "Comment"
+  },
+  {
+   "fieldname": "comment",
+   "fieldtype": "Small Text",
+   "label": "Comment",
+   "permlevel": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-05-17 01:05:51.085570",
+ "modified": "2026-05-29 15:48:50.145042",
  "modified_by": "Administrator",
  "module": "C4E Platform",
  "name": "C4E Company Memo",
@@ -631,6 +644,37 @@
    "role": "C4E Student",
    "share": 1,
    "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "C4E Mentor",
+   "share": 1
+  },
+  {
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "permlevel": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "C4E Mentor",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "permlevel": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "C4E Student",
+   "share": 1
   }
  ],
  "sort_field": "modified",
