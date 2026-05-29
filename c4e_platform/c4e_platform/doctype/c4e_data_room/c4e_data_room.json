@@ -8,6 +8,7 @@
  "field_order": [
   "venture_name",
   "industry",
+  "c4e_program",
   "market_research_tab",
   "problem",
   "problem_ai_feedback",
@@ -523,12 +524,18 @@
    "fieldtype": "Small Text",
    "label": "Imapct Comment",
    "permlevel": 1
+  },
+  {
+   "fieldname": "c4e_program",
+   "fieldtype": "Link",
+   "label": "C4E Program",
+   "options": "C4E Program"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-05-29 15:48:24.230113",
+ "modified": "2026-05-29 16:16:21.443547",
  "modified_by": "Administrator",
  "module": "C4E Platform",
  "name": "C4E Data Room",
@@ -555,7 +562,7 @@
    "print": 1,
    "read": 1,
    "report": 1,
-   "role": "C4E Student",
+   "role": "C4E Builder",
    "share": 1,
    "write": 1
   },
@@ -587,7 +594,7 @@
    "print": 1,
    "read": 1,
    "report": 1,
-   "role": "C4E Student",
+   "role": "C4E Builder",
    "share": 1
   }
  ],

@@ -252,7 +252,7 @@ fixtures = [
     {
         "doctype": "Role",
         "filters": {
-            "name": ["in", ["C4E Mentor", "C4E Manager", "C4E Student"]]
+            "name": ["in", ["C4E Mentor", "C4E Manager", "C4E Student", "C4E Builder"]]
         }
     }
 ]
