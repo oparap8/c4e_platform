@@ -1,0 +1,221 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-05-15 20:52:16.839522",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "market_research_tab",
+  "problem",
+  "market_size",
+  "competition_and_edge",
+  "discovery",
+  "product_tab",
+  "stage",
+  "features",
+  "testing",
+  "sales_and_marketing_tab",
+  "uvp",
+  "gtm_strategy",
+  "traction",
+  "marketing_assets",
+  "finance_tab",
+  "financial_history",
+  "projections",
+  "unit_economics",
+  "ask",
+  "legal_tab",
+  "business_registration",
+  "contracts",
+  "ip",
+  "compliance",
+  "cap_table",
+  "pitch_deck_tab",
+  "narrative",
+  "impact_and_partnerships_tab",
+  "impact_metrics",
+  "partnerships",
+  "testimonials"
+ ],
+ "fields": [
+  {
+   "fieldname": "market_size",
+   "fieldtype": "Small Text",
+   "label": "Market Size"
+  },
+  {
+   "fieldname": "discovery",
+   "fieldtype": "Small Text",
+   "label": "Discovery"
+  },
+  {
+   "fieldname": "market_research_tab",
+   "fieldtype": "Tab Break",
+   "label": "Market Research"
+  },
+  {
+   "fieldname": "product_tab",
+   "fieldtype": "Tab Break",
+   "label": "Product"
+  },
+  {
+   "fieldname": "sales_and_marketing_tab",
+   "fieldtype": "Tab Break",
+   "label": "Sales and Marketing"
+  },
+  {
+   "fieldname": "finance_tab",
+   "fieldtype": "Tab Break",
+   "label": "Finance"
+  },
+  {
+   "fieldname": "legal_tab",
+   "fieldtype": "Tab Break",
+   "label": "Legal"
+  },
+  {
+   "fieldname": "pitch_deck_tab",
+   "fieldtype": "Tab Break",
+   "label": "Pitch Deck"
+  },
+  {
+   "fieldname": "impact_and_partnerships_tab",
+   "fieldtype": "Tab Break",
+   "label": "Impact and Partnerships"
+  },
+  {
+   "fieldname": "stage",
+   "fieldtype": "Small Text",
+   "label": "Stage"
+  },
+  {
+   "fieldname": "features",
+   "fieldtype": "Small Text",
+   "label": "Features"
+  },
+  {
+   "fieldname": "testing",
+   "fieldtype": "Small Text",
+   "label": "Testing"
+  },
+  {
+   "fieldname": "uvp",
+   "fieldtype": "Small Text",
+   "label": "Unique Value Proposal"
+  },
+  {
+   "fieldname": "traction",
+   "fieldtype": "Small Text",
+   "label": "Traction"
+  },
+  {
+   "fieldname": "marketing_assets",
+   "fieldtype": "Small Text",
+   "label": "Marketing Assets"
+  },
+  {
+   "fieldname": "financial_history",
+   "fieldtype": "Small Text",
+   "label": "Financial History"
+  },
+  {
+   "fieldname": "projections",
+   "fieldtype": "Small Text",
+   "label": "Projections"
+  },
+  {
+   "fieldname": "unit_economics",
+   "fieldtype": "Small Text",
+   "label": "Unit Economics"
+  },
+  {
+   "fieldname": "ask",
+   "fieldtype": "Small Text",
+   "label": "Ask"
+  },
+  {
+   "fieldname": "business_registration",
+   "fieldtype": "Small Text",
+   "label": "Business Registration"
+  },
+  {
+   "fieldname": "contracts",
+   "fieldtype": "Small Text",
+   "label": "Contracts"
+  },
+  {
+   "fieldname": "ip",
+   "fieldtype": "Small Text",
+   "label": "IP"
+  },
+  {
+   "fieldname": "compliance",
+   "fieldtype": "Small Text",
+   "label": "Compliance"
+  },
+  {
+   "fieldname": "cap_table",
+   "fieldtype": "Small Text",
+   "label": "Cap Table"
+  },
+  {
+   "fieldname": "narrative",
+   "fieldtype": "Small Text",
+   "label": "Narrative"
+  },
+  {
+   "fieldname": "partnerships",
+   "fieldtype": "Small Text",
+   "label": "Partnerships"
+  },
+  {
+   "fieldname": "testimonials",
+   "fieldtype": "Small Text",
+   "label": "Testimonials"
+  },
+  {
+   "fieldname": "problem",
+   "fieldtype": "Small Text",
+   "label": "Problem"
+  },
+  {
+   "fieldname": "gtm_strategy",
+   "fieldtype": "Small Text",
+   "label": "Go-To-Market Stratedy"
+  },
+  {
+   "fieldname": "impact_metrics",
+   "fieldtype": "Small Text",
+   "label": "Impact Metrics"
+  },
+  {
+   "fieldname": "competition_and_edge",
+   "fieldtype": "Small Text",
+   "label": "Competition"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-05-24 15:52:30.001246",
+ "modified_by": "Administrator",
+ "module": "C4E Platform",
+ "name": "C4E Data Room Hint",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

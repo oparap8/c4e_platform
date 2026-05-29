@@ -37,20 +37,63 @@
   "solution_ai_feedback",
   "why_now_tab",
   "why_now",
+  "why_now_checklist_section",
+  "something_changed",
+  "solution_possible",
+  "section_break_kabt",
+  "why_now_ai_feedback",
   "market_potential_tab",
   "market_potential",
+  "market_potential_checklist_section",
+  "estimated_number",
+  "market_person",
+  "number_source",
+  "section_break_ugxw",
+  "market_potential_ai_feedback",
   "competition_tab",
   "competition",
+  "competition_checklist_section",
+  "alternative_named",
+  "specific_reason",
+  "section_break_vooi",
+  "competition_ai_feedback",
   "business_model_tab",
   "business_model",
+  "business_model_checklist_section",
+  "payer_named",
+  "pay_description",
+  "amount_provided",
+  "section_break_kqnm",
+  "business_model_ai_feedback",
   "team_tab",
   "team",
+  "section_break_msbf",
+  "team_named",
+  "team_description",
+  "suitable_solver",
+  "section_break_ycgf",
+  "team_ai_feedback",
   "tab_10_tab",
   "traction",
+  "traction_checklist_section",
+  "concrete_thing",
+  "number_provided",
+  "section_break_hbvw",
+  "traction_ai_feedback",
   "what_you_need_tab",
   "what_you_need",
+  "need_checklist_section",
+  "need_stated",
+  "need_next",
+  "section_break_psve",
+  "what_you_need_ai_feedback",
   "vision_tab",
-  "vision"
+  "vision",
+  "vision_checklist_section",
+  "future_described",
+  "logical_connection",
+  "section_break_hthm",
+  "vision_ai_feedback"
  ],
  "fields": [
   {
@@ -90,7 +133,7 @@
    "fieldname": "purpose",
    "fieldtype": "Small Text",
    "label": "Purpose",
-   "placeholder": "We help small fashion sellers in Kigali manage orders and payments without needing a bank account."
+   "placeholder": "e.g. We help small fashion sellers in Kigali manage orders and payments without needing a bank account."
   },
   {
    "fieldname": "problem_tab",
@@ -102,7 +145,7 @@
    "fieldname": "problem",
    "fieldtype": "Small Text",
    "label": "Problem",
-   "placeholder": "Sellers take WhatsApp orders but struggle to track payments. They spend hours chasing customers and risk delivering without payment."
+   "placeholder": "e.g. Sellers take WhatsApp orders but struggle to track payments. They spend hours chasing customers and risk delivering without payment."
   },
   {
    "fieldname": "solution_tab",
@@ -138,7 +181,7 @@
    "fieldname": "market_potential",
    "fieldtype": "Small Text",
    "label": "Market Potential",
-   "placeholder": "Kigali has ~80,000 informal sellers (RDB 2023). Around half take orders on WhatsApp. That\u2019s our starting market."
+   "placeholder": "e.g Kigali has ~80,000 informal sellers (RDB 2023). Around half take orders on WhatsApp. That\u2019s our starting market."
   },
   {
    "fieldname": "competition_tab",
@@ -150,7 +193,7 @@
    "fieldname": "competition",
    "fieldtype": "Small Text",
    "label": "Competition",
-   "placeholder": "Sellers use Excel, notebooks, or nothing. Apps like Wave handle payments but not orders. Our app combines both in one place."
+   "placeholder": "e.g. Sellers use Excel, notebooks, or nothing. Apps like Wave handle payments but not orders. Our app combines both in one place."
   },
   {
    "fieldname": "business_model_tab",
@@ -162,7 +205,7 @@
    "fieldname": "business_model",
    "fieldtype": "Small Text",
    "label": "Business Model",
-   "placeholder": "We charge sellers a flat monthly fee of RWF 5,000. We don't take a cut of transactions."
+   "placeholder": "e.g. We charge sellers a flat monthly fee of RWF 5,000. We don't take a cut of transactions."
   },
   {
    "description": "Who is working on this and what does each person bring?",
@@ -175,7 +218,7 @@
    "fieldname": "team",
    "fieldtype": "Small Text",
    "label": "Team",
-   "placeholder": "Who is working on this and what does each person bring?"
+   "placeholder": "A business and tech duo: I ran a delivery startup, and my co-founder built an inventory app used by three local businesses."
   },
   {
    "fieldname": "tab_10_tab",
@@ -199,7 +242,7 @@
    "fieldname": "what_you_need",
    "fieldtype": "Small Text",
    "label": "What Do You Need from C4E",
-   "placeholder": "I'd like feedback on whether my business model makes sense, and I want to apply for Ventures Lab next term."
+   "placeholder": "e.g I'd like feedback on whether my business model makes sense, and I want to apply for Ventures Lab next term."
   },
   {
    "fieldname": "vision_tab",
@@ -327,13 +370,238 @@
    "fieldname": "solution_ai_feedback",
    "fieldtype": "HTML",
    "label": "Solution AI Feedback"
+  },
+  {
+   "fieldname": "why_now_checklist_section",
+   "fieldtype": "Section Break",
+   "label": "Why Now Checklist"
+  },
+  {
+   "default": "0",
+   "fieldname": "something_changed",
+   "fieldtype": "Check",
+   "label": "You've named something that has recently changed"
+  },
+  {
+   "default": "0",
+   "fieldname": "solution_possible",
+   "fieldtype": "Check",
+   "label": "You've explained why that change makes your solution possible or more urgent now"
+  },
+  {
+   "fieldname": "market_potential_checklist_section",
+   "fieldtype": "Section Break",
+   "label": "Market Potential Checklist"
+  },
+  {
+   "default": "0",
+   "fieldname": "estimated_number",
+   "fieldtype": "Check",
+   "label": "You've given a number or an estimate (not just 'a large market')"
+  },
+  {
+   "default": "0",
+   "fieldname": "market_person",
+   "fieldtype": "Check",
+   "label": "You've described who is in the market \u2014 not just how big it is"
+  },
+  {
+   "default": "0",
+   "fieldname": "number_source",
+   "fieldtype": "Check",
+   "label": "You've mentioned where your number comes from, even if it's an estimate"
+  },
+  {
+   "fieldname": "competition_checklist_section",
+   "fieldtype": "Section Break",
+   "label": "Competition Checklist"
+  },
+  {
+   "default": "0",
+   "fieldname": "alternative_named",
+   "fieldtype": "Check",
+   "label": "You've named at least one alternative (including doing nothing or using a manual method)"
+  },
+  {
+   "default": "0",
+   "fieldname": "specific_reason",
+   "fieldtype": "Check",
+   "label": "You've explained one specific reason customers would choose you over it"
+  },
+  {
+   "fieldname": "business_model_checklist_section",
+   "fieldtype": "Section Break",
+   "label": "Business Model Checklist"
+  },
+  {
+   "default": "0",
+   "fieldname": "pay_description",
+   "fieldtype": "Check",
+   "label": "You've described what they pay for"
+  },
+  {
+   "default": "0",
+   "fieldname": "amount_provided",
+   "fieldtype": "Check",
+   "label": "You've given a rough amount or pricing structure"
+  },
+  {
+   "fieldname": "section_break_msbf",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "team_named",
+   "fieldtype": "Check",
+   "label": "You've named everyone actively working on this"
+  },
+  {
+   "default": "0",
+   "fieldname": "team_description",
+   "fieldtype": "Check",
+   "label": "You've described what each person contributes"
+  },
+  {
+   "default": "0",
+   "fieldname": "suitable_solver",
+   "fieldtype": "Check",
+   "label": "There's at least one sentence on why you are suited to solve this particular problem"
+  },
+  {
+   "fieldname": "traction_checklist_section",
+   "fieldtype": "Section Break",
+   "label": "Traction Checklist"
+  },
+  {
+   "default": "0",
+   "fieldname": "concrete_thing",
+   "fieldtype": "Check",
+   "label": "You've described at least one concrete thing you've done"
+  },
+  {
+   "default": "0",
+   "fieldname": "number_provided",
+   "fieldtype": "Check",
+   "label": "If you have users or revenue, you've given a number"
+  },
+  {
+   "fieldname": "need_checklist_section",
+   "fieldtype": "Section Break",
+   "label": "Need Checklist"
+  },
+  {
+   "default": "0",
+   "fieldname": "need_stated",
+   "fieldtype": "Check",
+   "label": "You've stated at least one specific thing you're asking for"
+  },
+  {
+   "default": "0",
+   "fieldname": "need_next",
+   "fieldtype": "Check",
+   "label": "It's clear what you want next"
+  },
+  {
+   "fieldname": "vision_checklist_section",
+   "fieldtype": "Section Break",
+   "label": "Vision Checklist"
+  },
+  {
+   "default": "0",
+   "fieldname": "future_described",
+   "fieldtype": "Check",
+   "label": "You've described a future state that's bigger than where you are now"
+  },
+  {
+   "default": "0",
+   "fieldname": "logical_connection",
+   "fieldtype": "Check",
+   "label": "It connects logically to what you're building today"
+  },
+  {
+   "fieldname": "section_break_kabt",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "why_now_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Why Now AI Feedback"
+  },
+  {
+   "fieldname": "section_break_ugxw",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "market_potential_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Market Potential AI Feedback"
+  },
+  {
+   "fieldname": "section_break_vooi",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "competition_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Competition AI Feedback"
+  },
+  {
+   "fieldname": "section_break_kqnm",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "business_model_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Business Model AI Feedback"
+  },
+  {
+   "fieldname": "section_break_ycgf",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "team_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Team AI Feedback"
+  },
+  {
+   "fieldname": "section_break_hbvw",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "traction_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Traction AI Feedback"
+  },
+  {
+   "fieldname": "section_break_psve",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "what_you_need_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "What You Need AI Feedback"
+  },
+  {
+   "fieldname": "section_break_hthm",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "vision_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Vision AI Feedback"
+  },
+  {
+   "default": "0",
+   "fieldname": "payer_named",
+   "fieldtype": "Check",
+   "label": "You've named who pays"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-05-05 10:32:16.394050",
+ "modified": "2026-05-17 01:05:51.085570",
  "modified_by": "Administrator",
  "module": "C4E Platform",
  "name": "C4E Company Memo",
@@ -365,8 +633,6 @@
    "write": 1
   }
  ],
- "row_format": "Dynamic",
- "rows_threshold_for_grid_search": 20,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

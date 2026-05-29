@@ -1,0 +1,470 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{venture_name}-{industry}",
+ "creation": "2026-05-15 23:05:08.735014",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "venture_name",
+  "industry",
+  "market_research_tab",
+  "problem",
+  "problem_ai_feedback",
+  "market_size",
+  "market_size_ai_feedback",
+  "competition_and_edge",
+  "competition_and_edge_ai_feedback",
+  "discovery",
+  "discovery_ai_feedback",
+  "product_tab",
+  "stage",
+  "stage_ai_feedback",
+  "features",
+  "features_ai_feedback",
+  "testing",
+  "testing_ai_feedback",
+  "sales_and_marketing_tab",
+  "uvp",
+  "uvp_ai_feedback",
+  "gtm_strategy",
+  "gtm_strategy_ai_feedback",
+  "traction",
+  "traction_ai_feedback",
+  "marketing_assets",
+  "marketing_assets_ai_feedback",
+  "finance_tab",
+  "financial_history",
+  "financial_history_ai_feedback",
+  "projections",
+  "projections_ai_feedback",
+  "unit_economics",
+  "unit_economics_ai_feedback",
+  "ask",
+  "ask_ai_feedback",
+  "legal_tab",
+  "business_registration",
+  "registration_certificate",
+  "business_registration_ai_feedback",
+  "contracts",
+  "agreement_contracts",
+  "contracts_ai_feedback",
+  "ip",
+  "ip_filing",
+  "ip_ai_feedback",
+  "compliance",
+  "compliance_ai_feedback",
+  "cap_table",
+  "cap_table_atttach",
+  "cap_table_ai_feedback",
+  "pitch_deck_tab",
+  "pitch_deck_link",
+  "slides",
+  "company_hook",
+  "impact_and_partnerships_tab",
+  "impact_metrics",
+  "impact_metrics_ai_feedback",
+  "partnerships",
+  "signed_agreements",
+  "partnerships_ai_feedback",
+  "testimonials",
+  "testimonials_ai_feedback"
+ ],
+ "fields": [
+  {
+   "fieldname": "market_research_tab",
+   "fieldtype": "Tab Break",
+   "label": "Market Research"
+  },
+  {
+   "description": "Who is your customer and what problem do they have?",
+   "fieldname": "problem",
+   "fieldtype": "Small Text",
+   "label": "Problem",
+   "placeholder": "e.g. Farmers lose 30-50% income to middlemen who control buyer access."
+  },
+  {
+   "fieldname": "product_tab",
+   "fieldtype": "Tab Break",
+   "label": "Product"
+  },
+  {
+   "fieldname": "sales_and_marketing_tab",
+   "fieldtype": "Tab Break",
+   "label": "Sales and Marketing"
+  },
+  {
+   "fieldname": "finance_tab",
+   "fieldtype": "Tab Break",
+   "label": "Finance"
+  },
+  {
+   "fieldname": "legal_tab",
+   "fieldtype": "Tab Break",
+   "label": "Legal"
+  },
+  {
+   "fieldname": "pitch_deck_tab",
+   "fieldtype": "Tab Break",
+   "label": "Pitch Deck"
+  },
+  {
+   "fieldname": "impact_and_partnerships_tab",
+   "fieldtype": "Tab Break",
+   "label": "Impact and Partnerships"
+  },
+  {
+   "description": "How big is the opportunity?",
+   "fieldname": "market_size",
+   "fieldtype": "Small Text",
+   "label": "Market Size",
+   "placeholder": "e.g. TAM: 200K+ farmers in Rwanda (NISR 2023). SOM Year 1: 500 farmers."
+  },
+  {
+   "description": "What did you learn from talking to real customers?",
+   "fieldname": "discovery",
+   "fieldtype": "Small Text",
+   "label": "Discovery",
+   "placeholder": "e.g. 47 farmers interviewed. 82% said price uncertainty was their biggest problem."
+  },
+  {
+   "description": "What stage is the product at?",
+   "fieldname": "stage",
+   "fieldtype": "Small Text",
+   "label": "Stage",
+   "placeholder": "e.g. MVP live on WhatsApp. 12 farmers using it weekly."
+  },
+  {
+   "description": "Core features today.",
+   "fieldname": "features",
+   "fieldtype": "Small Text",
+   "label": "Features",
+   "placeholder": "e.g. SMS registration, weekly availability posting, SMS order confirmation."
+  },
+  {
+   "description": "Feedback you have received and what you changed.",
+   "fieldname": "testing",
+   "fieldtype": "Small Text",
+   "label": "Testing",
+   "placeholder": "e.g. Farmers wanted bulk order option. Added in Week 3."
+  },
+  {
+   "description": "Your channels and approach.",
+   "fieldname": "gtm_strategy",
+   "fieldtype": "Small Text",
+   "label": "Go-To-Market Strategy",
+   "placeholder": "e.g. Cooperatives, direct farm visits, restaurant procurement managers."
+  },
+  {
+   "description": "What you have so far: flyer, one-pager, brand sample, social posts, anything.",
+   "fieldname": "marketing_assets",
+   "fieldtype": "Small Text",
+   "label": "Marketing Assets",
+   "placeholder": "e.g. Brand kit (logo, colors, 3 social posts), 1 printed flyer for cooperatives."
+  },
+  {
+   "description": "What have you spent and where did the money come from?",
+   "fieldname": "financial_history",
+   "fieldtype": "Small Text",
+   "label": "Financial History",
+   "placeholder": "e.g. Spent RWF 450,000 to date. Bootstrapped from savings."
+  },
+  {
+   "description": "Revenue and cost projections with clear assumptions.",
+   "fieldname": "projections",
+   "fieldtype": "Small Text",
+   "label": "Projections",
+   "placeholder": "e.g. Year 1: 500 farmers, 2% transaction fee = RWF 10M revenue."
+  },
+  {
+   "description": "What it costs to get a customer and what they are worth.",
+   "fieldname": "unit_economics",
+   "fieldtype": "Small Text",
+   "label": "Unit Economics",
+   "placeholder": "e.g. CAC: RWF 8,000. LTV: RWF 60,000. Ratio: 7.5:1."
+  },
+  {
+   "description": "How much and what it will be spent on.",
+   "fieldname": "ask",
+   "fieldtype": "Small Text",
+   "label": "Ask",
+   "placeholder": "e.g. Raising RWF 15M pre-seed. 40% engineering, 30% outreach, 30% ops."
+  },
+  {
+   "description": "Is the business legally registered?",
+   "fieldname": "business_registration",
+   "fieldtype": "Small Text",
+   "label": "Business Registration",
+   "placeholder": "e.g. Registered as SARL in Rwanda. RDB Certificate No. XXX."
+  },
+  {
+   "description": "Written agreements with co-founders, team, key suppliers.",
+   "fieldname": "contracts",
+   "fieldtype": "Small Text",
+   "label": "Contracts",
+   "placeholder": "e.g. Founder agreement: 60/40 split, 4-year vest, 1-year cliff."
+  },
+  {
+   "description": "Sector-specific laws, tax registration, cross-border rules if any.",
+   "fieldname": "compliance",
+   "fieldtype": "Small Text",
+   "label": "Compliance",
+   "placeholder": "e.g. Tax-registered with RRA. Agritech: NAEB cooperative regs apply. No cross-border yet."
+  },
+  {
+   "description": "Equity ownership breakdown. One line summary plus the spreadsheet.",
+   "fieldname": "cap_table",
+   "fieldtype": "Small Text",
+   "label": "Cap Table",
+   "placeholder": "e.g. Founder A: 60%, Founder B: 35%, ESOP reserved: 5%."
+  },
+  {
+   "description": "Paste a Canva or Google Slides link, or upload your deck.",
+   "fieldname": "pitch_deck_link",
+   "fieldtype": "Data",
+   "label": "Pitch Deck Link",
+   "placeholder": "e.g. https://www.canva.com/design/..."
+  },
+  {
+   "description": "The one thing investors should remember after your pitch.",
+   "fieldname": "company_hook",
+   "fieldtype": "Small Text",
+   "label": "Company Hook",
+   "placeholder": "e.g. A farmer can grow 500kg and earn less than the person driving the truck."
+  },
+  {
+   "description": "Measurable outcomes. Users served, jobs created, % income or productivity change, SDG alignment if relevant.",
+   "fieldname": "impact_metrics",
+   "fieldtype": "Small Text",
+   "label": "Impact Metrics",
+   "placeholder": "e.g. 47 farmers onboarded. RWF 1.2M extra income generated in 8 weeks. SDG 1 (poverty), SDG 8 (decent work)."
+  },
+  {
+   "description": "Signed agreements, letters of intent, pilot deals. Logos of partners if you have permission.",
+   "fieldname": "partnerships",
+   "fieldtype": "Small Text",
+   "label": "Partnerships",
+   "placeholder": "e.g. MoU with Kigali Farmers Cooperative (signed Apr 2026, 12-month pilot)."
+  },
+  {
+   "description": "Real quotes from customers, or short case studies of how your product changed their life or business.",
+   "fieldname": "testimonials",
+   "fieldtype": "Small Text",
+   "label": "Testimonials",
+   "placeholder": "e.g. 'I made 40% more this season because I knew the price before I left the farm.' \u2014 Marie U., farmer, Musanze"
+  },
+  {
+   "fieldname": "registration_certificate",
+   "fieldtype": "Attach",
+   "label": "Registration Certificate"
+  },
+  {
+   "fieldname": "agreement_contracts",
+   "fieldtype": "Attach",
+   "label": "Agreement Contracts"
+  },
+  {
+   "fieldname": "ip_filing",
+   "fieldtype": "Attach",
+   "label": "IP Filing"
+  },
+  {
+   "fieldname": "cap_table_atttach",
+   "fieldtype": "Attach",
+   "label": "Cap Table (attach)"
+  },
+  {
+   "fieldname": "slides",
+   "fieldtype": "Attach",
+   "label": "Slides"
+  },
+  {
+   "fieldname": "signed_agreements",
+   "fieldtype": "Attach",
+   "label": "Signed Agreements"
+  },
+  {
+   "fieldname": "venture_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Venture Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "industry",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Industry",
+   "reqd": 1
+  },
+  {
+   "fieldname": "problem_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Problem AI Feedback"
+  },
+  {
+   "fieldname": "market_size_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Market Size AI Feedback"
+  },
+  {
+   "fieldname": "competition_and_edge_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Competition and Edge AI Feedback"
+  },
+  {
+   "fieldname": "discovery_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Discovery AI Feedback"
+  },
+  {
+   "fieldname": "stage_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Stage AI Feedback"
+  },
+  {
+   "fieldname": "features_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Features AI Feedback"
+  },
+  {
+   "fieldname": "testing_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Testing AI Feedback"
+  },
+  {
+   "description": "The one reason a customer picks you over everything else.",
+   "fieldname": "uvp",
+   "fieldtype": "Small Text",
+   "label": "Unique Value Proposal",
+   "placeholder": "e.g. Only platform that gets fair prices to farmers without a smartphone."
+  },
+  {
+   "fieldname": "uvp_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Unique Value Proposal AI Feedback"
+  },
+  {
+   "fieldname": "marketing_assets_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Marketing Assets AI Feedback"
+  },
+  {
+   "fieldname": "financial_history_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Financial History AI Feedback"
+  },
+  {
+   "fieldname": "projections_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Projections AI Feedback"
+  },
+  {
+   "fieldname": "unit_economics_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Unit Economics AI Feedback"
+  },
+  {
+   "fieldname": "ask_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Ask AI Feedback"
+  },
+  {
+   "fieldname": "business_registration_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Business Registration AI Feedback"
+  },
+  {
+   "fieldname": "contracts_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Contracts AI Feedback"
+  },
+  {
+   "fieldname": "compliance_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Compliance AI Feedback"
+  },
+  {
+   "fieldname": "cap_table_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Cap Table AI Feedback"
+  },
+  {
+   "fieldname": "impact_metrics_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Impact Metrics AI Feedback"
+  },
+  {
+   "fieldname": "partnerships_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Partnerships AI Feedback"
+  },
+  {
+   "fieldname": "testimonials_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Testimonials AI Feedback"
+  },
+  {
+   "fieldname": "gtm_strategy_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Go-To-Market Strategy AI Feedback"
+  },
+  {
+   "description": "Users, sales, pilots, partnerships, anything real.",
+   "fieldname": "traction",
+   "fieldtype": "Small Text",
+   "label": "Traction and Revenue",
+   "placeholder": "e.g. 47 farmers, 12 buyers, 23 orders, RWF 1.2M in 8 weeks."
+  },
+  {
+   "fieldname": "traction_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "Traction and Revenue AI Feedback"
+  },
+  {
+   "description": "Key assets and how you are protecting them.",
+   "fieldname": "ip",
+   "fieldtype": "Small Text",
+   "label": "IP Protection",
+   "placeholder": "e.g. AgriLink trademark filed with OPIC Rwanda (pending)."
+  },
+  {
+   "fieldname": "ip_ai_feedback",
+   "fieldtype": "HTML",
+   "label": "IP Protection AI Feedback"
+  },
+  {
+   "description": "Who else is solving this and why will customers choose you?",
+   "fieldname": "competition_and_edge",
+   "fieldtype": "Small Text",
+   "label": "Competition and Edge",
+   "placeholder": "e.g. No direct SMS-based competitor in Rwanda. Middlemen are the status quo."
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-05-25 15:09:55.334659",
+ "modified_by": "Administrator",
+ "module": "C4E Platform",
+ "name": "C4E Data Room",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

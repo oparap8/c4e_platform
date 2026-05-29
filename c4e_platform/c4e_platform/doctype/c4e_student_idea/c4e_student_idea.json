@@ -114,7 +114,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-03-24 12:00:42.745569",
+ "modified": "2026-05-06 16:37:11.655601",
  "modified_by": "Administrator",
  "module": "C4E Platform",
  "name": "C4E Student Idea",
@@ -156,8 +156,6 @@
    "share": 1
   }
  ],
- "row_format": "Dynamic",
- "rows_threshold_for_grid_search": 20,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],

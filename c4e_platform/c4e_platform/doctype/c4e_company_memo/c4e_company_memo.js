@@ -2,45 +2,58 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on("C4E Company Memo", {
-	refresh(frm) {
-		frm.add_custom_button("Get Analysis", () => {
-			if (!frm.doc.purpose || frm.doc.purpose.length < 10) {
-				frappe.msgprint({
-					title: "Validation Error",
-					message: "Please enter a purpose with at least 10 characters before analyzing.",
-					indicator: "red",
-				});
-				return;
-			}
-			frm.trigger("process_ai_checklist");
-		});
-	},
+    refresh(frm) {
+        frm.add_custom_button("Section Analysis", () => {
+            frappe.prompt([
+                {
+                    label: 'Field to Check',
+                    fieldname: 'field_section',
+                    fieldtype: 'Select',
+                    options: ['Purpose', 'Problem', 'Solution', 'Why Now', 'Market Potential', 
+                        'Competition', 'Business Model', 'Team', 'Traction', 'What You Need', 'Vision'],
+                    reqd: 1
+                }
+            ],
+            (values) => {
+                const section_key = (values.field_section).toLowerCase().replace(/ /g, '_');
+                
+                const section_text = frm.doc[section_key];
 
-	process_ai_checklist(frm) {
-		frappe.call({
-			method: "c4e_platform.api.ai_feedback.check_memo",
-			args: {
-				purpose: frm.doc.purpose,
-				problem: frm.doc.problem,
-				solution: frm.doc.solution,
-			},
-			freeze: true,
-			freeze_message: "Analyzing your idea...",
-			callback(r) {
-				if (!r.message) return;
+                if (!section_text || section_text.length < 10) {
+                    frappe.msgprint({
+                        title: "Validation Error",
+                        message: `Please enter a ${values.field_section} with at least 10 characters before analyzing.`,
+                        indicator: "red",
+                    });
+                    return;
+                }
 
-				const { purpose, problem, solution } = r.message;
+                frm.events.process_ai_checklist(frm, section_key, section_text);
+            });
+        });
+    },
 
-				frm.set_df_property("purpose_ai_feedback", "options", build_feedback_html(purpose));
-				frm.set_df_property("problem_ai_feedback", "options", build_feedback_html(problem));
-				frm.set_df_property("solution_ai_feedback", "options", build_feedback_html(solution));
+    process_ai_checklist(frm, section_key, section_text) {
+        frappe.call({
+            method: "c4e_platform.api.company_memo.check_memo",
+            args: {
+                key: section_key,
+                field: section_text,
+            },
+            freeze: true,
+            freeze_message: "Analyzing your idea...",
+            callback(r) {
+                if (!r.message) return;
 
-				set_purpose_checklist(frm, purpose);
-				set_problem_checklist(frm, problem);
-				set_solution_checklist(frm, solution);
-			},
-		});
-	},
+                const result = r.message;
+
+                console.log(result)
+
+                section_ai_feedback(frm, section_key, result);  
+                set_checklist(frm, section_key, result);
+            },
+        });
+    },
 });
 
 function build_feedback_html(section) {
@@ -52,20 +65,83 @@ function build_feedback_html(section) {
 	return `<ul>${failures}</ul>`;
 }
 
-function set_purpose_checklist(frm, { person_named, outcome_clear, one_sentence }) {
-	frm.set_value("has_who_is_helped", person_named.pass);
-	frm.set_value("is_described_in_plain_terms", outcome_clear.pass);
-	frm.set_value("is_one_sentence", one_sentence.pass);
+function section_ai_feedback(frm, section, result){
+	const target_fieldname = `${section}_ai_feedback`;
+
+	const inner_data = result[section];
+
+	if (!inner_data) {
+        console.error(`No data found for section: ${section}`);
+        return;
+    }
+
+	frm.set_df_property(target_fieldname, "options", build_feedback_html(inner_data));
 }
 
-function set_problem_checklist(frm, { concrete, who_affected, significance_shown }) {
-	frm.set_value("is_problem_described_concretely", concrete.pass);
-	frm.set_value("is_who_in_problem", who_affected.pass);
-	frm.set_value("is_problem_significant", significance_shown.pass);
-}
+function set_checklist(frm, section, result) {
+    const inner_data = result?.[section];
+    if (!inner_data) return; 
 
-function set_solution_checklist(frm, { what_it_does_clear, links_to_problem, user_benefit_not_just_tech }) {
-	frm.set_value("is_solution_described_clearly", what_it_does_clear.pass);
-	frm.set_value("is_solution_aligned_with_problem", links_to_problem.pass);
-	frm.set_value("is_user_value_clear", user_benefit_not_just_tech.pass);
+    const field_map = {
+        "purpose": {
+            "has_who_is_helped": "person_named",
+            "is_described_in_plain_terms": "outcome_clear",
+            "is_one_sentence": "one_sentence"
+        },
+        "problem": {
+            "is_problem_described_concretely": "problem_described_concretely",
+            "is_who_in_problem": "who_affected",
+            "is_problem_significant": "significance_shown"
+        },
+        "solution": {
+            "is_solution_described_clearly": "what_it_does_clear",
+            "is_solution_aligned_with_problem": "links_to_problem",
+            "is_user_value_clear": "user_benefit_not_just_tech"
+        },
+        "why_now": {
+            "something_changed": "named_recent_change",
+            "solution_possible": "change_makes_solution_needed"
+        },
+        "market_potential": {
+            "estimated_number": "market_number_estimate_provided",
+            "market_person": "target_market_mentioned",
+            "number_source": "data_source_mentioned"
+        },
+        "competition": {
+            "alternative_named": "competitor_named",
+            "specific_reason": "competitive_advantage_explained"
+        },
+        "business_model": {
+            "payer_named": "who_pays",
+            "pay_description": "what_they_pay_for",
+            "amount_provided": "amount_or_pricing_structure"
+        },
+        "team": {
+            "team_named": "everyone_working_named",
+            "team_description": "role_description_for_each",
+            "suitable_solver": "team_skills_match_problem"
+        },
+        "traction": {
+            "concrete_thing": "one_concrete_thing_done",
+            "number_provided": "if_user_revenue_stated"
+        },
+        "what_you_need": {
+            "need_stated": "stated_what_needed",
+            "need_next": "what_want_next_clear"
+        },
+        "vision": {
+            "future_described": "future_bigger_than_now_described",
+            "logical_connection": "connection_to_current_solution"
+        }
+    };
+
+    const current_mapping = field_map[section];
+
+    if (current_mapping) {
+        for (const [frappe_field, ai_key] of Object.entries(current_mapping)) {
+            const passed = inner_data[ai_key]?.pass || false; 
+            
+            frm.set_value(frappe_field, passed ? 1 : 0);
+        }
+    }
 }

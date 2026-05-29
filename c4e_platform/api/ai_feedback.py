@@ -1,13 +1,6 @@
 import frappe
-import anthropic
 import json
-
-
-def get_client():
-    api_key = frappe.db.get_single_value("C4E Platform Settings", "anthropic_api_key")
-    if not api_key:
-        frappe.throw("Anthropic API key not configured in C4E Platform Settings.")
-    return anthropic.Anthropic(api_key=api_key)
+from c4e_platform.api.ai_config import get_client
 
 
 @frappe.whitelist()
@@ -71,7 +64,8 @@ def get_idea_feedback(onboarding_idea, onboarding_problem, onboarding_target_cus
 
 @frappe.whitelist()
 def check_memo(purpose, problem, solution):
-    system_prompt = """You are screening a student proposal for a university entrepreneurship program.
+    system_prompt = """
+    You are screening a student proposal for a university entrepreneurship program.
 
     Return ONLY a valid JSON object. No preamble. No markdown. No extra text.
 
@@ -97,7 +91,8 @@ def check_memo(purpose, problem, solution):
         "links_to_problem": {{ "pass": true, "reason": null }},
         "user_benefit_not_just_tech": {{ "pass": true, "reason": null }}
     }}
-    }}"""
+    }}
+    """
     
     user_prompt = f"""
         Purpose: {purpose}
@@ -125,3 +120,6 @@ def check_memo(purpose, problem, solution):
         return result
     except json.JSONDecodeError:
         frappe.throw("AI response is not valid JSON: " + response)
+
+
+
