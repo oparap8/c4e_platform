@@ -6,6 +6,7 @@
  "engine": "InnoDB",
  "field_order": [
   "student",
+  "student_idea",
   "onboarding_problem",
   "onboarding_solution",
   "stage",
@@ -95,12 +96,17 @@
    "fieldtype": "Small Text",
    "label": "Solution",
    "reqd": 1
+  },
+  {
+   "fieldname": "student_idea",
+   "fieldtype": "Data",
+   "label": "Student Idea"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-05-29 15:27:25.019081",
+ "modified": "2026-05-29 16:03:59.152438",
  "modified_by": "Administrator",
  "module": "C4E Platform",
  "name": "C4E Student Idea",
