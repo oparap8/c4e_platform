@@ -1,0 +1,1 @@
+import{A as e,D as t,t as n,w as r,x as i}from"./index.js";var a={},o={class:`auth-shell`};function s(n,a){let s=e(`RouterView`);return t(),i(`div`,o,[r(s)])}var c=n(a,[[`render`,s]]);export{c as default};

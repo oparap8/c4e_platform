@@ -119,7 +119,10 @@ def generate_system_prompt(key):
     
 
 @frappe.whitelist()
-def check_memo(key, field):
+def check_memo():
+    key = frappe.form_dict.get('key')
+    field = frappe.form_dict.get('field')
+
     system_prompt = generate_system_prompt(key)
     
     user_prompt = f"""

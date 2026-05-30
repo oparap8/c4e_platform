@@ -120,12 +120,7 @@ doctype_list_js = {
 # Permissions evaluated in scripted ways
 
 permission_query_conditions = {
-	"C4E Student": "c4e_platform.permissions.get_permission_query_conditions_for_c4e_student",
-	"C4E Mentor": "c4e_platform.permissions.get_permission_query_conditions_for_c4e_mentor",
-}
-
-has_permission = {
-	"C4E Student": "c4e_platform.c4e_platform.doctype.c4e_student.c4e_student.student_has_permission",
+	"C4E Student Idea": "c4e_platform.permissions.get_permission_query_conditions_for_student_idea",
 }
 
 # DocType Class
@@ -246,7 +241,13 @@ has_permission = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
-website_route_rules = [{'from_route': '/dashboard/<path:app_path>', 'to_route': 'dashboard'},]
+# Website Route Rules to bypass Frappe routing for our SPA routes
+website_route_rules = [
+	{"from_route": "/dashboard/login", "to_route": "dashboard"},  # Match your frontend name
+	{"from_route": "/dashboard/<path:app_path>", "to_route": "dashboard"},
+	{"from_route": "/dashboard", "to_route": "dashboard"},
+	{"from_route": "/app", "to_route": "/app"},  # Keep ERPNext desk routing
+]
 
 fixtures = [
     {

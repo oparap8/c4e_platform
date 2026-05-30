@@ -61,7 +61,12 @@ def generate_data_system_prompt(key):
     return system_prompt
 
 @frappe.whitelist()
-def data_room_feedback(venture_name, industry, key, field):
+def data_room_feedback():
+    venture_name = frappe.form_dict.get('venture_name')
+    industry = frappe.form_dict.get('industry')
+    key = frappe.form_dict.get('key')
+    field = frappe.form_dict.get('field')
+
     system_prompt = generate_data_system_prompt(key)
 
     payload = {

@@ -4,8 +4,13 @@ from c4e_platform.api.ai_config import get_client
 
 
 @frappe.whitelist()
-def get_idea_feedback(onboarding_idea, onboarding_problem, onboarding_target_customer, onboarding_differentiation):
-    system_prompt = """You are a startup advisor at a university Center for Entrepreneurship in Rwanda.
+def get_idea_feedback():
+	student_idea = frappe.form_dict.get('student_idea')
+	onboarding_problem = frappe.form_dict.get('onboarding_problem') 
+	onboarding_solution = frappe.form_dict.get('onboarding_solution')
+
+
+	system_prompt = """You are a startup advisor at a university Center for Entrepreneurship in Rwanda.
     Your job is to encourage students and help them think clearly about their idea.
     You are reading a student's first submission — treat it as the beginning of a conversation, not an evaluation.
 
@@ -28,43 +33,42 @@ def get_idea_feedback(onboarding_idea, onboarding_problem, onboarding_target_cus
     - If the idea sounds advanced, acknowledge that too.
     - Never mention scores, ratings, or maturity levels."""
 
-    user_prompt = f"""Here is a student's business idea submission:
+	user_prompt = f"""Here is a student's business idea submission:
 
-    Business Idea: {onboarding_idea}
+    Idea Title: {student_idea}
     Problem: {onboarding_problem}
-    Target Customer: {onboarding_target_customer}
-    Differentiation: {onboarding_differentiation}"""
+    Solution: {onboarding_solution}"""
 
-    client = get_client()
-    message = client.messages.create(
-        model="claude-sonnet-4-6",
-        max_tokens=1024,
-        system=system_prompt,
-        messages=[{"role": "user", "content": user_prompt}],
-    )
+	client = get_client()
+	message = client.messages.create(
+		model="claude-sonnet-4-6",
+		max_tokens=1024,
+		system=system_prompt,
+		messages=[{"role": "user", "content": user_prompt}],
+	)
 
-    response = message.content[0].text.strip()
+	response = message.content[0].text.strip()
 
-    if response.startswith("```") and response.endswith("```"):
-        response = response[3:-3].strip()
-        if response.startswith("json"):
-            response = response[4:].strip()
+	if response.startswith("```") and response.endswith("```"):
+		response = response[3:-3].strip()
+		if response.startswith("json"):
+			response = response[4:].strip()
 
-    try:
-        result = json.loads(response)
+	try:
+		result = json.loads(response)
 
-        bullets = "\n".join(f"- {b}" for b in result.pop("overview_bullets", []))
-        paragraph = result.pop("overview_paragraph", "")
-        result["overview"] = f"### Overview\n\n{paragraph}\n\n### Key Insights\n\n{bullets}"
+		bullets = "\n".join(f"- {b}" for b in result.pop("overview_bullets", []))
+		paragraph = result.pop("overview_paragraph", "")
+		result["overview"] = f"### Overview\n\n{paragraph}\n\n### Key Insights\n\n{bullets}"
 
-        return result
-    except json.JSONDecodeError:
-        frappe.throw("AI response is not valid JSON: " + response)
+		return result
+	except json.JSONDecodeError:
+		frappe.throw("AI response is not valid JSON: " + response)
 
 
 @frappe.whitelist()
 def check_memo(purpose, problem, solution):
-    system_prompt = """
+	system_prompt = """
     You are screening a student proposal for a university entrepreneurship program.
 
     Return ONLY a valid JSON object. No preamble. No markdown. No extra text.
@@ -93,33 +97,30 @@ def check_memo(purpose, problem, solution):
     }}
     }}
     """
-    
-    user_prompt = f"""
+
+	user_prompt = f"""
         Purpose: {purpose}
         Problem: {problem}
         Solution: {solution}
     """
 
-    client = get_client()
-    message = client.messages.create(
-        model="claude-sonnet-4-6",
-        max_tokens=1024,
-        system=system_prompt,
-        messages=[{"role": "user", "content": user_prompt}],
-    )
+	client = get_client()
+	message = client.messages.create(
+		model="claude-sonnet-4-6",
+		max_tokens=1024,
+		system=system_prompt,
+		messages=[{"role": "user", "content": user_prompt}],
+	)
 
-    response = message.content[0].text.strip()
+	response = message.content[0].text.strip()
 
-    if response.startswith("```") and response.endswith("```"):
-        response = response[3:-3].strip()
-        if response.startswith("json"):
-            response = response[4:].strip()
+	if response.startswith("```") and response.endswith("```"):
+		response = response[3:-3].strip()
+		if response.startswith("json"):
+			response = response[4:].strip()
 
-    try:
-        result = json.loads(response)
-        return result
-    except json.JSONDecodeError:
-        frappe.throw("AI response is not valid JSON: " + response)
-
-
-
+	try:
+		result = json.loads(response)
+		return result
+	except json.JSONDecodeError:
+		frappe.throw("AI response is not valid JSON: " + response)
