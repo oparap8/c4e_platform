@@ -529,13 +529,14 @@
    "fieldname": "c4e_program",
    "fieldtype": "Link",
    "label": "C4E Program",
-   "options": "C4E Program"
+   "options": "C4E Program",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-05-29 16:16:21.443547",
+ "modified": "2026-05-31 20:19:02.638936",
  "modified_by": "Administrator",
  "module": "C4E Platform",
  "name": "C4E Data Room",

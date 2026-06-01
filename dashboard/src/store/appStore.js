@@ -45,12 +45,15 @@ export const useAppStore = defineStore('app', () => {
   async function _loadSession() {
     const email = await frappeGetCurrentUser()
     if (!email || email === 'Guest') { user.value = null; return }
-    const info  = await frappeGetUserInfo(email)
+    const [info, roles] = await Promise.all([
+      frappeGetUserInfo(email),
+      frappeCall('c4e_platform.api.auth.get_current_user_roles'),
+    ])
     user.value  = {
       name:      info?.name || email,
       email,
       full_name: info?.full_name || email,
-      roles:     (info?.user_roles || []).map(r => r.role),
+      roles:     roles || [],
     }
     await loadIdeas()
   }

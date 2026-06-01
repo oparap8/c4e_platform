@@ -1,7 +1,7 @@
 <script setup>
 import { inject, ref, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { frappeGetList, frappeSetValue, frappeCall } from '@/utils/frappe'
+import { frappeGetList, frappeSetValue, frappeCall, frappeUpdate } from '@/utils/frappe'
 
 const idea   = inject('idea')
 const router = useRouter()
@@ -9,44 +9,74 @@ const route  = useRoute()
 
 // 11 sections — keys are Frappe fieldnames (also used as check_memo key argument)
 const MEMO_SECTIONS = [
-  { key: 'purpose',        name: 'Purpose',          required: true,  info: 'Describe your venture in one clear sentence. Who is it for and what does it do?',
-    checklist: ['Who is it for?', 'What does it do in one sentence?', 'Is it plain language?'] },
-  { key: 'problem',        name: 'Problem',           required: true,  info: 'What specific problem are you solving? Be concrete — vague problems produce vague solutions.',
-    checklist: ['What specific problem are you solving?', 'Who experiences this problem?', 'What evidence do you have?'] },
-  { key: 'solution',       name: 'Solution',          required: true,  info: 'Explain how your solution fixes the problem. Connect it directly to what you described above.',
-    checklist: ['What is your proposed solution?', 'How does it connect to the problem?', 'What makes it work?'] },
-  { key: 'why_now',        name: 'Why Now',           required: false, info: 'What has changed recently that makes this the right time? Technology, regulation, behaviour shift?',
-    checklist: ['What has changed recently?', 'Why hasn\'t this been solved before?'] },
-  { key: 'market_potential', name: 'Market Potential', required: true, info: 'How many people have this problem and how much would they pay to solve it?',
-    checklist: ['How big is the market?', 'What is your initial target segment?', 'What is your revenue opportunity?'] },
-  { key: 'competition',    name: 'Competition',       required: true,  info: 'Who else is trying to solve this? What do you do that they don\'t?',
-    checklist: ['Who else is solving this?', 'Why will customers choose you?', 'What is your unfair advantage?'] },
-  { key: 'business_model', name: 'Business Model',    required: true,  info: 'Who pays you, what do they pay for, and roughly how much?',
-    checklist: ['Who pays you?', 'What do they pay for?', 'Approximately how much?'] },
-  { key: 'team',           name: 'Team',              required: true,  info: 'Who is building this and why are you the right people?',
-    checklist: ['Who is on your team?', 'Why are you the right people?', 'What relevant experience?'] },
-  { key: 'traction',       name: 'Traction',          required: false, info: 'What have you done so far? Users, pilots, revenue, partnerships, interviews.',
-    checklist: ['What have you built or tested?', 'Have you spoken to potential customers?', 'Any early results?'] },
-  { key: 'what_you_need',  name: 'What Do You Need?', required: true,  info: 'What specific help are you looking for from C4E? Be precise, not general.',
-    checklist: ['What specific support are you looking for?', 'What would help most right now?'] },
-  { key: 'vision',         name: 'Vision',            required: false, info: 'Where is this going in 5 years? What does success look like at scale?',
-    checklist: ['Where do you want this in 5 years?', 'What is the bigger impact?'] },
+  { key: 'purpose',          name: 'Purpose',          required: true,  info: 'Describe your venture in one clear sentence. Who is it for and what does it do?' },
+  { key: 'problem',          name: 'Problem',           required: true,  info: 'What specific problem are you solving? Be concrete — vague problems produce vague solutions.' },
+  { key: 'solution',         name: 'Solution',          required: true,  info: 'Explain how your solution fixes the problem. Connect it directly to what you described above.' },
+  { key: 'why_now',          name: 'Why Now',           required: false, info: 'What has changed recently that makes this the right time? Technology, regulation, behaviour shift?' },
+  { key: 'market_potential', name: 'Market Potential',  required: true,  info: 'How many people have this problem and how much would they pay to solve it?' },
+  { key: 'competition',      name: 'Competition',       required: true,  info: "Who else is trying to solve this? What do you do that they don't?" },
+  { key: 'business_model',   name: 'Business Model',    required: true,  info: 'Who pays you, what do they pay for, and roughly how much?' },
+  { key: 'team',             name: 'Team',              required: true,  info: 'Who is building this and why are you the right people?' },
+  { key: 'traction',         name: 'Traction',          required: false, info: 'What have you done so far? Users, pilots, revenue, partnerships, interviews.' },
+  { key: 'what_you_need',    name: 'What Do You Need?', required: true,  info: 'What specific help are you looking for from C4E? Be precise, not general.' },
+  { key: 'vision',           name: 'Vision',            required: false, info: 'Where is this going in 5 years? What does success look like at scale?' },
 ]
 
-// Checklist criteria per section (from check_memo API response)
-const CRITERIA_LABELS = {
-  purpose:          { person_named: 'Person or customer named', outcome_clear: 'Outcome is clear', one_sentence: 'Fits in one sentence' },
-  problem:          { problem_described_concretely: 'Problem described concretely', who_affected: 'Who is affected', significance_shown: 'Significance shown' },
-  solution:         { what_it_does_clear: 'What it does is clear', links_to_problem: 'Links to the problem', user_benefit_not_just_tech: 'User benefit, not just technology' },
-  why_now:          { named_recent_change: 'Named a recent change', change_makes_solution_needed: 'Change makes solution needed' },
-  market_potential: { market_number_estimate_provided: 'Market number or estimate given', target_market_mentioned: 'Target market mentioned', data_source_mentioned: 'Data source mentioned' },
-  competition:      { competitor_named: 'Competitor named', competitive_advantage_explained: 'Competitive advantage explained' },
-  business_model:   { who_pays: 'Who pays is named', what_they_pay_for: 'What they pay for is clear', amount_or_pricing_structure: 'Amount or pricing structure given' },
-  team:             { everyone_working_named: 'Everyone working is named', role_description_for_each: 'Role described for each', team_skills_match_problem: 'Skills match the problem' },
-  traction:         { one_concrete_thing_done: 'One concrete thing done', if_user_revenue_stated: 'Users or revenue stated (if any)' },
-  what_you_need:    { stated_what_needed: 'Stated what is needed', what_want_next_clear: 'What you want next is clear' },
-  vision:           { future_bigger_than_now_described: 'Future bigger than now described', connection_to_current_solution: 'Connection to current solution' },
+// Maps AI criterion keys → doctype checkbox fieldnames + exact doctype labels
+const SECTION_CRITERIA = {
+  purpose: [
+    { criterion: 'person_named',  fieldname: 'has_who_is_helped',           label: "Who you help is named (a specific type of person or business, not 'everyone')" },
+    { criterion: 'outcome_clear', fieldname: 'is_described_in_plain_terms', label: 'What you help them do is described in plain terms' },
+    { criterion: 'one_sentence',  fieldname: 'is_one_sentence',             label: 'It fits in one sentence' },
+  ],
+  problem: [
+    { criterion: 'problem_described_concretely', fieldname: 'is_problem_described_concretely', label: 'The problem is described concretely — what actually happens' },
+    { criterion: 'who_affected',                 fieldname: 'is_who_in_problem',               label: 'You mention who experiences this problem' },
+    { criterion: 'significance_shown',           fieldname: 'is_problem_significant',          label: 'You give a sense of how significant the problem is (frequency, cost, frustration)' },
+  ],
+  solution: [
+    { criterion: 'what_it_does_clear',         fieldname: 'is_solution_described_clearly',    label: 'What the product or service does is described in plain terms' },
+    { criterion: 'links_to_problem',           fieldname: 'is_solution_aligned_with_problem', label: "It's clear how the solution connects to the problem you described" },
+    { criterion: 'user_benefit_not_just_tech', fieldname: 'is_user_value_clear',              label: "You haven't only described the technology — you've described what it does for the user" },
+  ],
+  why_now: [
+    { criterion: 'named_recent_change',          fieldname: 'something_changed', label: "You've named something that has recently changed" },
+    { criterion: 'change_makes_solution_needed', fieldname: 'solution_possible', label: "You've explained why that change makes your solution possible or more urgent now" },
+  ],
+  market_potential: [
+    { criterion: 'market_number_estimate_provided', fieldname: 'estimated_number', label: "You've given a number or an estimate (not just 'a large market')" },
+    { criterion: 'target_market_mentioned',          fieldname: 'market_person',   label: "You've described who is in the market — not just how big it is" },
+    { criterion: 'data_source_mentioned',            fieldname: 'number_source',   label: "You've mentioned where your number comes from, even if it's an estimate" },
+  ],
+  competition: [
+    { criterion: 'competitor_named',               fieldname: 'alternative_named', label: "You've named at least one alternative (including doing nothing or using a manual method)" },
+    { criterion: 'competitive_advantage_explained', fieldname: 'specific_reason',  label: "You've explained one specific reason customers would choose you over it" },
+  ],
+  business_model: [
+    { criterion: 'who_pays',                    fieldname: 'payer_named',     label: "You've named who pays" },
+    { criterion: 'what_they_pay_for',           fieldname: 'pay_description', label: "You've described what they pay for" },
+    { criterion: 'amount_or_pricing_structure', fieldname: 'amount_provided', label: "You've given a rough amount or pricing structure" },
+  ],
+  team: [
+    { criterion: 'everyone_working_named',    fieldname: 'team_named',       label: "You've named everyone actively working on this" },
+    { criterion: 'role_description_for_each', fieldname: 'team_description', label: "You've described what each person contributes" },
+    { criterion: 'team_skills_match_problem', fieldname: 'suitable_solver',  label: "There's at least one sentence on why you are suited to solve this particular problem" },
+  ],
+  traction: [
+    { criterion: 'one_concrete_thing_done', fieldname: 'concrete_thing',  label: "You've described at least one concrete thing you've done" },
+    { criterion: 'if_user_revenue_stated',  fieldname: 'number_provided', label: "If you have users or revenue, you've given a number" },
+  ],
+  what_you_need: [
+    { criterion: 'stated_what_needed',   fieldname: 'need_stated', label: "You've stated at least one specific thing you're asking for" },
+    { criterion: 'what_want_next_clear', fieldname: 'need_next',   label: "It's clear what you want next" },
+  ],
+  vision: [
+    { criterion: 'future_bigger_than_now_described', fieldname: 'future_described',   label: "You've described a future state that's bigger than where you are now" },
+    { criterion: 'connection_to_current_solution',   fieldname: 'logical_connection', label: 'It connects logically to what you\'re building today' },
+  ],
 }
+
+const ALL_CHECKBOX_FIELDS = Object.values(SECTION_CRITERIA).flat().map(c => c.fieldname)
 
 const REQUIRED = MEMO_SECTIONS.filter(s => s.required)
 
@@ -55,6 +85,7 @@ const data     = ref({})  // { [sectionKey]: string }
 const aiFb     = ref({})  // { [sectionKey]: { [criterion]: { pass, reason } } }
 const aiLoad   = ref({})
 const saved    = ref({})
+const checks   = ref({})
 
 const active    = ref('purpose')
 const activeSec = computed(() => MEMO_SECTIONS.find(s => s.key === active.value))
@@ -85,7 +116,7 @@ onMounted(async () => {
   try {
     const list = await frappeGetList('C4E Company Memo', {
       filters: { idea: idea.value?.name },
-      fields: ['name', ...MEMO_SECTIONS.map(s => s.key)],
+      fields: ['name', ...MEMO_SECTIONS.map(s => s.key), ...ALL_CHECKBOX_FIELDS],
       limit: 1,
     })
     if (list?.[0]) {
@@ -93,6 +124,9 @@ onMounted(async () => {
       const populated = {}
       MEMO_SECTIONS.forEach(s => { populated[s.key] = list[0][s.key] || '' })
       data.value = populated
+      const loadedChecks = {}
+      ALL_CHECKBOX_FIELDS.forEach(f => { loadedChecks[f] = list[0][f] ? 1 : 0 })
+      checks.value = loadedChecks
     }
   } catch (e) {
     console.error('Failed to load memo', e)
@@ -124,6 +158,17 @@ async function saveAndFeedback() {
     // result shape: { section_key: { criterion: { pass, reason } } }
     const criteria = result?.[active.value] || {}
     aiFb.value = { ...aiFb.value, [active.value]: criteria }
+
+    // Map AI results to doctype checkbox fields, update local state and save
+    const sectionCriteria = SECTION_CRITERIA[active.value] || []
+    const checkUpdates = {}
+    sectionCriteria.forEach(({ criterion, fieldname }) => {
+      checkUpdates[fieldname] = criteria[criterion]?.pass ? 1 : 0
+    })
+    checks.value = { ...checks.value, ...checkUpdates }
+    if (memoName.value && Object.keys(checkUpdates).length) {
+      await frappeUpdate('C4E Company Memo', memoName.value, checkUpdates)
+    }
   } catch {
     aiFb.value = { ...aiFb.value, [active.value]: null }
   }
@@ -197,12 +242,16 @@ async function saveAndFeedback() {
           </div>
         </div>
 
-        <!-- Guide checklist (static prompts) -->
+        <!-- Guide checklist -->
         <div class="card" style="margin-bottom:14px">
           <div style="font-size:11px;font-weight:600;color:var(--stone);letter-spacing:.08em;text-transform:uppercase;margin-bottom:9px">What to cover</div>
-          <div v-for="(item, i) in activeSec?.checklist" :key="i" class="ck-item">
-            <div class="ck-box"></div>
-            <div class="ck-txt">{{ item }}</div>
+          <div v-for="item in SECTION_CRITERIA[active] || []" :key="item.criterion" class="ck-item">
+            <div class="ck-box" :class="{ on: checks[item.fieldname] }">
+              <svg v-if="checks[item.fieldname]" width="10" height="10" viewBox="0 0 12 12" fill="none">
+                <path d="M2 6l3 3 5-5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="ck-txt" :class="{ on: checks[item.fieldname] }">{{ item.label }}</div>
           </div>
         </div>
 
@@ -251,7 +300,7 @@ async function saveAndFeedback() {
             </div>
             <div>
               <div style="font-size:12px;font-weight:600" :style="result.pass ? 'color:#1a5c3a' : 'color:#c11633'">
-                {{ CRITERIA_LABELS[active]?.[criterion] || criterion }}
+                {{ SECTION_CRITERIA[active]?.find(c => c.criterion === criterion)?.label || criterion }}
               </div>
               <div v-if="!result.pass && result.reason" style="font-size:12px;color:var(--stone);margin-top:3px;line-height:1.5">
                 {{ result.reason }}

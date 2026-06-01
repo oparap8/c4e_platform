@@ -1,6 +1,11 @@
 import frappe
 
 
+@frappe.whitelist()
+def get_current_user_roles():
+	return frappe.get_roles(frappe.session.user)
+
+
 @frappe.whitelist(allow_guest=True)
 def register():
 	first_name = frappe.form_dict.get('first_name')

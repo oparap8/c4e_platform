@@ -382,13 +382,15 @@
    "default": "0",
    "fieldname": "something_changed",
    "fieldtype": "Check",
-   "label": "You've named something that has recently changed"
+   "label": "You've named something that has recently changed",
+   "read_only": 1
   },
   {
    "default": "0",
    "fieldname": "solution_possible",
    "fieldtype": "Check",
-   "label": "You've explained why that change makes your solution possible or more urgent now"
+   "label": "You've explained why that change makes your solution possible or more urgent now",
+   "read_only": 1
   },
   {
    "fieldname": "market_potential_checklist_section",
@@ -399,19 +401,22 @@
    "default": "0",
    "fieldname": "estimated_number",
    "fieldtype": "Check",
-   "label": "You've given a number or an estimate (not just 'a large market')"
+   "label": "You've given a number or an estimate (not just 'a large market')",
+   "read_only": 1
   },
   {
    "default": "0",
    "fieldname": "market_person",
    "fieldtype": "Check",
-   "label": "You've described who is in the market \u2014 not just how big it is"
+   "label": "You've described who is in the market \u2014 not just how big it is",
+   "read_only": 1
   },
   {
    "default": "0",
    "fieldname": "number_source",
    "fieldtype": "Check",
-   "label": "You've mentioned where your number comes from, even if it's an estimate"
+   "label": "You've mentioned where your number comes from, even if it's an estimate",
+   "read_only": 1
   },
   {
    "fieldname": "competition_checklist_section",
@@ -422,13 +427,15 @@
    "default": "0",
    "fieldname": "alternative_named",
    "fieldtype": "Check",
-   "label": "You've named at least one alternative (including doing nothing or using a manual method)"
+   "label": "You've named at least one alternative (including doing nothing or using a manual method)",
+   "read_only": 1
   },
   {
    "default": "0",
    "fieldname": "specific_reason",
    "fieldtype": "Check",
-   "label": "You've explained one specific reason customers would choose you over it"
+   "label": "You've explained one specific reason customers would choose you over it",
+   "read_only": 1
   },
   {
    "fieldname": "business_model_checklist_section",
@@ -439,13 +446,15 @@
    "default": "0",
    "fieldname": "pay_description",
    "fieldtype": "Check",
-   "label": "You've described what they pay for"
+   "label": "You've described what they pay for",
+   "read_only": 1
   },
   {
    "default": "0",
    "fieldname": "amount_provided",
    "fieldtype": "Check",
-   "label": "You've given a rough amount or pricing structure"
+   "label": "You've given a rough amount or pricing structure",
+   "read_only": 1
   },
   {
    "fieldname": "section_break_msbf",
@@ -455,19 +464,22 @@
    "default": "0",
    "fieldname": "team_named",
    "fieldtype": "Check",
-   "label": "You've named everyone actively working on this"
+   "label": "You've named everyone actively working on this",
+   "read_only": 1
   },
   {
    "default": "0",
    "fieldname": "team_description",
    "fieldtype": "Check",
-   "label": "You've described what each person contributes"
+   "label": "You've described what each person contributes",
+   "read_only": 1
   },
   {
    "default": "0",
    "fieldname": "suitable_solver",
    "fieldtype": "Check",
-   "label": "There's at least one sentence on why you are suited to solve this particular problem"
+   "label": "There's at least one sentence on why you are suited to solve this particular problem",
+   "read_only": 1
   },
   {
    "fieldname": "traction_checklist_section",
@@ -478,13 +490,15 @@
    "default": "0",
    "fieldname": "concrete_thing",
    "fieldtype": "Check",
-   "label": "You've described at least one concrete thing you've done"
+   "label": "You've described at least one concrete thing you've done",
+   "read_only": 1
   },
   {
    "default": "0",
    "fieldname": "number_provided",
    "fieldtype": "Check",
-   "label": "If you have users or revenue, you've given a number"
+   "label": "If you have users or revenue, you've given a number",
+   "read_only": 1
   },
   {
    "fieldname": "need_checklist_section",
@@ -495,13 +509,15 @@
    "default": "0",
    "fieldname": "need_stated",
    "fieldtype": "Check",
-   "label": "You've stated at least one specific thing you're asking for"
+   "label": "You've stated at least one specific thing you're asking for",
+   "read_only": 1
   },
   {
    "default": "0",
    "fieldname": "need_next",
    "fieldtype": "Check",
-   "label": "It's clear what you want next"
+   "label": "It's clear what you want next",
+   "read_only": 1
   },
   {
    "fieldname": "vision_checklist_section",
@@ -512,13 +528,15 @@
    "default": "0",
    "fieldname": "future_described",
    "fieldtype": "Check",
-   "label": "You've described a future state that's bigger than where you are now"
+   "label": "You've described a future state that's bigger than where you are now",
+   "read_only": 1
   },
   {
    "default": "0",
    "fieldname": "logical_connection",
    "fieldtype": "Check",
-   "label": "It connects logically to what you're building today"
+   "label": "It connects logically to what you're building today",
+   "read_only": 1
   },
   {
    "fieldname": "section_break_kabt",
@@ -596,7 +614,8 @@
    "default": "0",
    "fieldname": "payer_named",
    "fieldtype": "Check",
-   "label": "You've named who pays"
+   "label": "You've named who pays",
+   "read_only": 1
   },
   {
    "fieldname": "comment_tab",
@@ -614,7 +633,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-05-29 15:48:50.145042",
+ "modified": "2026-05-31 18:41:33.010558",
  "modified_by": "Administrator",
  "module": "C4E Platform",
  "name": "C4E Company Memo",

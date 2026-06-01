@@ -11,7 +11,7 @@ function headers() {
 
 async function handleResponse(res) {
 	const data = await res.json()
-	console.log(data)
+	// console.log(data)
 	if (!res.ok) {
 		const msg =
 			data?.exc_type === 'ValidationError'
@@ -83,6 +83,20 @@ export async function frappeSetValue(doctype, name, fieldname, value) {
 	return data.data
 }
 
+export async function frappeUpdate(doctype, name, updates) {
+	const res = await fetch(
+		`/api/resource/${encodeURIComponent(doctype)}/${encodeURIComponent(name)}`,
+		{
+			method: 'PUT',
+			credentials: 'include',
+			headers: headers(),
+			body: JSON.stringify(updates),
+		}
+	)
+	const data = await handleResponse(res)
+	return data.data
+}
+
 export async function frappeLogin(email, password) {
 	const res = await fetch('/api/method/login', {
 		method: 'POST',
@@ -116,7 +130,7 @@ export async function frappeGetCurrentUser() {
 
 export async function frappeGetUserInfo(email) {
 	const res = await fetch(
-		`/api/resource/User/${encodeURIComponent(email)}?fields=["name","email","full_name","user_roles"]`,
+		`/api/resource/User/${encodeURIComponent(email)}?fields=["name","email","full_name","roles"]`,
 		{ credentials: 'include', headers: { 'X-Frappe-CSRF-Token': csrfToken() } }
 	)
 	if (!res.ok) return null
