@@ -1,0 +1,32 @@
+[
+ {
+  "ask": "Good answer: specific amount (RWF or USD), specific use breakdown (e.g. 40% product, 30% team, 20% marketing, 10% ops), runway it buys (months). Flag: round-number ask with no use breakdown, or runway longer than 24 months.",
+  "business_registration": "Good answer: names the legal entity type (sole proprietor, partnership, Ltd, cooperative, NGO), registration body (RDB for Rwanda), and registration number or status (registered / in progress). For licenses, names the regulator (e.g. BNR for fintech, NAEB for agri export). Flag: \"we will register\" with no timeline.",
+  "cap_table": "Good answer: lists every shareholder with percentage. Percentages sum to 100. ESOP is named separately if it exists. If multiple share classes, says so. Flag: percentages do not sum to 100, or single \"100% founders\" with no founder names.",
+  "competition_and_edge": "Good answer: names 2-4 real competitors (companies that actually exist, by name) and one differentiator per. \"No competition\" is almost always wrong — substitutes count. Flag: only generic names like \"informal sellers\".",
+  "compliance": "Good answer: names sector regulators that apply (RRA for tax — applies to everyone; BNR for fintech; NAEB for agri-export; RICA for telecoms; RMA for medical; MINEDUC for edtech). Confirms tax registration with RRA. If cross-border, names which countries and which compliance regimes. Flag: \"we are compliant\" without naming any regulator.",
+  "contracts": "Good answer: lists what's in place — founder agreement, employment or contractor agreements, supplier or customer contracts, NDAs. Says which are signed vs in-progress vs missing. Flag: \"we have agreements\" with no specifics.",
+  "discovery": "Good answer: at least 5-10 customer conversations with named quotes or grouped insights. Numbers of people, where, how (in-person, phone, survey). Flag: vague \"customers told us\" without count.",
+  "docstatus": 0,
+  "doctype": "C4E Data Room Hint",
+  "features": "Good answer: current features as a short list and next 2-3 features with a rough timeframe. Flag: feature list reads like a wish list with no priority.",
+  "financial_history": "Good answer: total spent to date with rough breakdown (product, team, marketing, ops). Source of funds (bootstrapped, grant, family). Currency consistent (prefer RWF). Flag: numbers given without a time window.",
+  "gtm_strategy": "Good answer: names channels (USSD, WhatsApp, agent network, cooperatives, schools, churches — whatever fits). Pricing model named (subscription, transaction fee, freemium). For Rwanda specifically: mobile money is a normal channel; partnerships with cooperatives or SACCOs are normal acquisition paths. Flag: \"social media marketing\" alone without specifics.",
+  "impact_metrics": "Good answer: numbers, with a time window. Users served, jobs created, % income change, SDG alignment if relevant. Quote sources where applicable. For impact-aligned investors in East Africa, this is one of the most important sections. Flag: stories instead of measurements, or unverifiable claims.",
+  "ip": "Good answer: lists IP assets (trademark, copyright, patent, trade secret, software code) and protection status. For Rwanda, trademark filings go through ORIPI (formerly OPIC). Flag: \"we own the IP\" without saying which IP or how it's protected.",
+  "market_size": "Good answer: separates TAM, SAM, SOM with at least one source (NISR, World Bank Rwanda, sector report). For Rwanda, common sources: NISR (statistics), MINAGRI (agriculture), BNR (finance), MINEDUC (education). Flag: round numbers with no source, or SOM > 5% of SAM Year 1.",
+  "marketing_assets": "Good answer: lists what exists (brand kit, one-pager, flyer, social posts, demo video). Upload should match. Flag: claims many assets but uploads are empty.",
+  "modified": "2026-06-03 19:48:52.472095",
+  "name": "C4E Data Room Hint",
+  "narrative": "Good answer: one sentence. Memorable. Specific. The line the investor repeats to a colleague. Under 25 words. Flag: generic phrases (\"changing the future of X\", \"empowering Y\").",
+  "partnerships": "Good answer: signed agreements only (MoU, LOI, pilot contract). Name the partner, date, scope. If logos used, says permission granted. Flag: verbal interest treated as a partnership.",
+  "problem": "Good answer: names a specific group (\"smallholder farmers in Northern Province\"), describes one concrete pain (\"lose 30-50% of harvest income\"), and gives one source (interview count, survey, statistic with citation). Flag: speculation without evidence.",
+  "projections": "Good answer: 3-year revenue and cost projection with stated assumptions (price per unit, units sold, growth rate). Currency consistent. For Rwanda agritech / fintech, healthy growth assumptions are 30-100% Year 2 and Year 3, not 1000%. Flag: hockey-stick projection with no assumptions.",
+  "stage": "Good answer: names one of idea, prototype, MVP, pilot, launched, scaling. For pilot or beyond, gives a count (users, transactions, deployments). Flag: \"we are building\" with no specifics.",
+  "testimonials": "Good answer: real quotes from named or anonymised real customers. Permission noted. Flag: quotes that read like marketing copy.",
+  "testing": "Good answer: real users, number of them, period tested, what changed as a result. Flag: \"we got positive feedback\" with no specifics.",
+  "traction": "Good answer: numbers. Users, paying customers, transactions, revenue, retention. With a time window (\"in the last 3 months\"). Flag: vanity metrics only (Instagram followers, app downloads with no usage).",
+  "unit_economics": "Good answer: CAC (or rough estimate), revenue per customer, gross margin, payback period. For pre-revenue ventures, projected unit economics with stated assumptions. Flag: LTV/CAC > 5 in Year 1 with no traction (almost always wrong).",
+  "uvp": "Good answer: one sentence that says what you do, for whom, and why it's better. Avoid \"the only\" or \"the first\" unless verifiable. Flag: same as competition (if UVP is just \"we are better\")."
+ }
+]
