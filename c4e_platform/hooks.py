@@ -256,5 +256,11 @@ fixtures = [
             "name": ["in", ["C4E Mentor", "C4E Manager", "C4E Student", "C4E Builder"]]
         }
     },
-    "C4E Data Room Hint"
+    "C4E Data Room Hint",
+    {
+        "doctype": "Number Card",
+        "filters": {
+            "name": ["in", ["Total Student Ideas", "Total Company Memos", "Total Data Rooms"]]
+        }
+    }
 ]

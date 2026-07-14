@@ -3,6 +3,7 @@
 
 frappe.ui.form.on("C4E Data Room", {
 	refresh(frm) {
+        document.querySelector(".comment-input-header > span").textContent = "Overall Comment"
         frm.add_custom_button("Field Analysis", () => {
             frappe.prompt([
                 {

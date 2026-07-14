@@ -1,0 +1,151 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"hdr_main\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">C4E Platform</span>\",\"col\":12}},{\"id\":\"nc_memos\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Company Memos\",\"col\":6}},{\"id\":\"nc_dr\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Data Rooms\",\"col\":6}},{\"id\":\"sc_memos\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Company Memos\",\"col\":4}},{\"id\":\"sc_dr\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Data Rooms\",\"col\":4}},{\"id\":\"sc_prog\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Programs\",\"col\":4}},{\"id\":\"card_journey\",\"type\":\"card\",\"data\":{\"card_name\":\"Student Journey\",\"col\":4}},{\"id\":\"card_people\",\"type\":\"card\",\"data\":{\"card_name\":\"People\",\"col\":4}},{\"id\":\"card_config\",\"type\":\"card\",\"data\":{\"card_name\":\"Configuration\",\"col\":4}}]",
+ "creation": "2026-06-11 15:39:23.478967",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "dialpad",
+ "idx": 2,
+ "indicator_color": "yellow",
+ "is_hidden": 0,
+ "label": "C4E Platform",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "People",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Student List",
+   "link_count": 0,
+   "link_to": "C4E Student",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Mentors List",
+   "link_count": 0,
+   "link_to": "C4E Mentor",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Configuration",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Platform Settings",
+   "link_count": 0,
+   "link_to": "C4E Platform Settings",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Programs",
+   "link_count": 0,
+   "link_to": "C4E Program",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Student Journey",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Company Memos",
+   "link_count": 0,
+   "link_to": "C4E Company Memo",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Data Rooms",
+   "link_count": 0,
+   "link_to": "C4E Data Room",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-07-13 17:17:16.946030",
+ "modified_by": "Administrator",
+ "module": "C4E Platform",
+ "name": "C4E Platform",
+ "number_cards": [
+  {
+   "label": "Total Company Memos",
+   "number_card_name": "Total Company Memos"
+  },
+  {
+   "label": "Total Data Rooms",
+   "number_card_name": "Total Data Rooms"
+  }
+ ],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 35.0,
+ "shortcuts": [
+  {
+   "color": "Green",
+   "doc_view": "List",
+   "label": "Company Memos",
+   "link_to": "C4E Company Memo",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Orange",
+   "doc_view": "List",
+   "label": "Data Rooms",
+   "link_to": "C4E Data Room",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Purple",
+   "doc_view": "List",
+   "label": "Programs",
+   "link_to": "C4E Program",
+   "stats_filter": "[]",
+   "type": "DocType"
+  }
+ ],
+ "title": "C4E Platform"
+}

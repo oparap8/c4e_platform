@@ -5,12 +5,11 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "details_tab",
   "section_break_6dlp",
   "amended_from",
   "section_break_kbtd",
   "idea",
-  "section_break_gzxy",
-  "details_html",
   "purpose_tab",
   "purpose",
   "purpose_checklist_section",
@@ -93,9 +92,7 @@
   "future_described",
   "logical_connection",
   "section_break_hthm",
-  "vision_ai_feedback",
-  "comment_tab",
-  "comment"
+  "vision_ai_feedback"
  ],
  "fields": [
   {
@@ -261,6 +258,7 @@
   {
    "fieldname": "purpose_checklist_section",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Purpose Checklist"
   },
   {
@@ -287,6 +285,7 @@
   {
    "fieldname": "problem_checklist_section",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Problem Checklist"
   },
   {
@@ -311,18 +310,9 @@
    "read_only": 1
   },
   {
-   "fieldname": "section_break_gzxy",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "details_html",
-   "fieldtype": "HTML",
-   "label": "Details HTML",
-   "options": "<div id=\"HTML\" class=\"text-center p-4 rounded m-5\" style=\"background-color: #f8f9fa; font-weight: bold; box-shadow: 0 0 10px rgba(0,0,0,0.1);\">\n    We are currently working on this feature. Stay tuned for updates!\n</div>"
-  },
-  {
    "fieldname": "solution_checklist_section",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Solution Checklist"
   },
   {
@@ -348,7 +338,8 @@
   },
   {
    "fieldname": "section_break_zhfo",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "hidden": 1
   },
   {
    "fieldname": "purpose_ai_feedback",
@@ -357,7 +348,8 @@
   },
   {
    "fieldname": "section_break_pmqt",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "hidden": 1
   },
   {
    "fieldname": "problem_ai_feedback",
@@ -366,7 +358,8 @@
   },
   {
    "fieldname": "section_break_emso",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "hidden": 1
   },
   {
    "fieldname": "solution_ai_feedback",
@@ -376,6 +369,7 @@
   {
    "fieldname": "why_now_checklist_section",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Why Now Checklist"
   },
   {
@@ -395,6 +389,7 @@
   {
    "fieldname": "market_potential_checklist_section",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Market Potential Checklist"
   },
   {
@@ -421,6 +416,7 @@
   {
    "fieldname": "competition_checklist_section",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Competition Checklist"
   },
   {
@@ -440,6 +436,7 @@
   {
    "fieldname": "business_model_checklist_section",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Business Model Checklist"
   },
   {
@@ -458,7 +455,8 @@
   },
   {
    "fieldname": "section_break_msbf",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "hidden": 1
   },
   {
    "default": "0",
@@ -484,6 +482,7 @@
   {
    "fieldname": "traction_checklist_section",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Traction Checklist"
   },
   {
@@ -503,6 +502,7 @@
   {
    "fieldname": "need_checklist_section",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Need Checklist"
   },
   {
@@ -540,7 +540,8 @@
   },
   {
    "fieldname": "section_break_kabt",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "hidden": 1
   },
   {
    "fieldname": "why_now_ai_feedback",
@@ -549,7 +550,8 @@
   },
   {
    "fieldname": "section_break_ugxw",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "hidden": 1
   },
   {
    "fieldname": "market_potential_ai_feedback",
@@ -558,7 +560,8 @@
   },
   {
    "fieldname": "section_break_vooi",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "hidden": 1
   },
   {
    "fieldname": "competition_ai_feedback",
@@ -567,7 +570,8 @@
   },
   {
    "fieldname": "section_break_kqnm",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "hidden": 1
   },
   {
    "fieldname": "business_model_ai_feedback",
@@ -576,7 +580,8 @@
   },
   {
    "fieldname": "section_break_ycgf",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "hidden": 1
   },
   {
    "fieldname": "team_ai_feedback",
@@ -585,7 +590,8 @@
   },
   {
    "fieldname": "section_break_hbvw",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "hidden": 1
   },
   {
    "fieldname": "traction_ai_feedback",
@@ -594,7 +600,8 @@
   },
   {
    "fieldname": "section_break_psve",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "hidden": 1
   },
   {
    "fieldname": "what_you_need_ai_feedback",
@@ -603,7 +610,8 @@
   },
   {
    "fieldname": "section_break_hthm",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "hidden": 1
   },
   {
    "fieldname": "vision_ai_feedback",
@@ -618,22 +626,17 @@
    "read_only": 1
   },
   {
-   "fieldname": "comment_tab",
+   "fieldname": "details_tab",
    "fieldtype": "Tab Break",
-   "label": "Comment"
-  },
-  {
-   "fieldname": "comment",
-   "fieldtype": "Small Text",
-   "label": "Comment",
-   "permlevel": 1
+   "hidden": 1,
+   "label": "Details"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-05-31 18:41:33.010558",
+ "modified": "2026-07-14 18:46:14.443686",
  "modified_by": "Administrator",
  "module": "C4E Platform",
  "name": "C4E Company Memo",
@@ -671,28 +674,6 @@
    "read": 1,
    "report": 1,
    "role": "C4E Mentor",
-   "share": 1
-  },
-  {
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "permlevel": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "C4E Mentor",
-   "share": 1,
-   "write": 1
-  },
-  {
-   "email": 1,
-   "export": 1,
-   "permlevel": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "C4E Student",
    "share": 1
   }
  ],

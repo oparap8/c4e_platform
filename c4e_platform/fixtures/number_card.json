@@ -1,0 +1,38 @@
+[
+ {
+  "doctype": "Number Card",
+  "name": "Total Student Ideas",
+  "label": "Total Student Ideas",
+  "document_type": "C4E Student Idea",
+  "function": "Count",
+  "is_public": 1,
+  "show_percentage_stats": 0,
+  "stats_time_interval": "Monthly",
+  "filters_json": "[]",
+  "color": "#173a70"
+ },
+ {
+  "doctype": "Number Card",
+  "name": "Total Company Memos",
+  "label": "Total Company Memos",
+  "document_type": "C4E Company Memo",
+  "function": "Count",
+  "is_public": 1,
+  "show_percentage_stats": 0,
+  "stats_time_interval": "Monthly",
+  "filters_json": "[]",
+  "color": "#1a5c3a"
+ },
+ {
+  "doctype": "Number Card",
+  "name": "Total Data Rooms",
+  "label": "Total Data Rooms",
+  "document_type": "C4E Data Room",
+  "function": "Count",
+  "is_public": 1,
+  "show_percentage_stats": 0,
+  "stats_time_interval": "Monthly",
+  "filters_json": "[]",
+  "color": "#c49000"
+ }
+]

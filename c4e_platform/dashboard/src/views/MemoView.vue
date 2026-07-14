@@ -12,14 +12,14 @@ const MEMO_SECTIONS = [
   { key: 'purpose',          name: 'Purpose',          required: true,  info: 'Describe your venture in one clear sentence. Who is it for and what does it do?' },
   { key: 'problem',          name: 'Problem',           required: true,  info: 'What specific problem are you solving? Be concrete — vague problems produce vague solutions.' },
   { key: 'solution',         name: 'Solution',          required: true,  info: 'Explain how your solution fixes the problem. Connect it directly to what you described above.' },
-  { key: 'why_now',          name: 'Why Now',           required: false, info: 'What has changed recently that makes this the right time? Technology, regulation, behaviour shift?' },
+  { key: 'why_now',          name: 'Why Now',           required: true,  info: 'What has changed recently that makes this the right time? Technology, regulation, behaviour shift?' },
   { key: 'market_potential', name: 'Market Potential',  required: true,  info: 'How many people have this problem and how much would they pay to solve it?' },
   { key: 'competition',      name: 'Competition',       required: true,  info: "Who else is trying to solve this? What do you do that they don't?" },
   { key: 'business_model',   name: 'Business Model',    required: true,  info: 'Who pays you, what do they pay for, and roughly how much?' },
   { key: 'team',             name: 'Team',              required: true,  info: 'Who is building this and why are you the right people?' },
   { key: 'traction',         name: 'Traction',          required: false, info: 'What have you done so far? Users, pilots, revenue, partnerships, interviews.' },
-  { key: 'what_you_need',    name: 'What Do You Need?', required: true,  info: 'What specific help are you looking for from C4E? Be precise, not general.' },
-  { key: 'vision',           name: 'Vision',            required: false, info: 'Where is this going in 5 years? What does success look like at scale?' },
+  { key: 'what_you_need',    name: 'What Do You Need?', required: false, info: 'What specific help are you looking for from C4E? Be precise, not general.' },
+  { key: 'vision',           name: 'Vision',            required: true,  info: 'Where is this going in 5 years? What does success look like at scale?' },
 ]
 
 // Maps AI criterion keys → doctype checkbox fieldnames + exact doctype labels
@@ -90,6 +90,29 @@ const checks   = ref({})
 const active    = ref('purpose')
 const activeSec = computed(() => MEMO_SECTIONS.find(s => s.key === active.value))
 const text      = computed(() => data.value[active.value] || '')
+const mentorComments = ref([])
+
+function formatDate(dt) {
+  if (!dt) return ''
+  // Frappe datetime strings are UTC — normalise for consistent parsing across browsers
+  const date = new Date(dt.replace(' ', 'T') + 'Z')
+  const diffMs = Date.now() - date.getTime()
+  const mins  = Math.floor(diffMs / 60_000)
+  const hours = Math.floor(diffMs / 3_600_000)
+  const days  = Math.floor(diffMs / 86_400_000)
+  const weeks = Math.floor(days / 7)
+
+  if (mins < 1)   return 'just now'
+  if (mins < 60)  return `${mins}m ago`
+  if (hours < 24) return `${hours}h ago`
+  if (days < 7)   return `${days}d ago`
+  if (weeks < 4)  return `${weeks}w ago`
+
+  const d = date.getDate()
+  const suffix = [11, 12, 13].includes(d) ? 'th'
+    : d % 10 === 1 ? 'st' : d % 10 === 2 ? 'nd' : d % 10 === 3 ? 'rd' : 'th'
+  return `${d}${suffix} ${date.toLocaleDateString('en-GB', { month: 'long' })}`
+}
 
 function setText(val) {
   data.value = { ...data.value, [active.value]: val }
@@ -127,6 +150,10 @@ onMounted(async () => {
       const loadedChecks = {}
       ALL_CHECKBOX_FIELDS.forEach(f => { loadedChecks[f] = list[0][f] ? 1 : 0 })
       checks.value = loadedChecks
+
+      try {
+        mentorComments.value = await frappeCall('c4e_platform.api.get_comments.get_company_memo_comments', { doc_name: memoName.value }) || []
+      } catch { /* no comments */ }
     }
   } catch (e) {
     console.error('Failed to load memo', e)
@@ -312,6 +339,19 @@ async function saveAndFeedback() {
         <div v-if="isLoading" style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--stone);padding:12px 0">
           <div class="spinner"></div> Getting AI feedback…
         </div>
+
+        <!-- Mentor feedback card -->
+        <div v-if="mentorComments.length" class="card" style="margin-top:20px;border-left:3px solid var(--navy)">
+          <div style="font-size:11px;font-weight:600;color:var(--navy);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">Mentor Feedback</div>
+          <div
+            v-for="(c, i) in mentorComments" :key="i"
+            :style="i > 0 ? 'margin-top:12px;padding-top:12px;border-top:1px solid var(--border)' : ''"
+          >
+            <div style="font-size:13px;color:var(--dark);line-height:1.7;white-space:pre-line">{{ c.content }}</div>
+            <div style="font-size:11px;color:var(--stone);margin-top:5px">{{ c.comment_by }} · {{ formatDate(c.modified) }}</div>
+          </div>
+        </div>
+
       </div>
     </div>
 

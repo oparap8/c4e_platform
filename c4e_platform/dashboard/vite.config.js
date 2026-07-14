@@ -16,7 +16,7 @@ export default defineConfig({
 		},
 	},
 	build: {
-		outDir: '../c4e_platform/public/dashboard',
+		outDir: '../public/dashboard',
 		emptyOutDir: true,
 		target: 'es2015',
 		rollupOptions: {

@@ -82,6 +82,17 @@ const DR_SECTIONS = [
   },
 ]
 
+// ── Section comment field map ────────────────────────────────────────────────
+const SECTION_COMMENT_FIELD = {
+  market:  'market_research_comment',
+  product: 'product_comment',
+  sales:   'sales_and_marketing_comment',
+  finance: 'finance_comment',
+  legal:   'legal_comment',
+  impact:  'imapct_comment',
+  pitch:   'pitch_comment',
+}
+
 // ── State ───────────────────────────────────────────────────────────────────
 const drName     = ref(null)   // Frappe doc name once loaded/created
 const venture    = ref('')     // venture_name field
@@ -99,7 +110,14 @@ const aiFb      = ref({})      // { [frappefield]: { ack, adv, flag } }
 const aiLoad    = ref({})
 const uploads   = ref({})      // { [frappefield]: fileName }
 
+const comments     = ref({})   // { [sectionKey]: string } — saved values
+const commentEdits = ref({})   // { [sectionKey]: string } — in-progress edits
+
 const loading = ref(true)
+
+const isMentor = computed(() =>
+  store.user?.roles?.some(r => r === 'C4E Mentor' || r === 'C4E Manager')
+)
 
 const sec         = computed(() => DR_SECTIONS.find(s => s.key === activeSec.value))
 const st          = computed(() => secStatus.value[activeSec.value] || 'Saved')
@@ -142,10 +160,11 @@ onMounted(async () => {
 
   // Find existing data room owned by current user
   try {
-    const allFields = DR_SECTIONS.flatMap(s => s.subs.map(f => f.frappefield))
+    const allFields     = DR_SECTIONS.flatMap(s => s.subs.map(f => f.frappefield))
+    const commentFields = Object.values(SECTION_COMMENT_FIELD)
     const list = await frappeGetList('C4E Data Room', {
       filters: { owner: store.user?.email },
-      fields: ['name', 'venture_name', 'industry', 'c4e_program', ...allFields],
+      fields: ['name', 'venture_name', 'industry', 'c4e_program', ...allFields, ...commentFields],
       limit: 1,
       orderBy: 'creation desc',
     })
@@ -160,6 +179,13 @@ onMounted(async () => {
         populated[f.frappefield] = rec[f.frappefield] || ''
       }))
       fd.value = populated
+
+      const loadedComments = {}
+      Object.entries(SECTION_COMMENT_FIELD).forEach(([sKey, field]) => {
+        loadedComments[sKey] = rec[field] || ''
+      })
+      comments.value     = loadedComments
+      commentEdits.value = { ...loadedComments }
     } else {
       creating.value = true
     }
@@ -249,6 +275,18 @@ function removeFile(sub) {
 
 function submitSection() {
   secStatus.value = { ...secStatus.value, [activeSec.value]: 'Submitted' }
+}
+
+async function saveComment(sectionKey) {
+  if (!drName.value) return
+  const field = SECTION_COMMENT_FIELD[sectionKey]
+  const text  = commentEdits.value[sectionKey] || ''
+  try {
+    await frappeSetValue('C4E Data Room', drName.value, field, text)
+    comments.value = { ...comments.value, [sectionKey]: text }
+  } catch (e) {
+    console.error('Comment save failed', e)
+  }
 }
 </script>
 
@@ -414,6 +452,7 @@ function submitSection() {
           <div v-for="sub in sec?.subs" :key="sub.frappefield" class="sf">
 
             <div style="font-size:12px;font-weight:600;color:var(--dark);margin-bottom:2px">{{ sub.label }}</div>
+
             <div class="sf-desc">{{ sub.desc }}</div>
 
             <!-- Read-only when reviewed -->
@@ -499,6 +538,29 @@ function submitSection() {
             </template>
 
           </div>
+
+          <!-- Mentor section comment -->
+          <div v-if="isMentor || comments[activeSec]" style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border)">
+            <div style="font-size:11px;font-weight:600;color:var(--stone);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">Mentor Comment</div>
+            <template v-if="isMentor">
+              <textarea
+                class="ta"
+                style="min-height:90px"
+                placeholder="Add a comment for this section…"
+                v-model="commentEdits[activeSec]"
+              />
+              <button
+                class="btn btn-primary btn-sm"
+                style="margin-top:8px"
+                @click="saveComment(activeSec)"
+              >Save comment</button>
+            </template>
+            <div
+              v-else-if="comments[activeSec]"
+              style="font-size:13px;color:var(--dark);line-height:1.75;white-space:pre-line;background:rgba(23,58,112,.05);border:1px solid rgba(23,58,112,.1);border-radius:9px;padding:12px 14px"
+            >{{ comments[activeSec] }}</div>
+          </div>
+
         </div>
       </div>
     </div>
