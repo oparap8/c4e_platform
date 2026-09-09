@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "cd dashboard && yarn install",
-    "dev": "cd dashboard && yarn dev",
-    "build": "cd dashboard && yarn build"
+    "postinstall": "cd c4e_platform/dashboard && yarn install",
+    "dev": "cd c4e_platform/dashboard && yarn dev",
+    "build": "cd c4e_platform/dashboard && yarn build"
   },
   "keywords": [],
   "author": "",
