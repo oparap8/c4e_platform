@@ -262,5 +262,6 @@ fixtures = [
         "filters": {
             "name": ["in", ["Total Student Ideas", "Total Company Memos", "Total Data Rooms"]]
         }
-    }
+    },
+    "Swift Theme Settings"
 ]
