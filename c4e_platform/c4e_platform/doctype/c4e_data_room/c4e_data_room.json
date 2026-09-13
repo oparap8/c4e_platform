@@ -6,9 +6,13 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "user",
   "venture_name",
   "industry",
   "c4e_program",
+  "description",
+  "section_break_rgob",
+  "team",
   "market_research_tab",
   "problem",
   "problem_ai_feedback",
@@ -83,7 +87,7 @@
   "testimonials",
   "testimonials_ai_feedback",
   "section_break_asgf",
-  "imapct_comment"
+  "impact_comment"
  ],
  "fields": [
   {
@@ -335,9 +339,10 @@
   },
   {
    "fieldname": "industry",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Industry",
+   "label": "Sector",
+   "options": "Sector",
    "permlevel": 1,
    "reqd": 1
   },
@@ -553,29 +558,50 @@
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "imapct_comment",
-   "fieldtype": "Small Text",
-   "label": "Imapct Comment",
-   "permlevel": 2
-  },
-  {
    "fieldname": "c4e_program",
    "fieldtype": "Link",
    "label": "C4E Program",
    "options": "C4E Program",
    "permlevel": 1,
    "reqd": 1
+  },
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "label": "User",
+   "options": "User"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "section_break_rgob",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "team",
+   "fieldtype": "Table",
+   "label": "Team",
+   "options": "Dataroom User Table"
+  },
+  {
+   "fieldname": "impact_comment",
+   "fieldtype": "Small Text",
+   "label": "Impact Comment",
+   "permlevel": 2
   }
  ],
  "grid_page_length": 50,
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-08-24 13:51:17.319892",
+ "modified": "2026-09-12 22:19:46.339018",
  "modified_by": "Administrator",
  "module": "C4E Platform",
  "name": "C4E Data Room",
- "naming_rule": "Expression",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
@@ -681,6 +707,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

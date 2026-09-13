@@ -6,7 +6,12 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "program"
+  "program",
+  "disable_ai",
+  "column_break_vrhp",
+  "status",
+  "tab_2_tab",
+  "field_config"
  ],
  "fields": [
   {
@@ -16,12 +21,39 @@
    "label": "Program",
    "reqd": 1,
    "unique": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "disable_ai",
+   "fieldtype": "Check",
+   "label": "Disable AI"
+  },
+  {
+   "fieldname": "column_break_vrhp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Scheduled\nOngoing\nCompleted"
+  },
+  {
+   "fieldname": "tab_2_tab",
+   "fieldtype": "Tab Break",
+   "label": "Template"
+  },
+  {
+   "fieldname": "field_config",
+   "fieldtype": "Table",
+   "label": "Field Config",
+   "options": "Program Config Table"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-05-31 20:21:17.139383",
+ "modified": "2026-09-12 22:04:36.700151",
  "modified_by": "Administrator",
  "module": "C4E Platform",
  "name": "C4E Program",
@@ -62,6 +94,7 @@
    "share": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

@@ -2,8 +2,41 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on("C4E Data Room", {
+    onload(frm) {
+        apply_program_template(frm);
+    },
 	refresh(frm) {
-        document.querySelector(".comment-input-header > span").textContent = "Overall Comment"
+        frm.add_custom_button("Upload Document", () => {
+            frappe.prompt(
+                [
+                    {
+                        label: "Upload File",
+                        fieldname: 'upload_file',
+                        fieldtype: 'Attach',
+                        reqd: 1
+                    }
+                ],
+                (values) => {
+                    frappe.call({
+                        method: "c4e_platform.api.data_room.read_uploaded_document",
+                        args: {
+                            file_url: values.upload_file,
+                            docname: frm.doc.name
+                        },
+                        freeze: true,
+                        freeze_message: "Analyzing document...",
+                        callback: (r) => {
+                            if (r.message && r.message.status === "success") {
+                                frappe.msgprint("Document processed successfully");
+                                frm.reload_doc();
+                            }
+                        }
+                    });
+                },
+                "Upload Document",
+                "Analyze"
+            );
+        });
         frm.add_custom_button("Field Analysis", () => {
             frappe.prompt([
                 {
@@ -43,9 +76,14 @@ frappe.ui.form.on("C4E Data Room", {
                 }
 
                 frm.events.process_ai_checklist(frm, section_key, section_text);
-            });
+            }, Actions);
         });
+        document.querySelector(".comment-input-header > span").textContent = "Overall Comment"
 	},
+    c4e_program(frm) {
+		apply_program_template(frm);
+	},
+
     process_ai_checklist(frm, section_key, section_text) {
         frappe.call({
             method: "c4e_platform.api.data_room.data_room_feedback",
@@ -54,6 +92,7 @@ frappe.ui.form.on("C4E Data Room", {
                 industry: frm.doc.industry,
                 key: section_key,
                 field: section_text,
+                disable_ai: frm.doc.disable_ai
             },
             freeze: true,
             freeze_message: "Analyzing your input...",
@@ -66,6 +105,30 @@ frappe.ui.form.on("C4E Data Room", {
         });
     },
 });
+
+function apply_program_template(frm) {
+	if (!frm.doc.c4e_program) return;
+
+	frappe.call({
+		method: "c4e_platform.api.program.get_program_field_config",
+		args: { program: frm.doc.c4e_program },
+		callback: function(r) {
+			const config = r.message || [];
+			config.forEach(row => {
+				if (row.hidden !== undefined) {
+					frm.set_df_property(row.field, "hidden", row.hidden);
+				}
+				if (row.description) {  
+					frm.set_df_property(row.field, "description", row.description);
+				}
+				if (row.placeholder) {
+					frm.set_df_property(row.field, "placeholder", row.placeholder);
+				}
+			});
+			frm.refresh();
+		}
+	});
+}
 
 function build_feedback_html(feedback_data) {
     if (!feedback_data) return "";

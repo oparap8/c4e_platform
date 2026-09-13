@@ -66,6 +66,10 @@ def data_room_feedback():
     industry = frappe.form_dict.get('industry')
     key = frappe.form_dict.get('key')
     field = frappe.form_dict.get('field')
+    disable_ai = frappe.form_dict.get('disable_ai')
+
+    if disable_ai:
+        return
 
     system_prompt = generate_data_system_prompt(key)
 
@@ -101,3 +105,81 @@ def data_room_feedback():
         return result
     except json.JSONDecodeError:
         frappe.throw("AI response is not valid JSON: " + response)
+
+@frappe.whitelist()
+def read_uploaded_document():
+    client = get_client()
+
+    template = {
+        "Problem": "", "Market Size": "", "Competetion and Edge": "",
+        "Discovery": "", "Stage": "", "Features": "", "Testing": "",
+        "Unique Value Proposal": "", "GTM Strategy": "", "Traction and Revenue": "",
+        "Marketing Assets": "", "Financial History": "", "Projections": "",
+        "Unit Economics": "", "Ask": "", "Business Registration": "",
+        "Contracts": "", "IP Protection": "", "Complaince": "", "Cap Table": "",
+        "Company Hook": "", "Impact Metrics": "", "Partnerships": "", "Testimonials": ""
+    }
+
+    file_url = frappe.form_dict.get('file_url')
+    docname = frappe.form_dict.get('docname')
+
+    file_doc = frappe.get_doc("File", {"file_url": file_url})
+    file_content = file_doc.get_content()
+
+    system_prompt = f"""
+    You are an investment-readiness coach for an
+    entrepreneurship programme. You are reading a document of
+    a student's investor-facing data room. Your goal: break the document
+    down into these sections: {', '.join(template.keys())}. 
+
+    Be brief in each section and if any section wasn't present leave it
+    empty ("").
+
+    Return ONLY a JSON object with these keys and no others, using exactly this structure:
+    {template}
+
+    Return valid JSON only. No markdown, no fences, no commentary.
+    """
+
+    user_prompt = "Please analyze the attached document and extract the sections as instructed."
+
+    uploaded = client.beta.files.upload(
+        file=(file_doc.file_name, file_content, "application/pdf")
+    )
+
+    message = client.messages.create(
+        model="claude-sonnet-4-6",
+        max_tokens=1024,
+        system=system_prompt,
+        messages=[{
+            "role": "user",
+            "content": [
+                {"type": "document", "source": {"type": "file", "file_id": uploaded.id}},
+                {"type": "text", "text": user_prompt}
+            ]
+        }]
+    )
+
+    response = message.content[0].text.strip()
+    if response.startswith("```") and response.endswith("```"):
+        response = response[3:-3].strip()
+        if response.startswith("json"):
+            response = response[4:].strip()
+
+    try:
+        result = json.loads(response)
+    except json.JSONDecodeError:
+        frappe.throw("AI response is not valid JSON: " + response)
+
+    # map labels back to real Dataroom fieldnames, same pattern as Program field_config
+    meta = frappe.get_meta("C4E Data Room")
+    label_to_fieldname = {f.label: f.fieldname for f in meta.fields if f.label}
+
+    doc = frappe.get_doc("C4E Data Room", docname)
+    for label, value in result.items():
+        fieldname = label_to_fieldname.get(label)
+        if fieldname and value:
+            doc.set(fieldname, value)
+
+    doc.save()
+    return {"status": "success"}
