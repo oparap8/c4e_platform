@@ -10,7 +10,7 @@
  "fields": [
   {
    "fieldname": "anthropic_api_key",
-   "fieldtype": "Data",
+   "fieldtype": "Password",
    "label": "Anthropic Api Key"
   }
  ],
@@ -18,7 +18,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2026-05-29 15:50:06.153151",
+ "modified": "2026-09-14 23:05:09.420505",
  "modified_by": "Administrator",
  "module": "C4E Platform",
  "name": "C4E Platform Settings",
@@ -45,6 +45,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []
