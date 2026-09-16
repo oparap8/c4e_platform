@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import {
   frappeCall,
+  frappeSignUp,
   frappeLogin,
   frappeLogout,
   frappeGetCurrentUser,
@@ -13,7 +14,7 @@ export const useAppStore = defineStore('app', () => {
   const ideas = ref([])
 
   async function register(first_name, email, password) {
-    await frappeCall('c4e_platform.api.auth.register', { first_name, email, password })
+    await frappeSignUp({ first_name, email, password })
   }
 
   async function login(email, password) {
