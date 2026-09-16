@@ -102,6 +102,7 @@ const program    = ref('')     // c4e_program link
 const programs   = ref([])     // list of available C4E Programs
 const creating   = ref(false)  // show creation form
 const saveError  = ref('')
+const industryOptions = ref([])
 
 const activeSec = ref('market')
 const fd        = ref({})      // { [frappefield]: string }
@@ -157,6 +158,12 @@ onMounted(async () => {
     programs.value = progs
     if (progs.length) program.value = progs[0].name
   } catch { /* no programs yet */ }
+
+  const industries = await frappeGetList('Sector', {
+      fields: ['name'],
+      orderBy: 'name asc'
+    })
+  industryOptions.value = industries.map(ind => ind.name)
 
   // Find existing data room owned by current user
   try {
@@ -308,9 +315,14 @@ async function saveComment(sectionKey) {
     </div>
 
     <div class="sf">
-      <div class="sf-lbl">Industry</div>
-      <input class="inp" placeholder="e.g. AgriTech" v-model="industry" />
-    </div>
+  <div class="sf-lbl">Industry</div>
+  <select class="inp" v-model="industry">
+    <option value="" disabled>Select an Industry</option>
+    <option v-for="ind in industryOptions" :key="ind" :value="ind">
+      {{ ind }}
+    </option>
+  </select>
+</div>
 
     <div class="sf">
       <div class="sf-lbl">C4E Program</div>
