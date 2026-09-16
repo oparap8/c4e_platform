@@ -3,6 +3,7 @@ function csrfToken() {
 }
 
 function headers() {
+	console.log(csrfToken())
 	return {
 		'Content-Type': 'application/json',
 		'X-Frappe-CSRF-Token': csrfToken(),
@@ -30,6 +31,20 @@ export async function frappeCall(method, args = {}) {
 		body: JSON.stringify(args),
 	})
 	// console.log(res)
+	const data = await handleResponse(res)
+	return data.message
+}
+
+export async function frappeSignUp(args = {}) {
+	console.log(JSON.stringify(args))
+	const res = await fetch(`/api/method/c4e_platform.api.auth.register`, {
+		method: 'POST',
+		credentials: 'omit',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(args),
+	})
 	const data = await handleResponse(res)
 	return data.message
 }

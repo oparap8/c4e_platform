@@ -1,4 +1,5 @@
 {
+ "app": "c4e_platform",
  "charts": [],
  "content": "[{\"id\":\"hdr_main\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">C4E Platform</span>\",\"col\":12}},{\"id\":\"nc_memos\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Company Memos\",\"col\":6}},{\"id\":\"nc_dr\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Data Rooms\",\"col\":6}},{\"id\":\"sc_memos\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Company Memos\",\"col\":4}},{\"id\":\"sc_dr\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Data Rooms\",\"col\":4}},{\"id\":\"sc_prog\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Programs\",\"col\":4}},{\"id\":\"card_journey\",\"type\":\"card\",\"data\":{\"card_name\":\"Student Journey\",\"col\":4}},{\"id\":\"card_people\",\"type\":\"card\",\"data\":{\"card_name\":\"People\",\"col\":4}},{\"id\":\"card_config\",\"type\":\"card\",\"data\":{\"card_name\":\"Configuration\",\"col\":4}}]",
  "creation": "2026-06-11 15:39:23.478967",
@@ -45,8 +46,37 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Configuration",
+   "label": "Student Journey",
    "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Company Memos",
+   "link_count": 0,
+   "link_to": "C4E Company Memo",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Data Rooms",
+   "link_count": 0,
+   "link_to": "C4E Data Room",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Configuration",
+   "link_count": 3,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -74,34 +104,15 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Student Journey",
-   "link_count": 2,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Company Memos",
+   "label": "Sector",
    "link_count": 0,
-   "link_to": "C4E Company Memo",
-   "link_type": "DocType",
-   "onboard": 1,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Data Rooms",
-   "link_count": 0,
-   "link_to": "C4E Data Room",
+   "link_to": "Sector",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
   }
  ],
- "modified": "2026-07-13 17:17:16.946030",
+ "modified": "2026-09-14 22:29:51.065937",
  "modified_by": "Administrator",
  "module": "C4E Platform",
  "name": "C4E Platform",
@@ -147,5 +158,6 @@
    "type": "DocType"
   }
  ],
- "title": "C4E Platform"
+ "title": "C4E Platform",
+ "type": "Workspace"
 }

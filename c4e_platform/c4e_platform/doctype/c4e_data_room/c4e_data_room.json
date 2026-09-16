@@ -10,6 +10,10 @@
   "venture_name",
   "industry",
   "c4e_program",
+  "column_break_mxkz",
+  "logo",
+  "image_source",
+  "section_break_opoy",
   "description",
   "section_break_rgob",
   "team",
@@ -591,13 +595,33 @@
    "fieldtype": "Small Text",
    "label": "Impact Comment",
    "permlevel": 2
+  },
+  {
+   "fieldname": "column_break_mxkz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "logo",
+   "fieldtype": "Image",
+   "label": "Logo",
+   "options": "image_source"
+  },
+  {
+   "fieldname": "section_break_opoy",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "image_source",
+   "fieldtype": "Attach Image",
+   "label": "Image source"
   }
  ],
  "grid_page_length": 50,
  "hide_toolbar": 1,
+ "image_field": "image_source",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-09-12 22:19:46.339018",
+ "modified": "2026-09-14 23:52:51.446778",
  "modified_by": "Administrator",
  "module": "C4E Platform",
  "name": "C4E Data Room",
