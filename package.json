@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "cd hub && yarn install",
     "dev": "cd hub && yarn dev",
-    "build": "cd hub && yarn build"
+    "build": "cd hub && yarn build",
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "",
