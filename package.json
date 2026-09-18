@@ -12,5 +12,9 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "frappe-react-sdk": "^1.17.1",
+    "react-router-dom": "^7.18.4"
+  }
 }
