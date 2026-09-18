@@ -1,29 +1,30 @@
-import path from 'node:path'
-import { defineConfig } from 'vite'
+import path from 'path'
 import tailwindcss from '@tailwindcss/vite'
-import vue from '@vitejs/plugin-vue'
+import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite'
 
+// https://vite.dev/config/
 export default defineConfig({
-  plugins: [vue(), tailwindcss()],
+  plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
-      '@': path.resolve(import.meta.dirname, './src')
-    },
+      '@': path.resolve(__dirname, './src')
+    }
   },
-   build: {
+  build: {
     chunkSizeWarningLimit: 1500,
-    outDir: path.resolve(__dirname, "../c4e_platform/public/hub"),
+    outDir: path.resolve(__dirname, '../c4e_platform/public/hub'),
     emptyOutDir: true,
-    target: "es2015",
-    sourcemap: true,
+    target: 'es2015',
+    sourcemap: true
   },
   server: {
     proxy: {
-      "^/(api|assets|files|app|login|pages|builder_assets|socket.io)": {
-        target: "http://localhost:8000",
+      '^/(api|assets|files|app|login|pages|builder_assets|socket.io)': {
+        target: 'http://localhost:8000',
         changeOrigin: true,
-        ws: true,
-      },
-    },
-  },
+        ws: true
+      }
+    }
+  }
 })
