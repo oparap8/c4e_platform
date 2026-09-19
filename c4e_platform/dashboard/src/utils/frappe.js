@@ -3,7 +3,6 @@ function csrfToken() {
 }
 
 function headers() {
-	console.log(csrfToken())
 	return {
 		'Content-Type': 'application/json',
 		'X-Frappe-CSRF-Token': csrfToken(),
