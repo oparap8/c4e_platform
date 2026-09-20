@@ -1,8 +1,10 @@
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader } from '@/components/ui/sidebar'
-import { SidebarHeaderContent } from './sidebar/SidebarHeaderContent'
-import { SidebarNavContent } from './sidebar/SidebarNavContent'
-import { SidebarFooterExpanded } from './sidebar/SidebarFooterExpanded'
-import { SidebarFooterCollapsed } from './sidebar/SidebarFooterCollapsed'
+import {
+  SidebarFooterCollapsed,
+  SidebarFooterExpanded,
+  SidebarHeaderContent,
+  SidebarNavContent
+} from './sidebar'
 
 export function AppSidebar() {
   return (

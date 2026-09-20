@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "preview": "vite preview",
     "build": "tsc --noEmit && tsc -b && vite build --base=/assets/c4e_platform/hub/ && npm run copy-html-entry",
     "copy-html-entry": "cp ../c4e_platform/public/hub/index.html ../c4e_platform/www/hub.html",

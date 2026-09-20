@@ -1,7 +1,9 @@
 import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom'
 
-import HubLayout from './layouts/HubLayout'
-import Dashboard from './pages/dashboard'
+import { lazy } from 'react'
+
+const HubLayout = lazy(() => import('@/layouts/HubLayout'))
+const Dashboard = lazy(() => import('@/pages/dashboard'))
 
 export const router = createBrowserRouter(
   createRoutesFromElements(

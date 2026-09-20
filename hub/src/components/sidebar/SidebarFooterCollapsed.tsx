@@ -1,8 +1,8 @@
 import { Paperclip, Bell, Calendar } from 'lucide-react'
-import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { AuthAvatar } from '@/components/auth'
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar'
 
-export function SidebarFooterCollapsed() {
+export default function SidebarFooterCollapsed() {
   return (
     <div className="hidden group-data-[collapsible=icon]:block">
       <SidebarMenu>
@@ -38,9 +38,7 @@ export function SidebarFooterCollapsed() {
             tooltip="Student Profile"
             className="h-9 w-9 justify-center rounded-full p-0 hover:bg-white/10"
           >
-            <Avatar className="size-7 bg-blue-600 text-white">
-              <AvatarFallback className="bg-blue-600 text-xs">ST</AvatarFallback>
-            </Avatar>
+            <AuthAvatar />
           </SidebarMenuButton>
         </SidebarMenuItem>
       </SidebarMenu>
