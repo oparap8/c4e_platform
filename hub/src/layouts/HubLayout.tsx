@@ -5,9 +5,9 @@ import { useUser } from '@/hooks'
 
 function Greeting() {
   const h = new Date().getHours()
-  if (h < 12) return <span>Good morning</span>
-  if (h < 17) return <span>Good Afternoon</span>
-  return <span>Good Evening</span>
+  if (h < 12) return <span>Good morning,</span>
+  if (h < 17) return <span>Good Afternoon,</span>
+  return <span>Good Evening,</span>
 }
 
 export default function HubLayout() {
@@ -16,11 +16,10 @@ export default function HubLayout() {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <main>
-        <div className="flex items-center gap-2">
+      <main className="w-full">
+        <div className="bg-secondary text-secondary-foreground flex h-16 items-center gap-2 md:h-20">
           <SidebarTrigger />
-          <h1>
-            {' '}
+          <h1 className="text-lg font-bold md:text-2xl">
             <Greeting /> {user?.first_name} {user?.last_name}
           </h1>
         </div>

@@ -1,18 +1,10 @@
 import { RouterProvider } from 'react-router-dom'
 import { Toaster } from '@/components/ui/sonner'
 import { router } from '@/router'
-import { Suspense } from 'react'
-import { C4ELogo } from './components/C4ELogo'
 
 export function App() {
   return (
-    <Suspense
-      fallback={
-        <div className="flex h-screen items-center justify-center">
-          <C4ELogo className="animate-pulse" size="2xl" />
-        </div>
-      }
-    >
+    <>
       <RouterProvider router={router} />
       <Toaster
         position="bottom-right"
@@ -30,6 +22,6 @@ export function App() {
           }
         }}
       />
-    </Suspense>
+    </>
   )
 }
