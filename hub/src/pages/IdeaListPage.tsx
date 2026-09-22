@@ -1,9 +1,11 @@
 import { Banner } from '@/components/Banner'
-import { CreateIdeaDialog, IdeaCard, IdeaCardSkeleton, NewIdeaCard } from '@/components/studentIdea'
+import { IdeaCard, IdeaCardSkeleton, NewIdeaCard } from '@/components/studentIdea'
 import { Button } from '@/components/ui/button'
 import type { C4EStudentIdea } from '@/types/C4EPlatform/C4EStudentIdea'
 import { useFrappeAuth, useFrappeGetDocList, type GetDocListArgs } from 'frappe-react-sdk'
 import { PlusCircle } from 'lucide-react'
+import { PageContainer, PageHeader } from '@/components/Page'
+import { Link } from 'react-router-dom'
 
 const IdeaListPage = () => {
   const { currentUser } = useFrappeAuth()
@@ -16,24 +18,24 @@ const IdeaListPage = () => {
 
   const { data, isLoading, error } = useFrappeGetDocList<C4EStudentIdea>('C4E Student Idea', args)
 
+  const subtitle = data
+    ? `${data.length} idea${data.length === 1 ? ' of 3' : 's of 3'}`
+    : 'Loading...'
+
   return (
-    <div className="p-2 md:p-5">
-      <div className="mb-5 flex items-center justify-between">
-        <div>
-          <h3 className="text-primary text-lg font-semibold">My Ideas</h3>
-          <p className="text-muted-foreground font-mono text-xs">
-            {data ? `${data.length} idea${data.length === 1 ? ' of 3' : 's of 3'}` : 'Loading...'}
-          </p>
-        </div>
-        <CreateIdeaDialog
-          render={
-            <Button size={'lg'}>
+    <PageContainer>
+      <PageHeader
+        title={'Your Ideas'}
+        subtitle={subtitle}
+        action={
+          <>
+            <Button size={'lg'} render={<Link to="new" />}>
               <PlusCircle className="mr-2 h-4 w-4" />
               Add New Idea
             </Button>
-          }
-        />
-      </div>
+          </>
+        }
+      />
 
       {error ? (
         <Banner
@@ -54,7 +56,7 @@ const IdeaListPage = () => {
           {data && data.length < 3 && <NewIdeaCard />}
         </div>
       )}
-    </div>
+    </PageContainer>
   )
 }
 

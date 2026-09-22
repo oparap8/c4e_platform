@@ -5,6 +5,7 @@ import { C4ELogo } from './components/C4ELogo'
 
 const HubLayout = lazy(() => import('@/layouts/HubLayout'))
 const IdeaLisitPage = lazy(() => import('@/pages/IdeaListPage'))
+const NewIdeaPage = lazy(() => import('@/pages/NewIdeaPage'))
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,8 +24,10 @@ export const router = createBrowserRouter(
       }
       errorElement={<ErrorPage />}
     >
-      <Route index element={<IdeaLisitPage />} />
-      <Route path="/about" element={<h1>About</h1>} />
+      <Route path="idea">
+        <Route index element={<IdeaLisitPage />} />
+        <Route path="new" element={<NewIdeaPage />} />
+      </Route>
     </Route>
   )
 )
