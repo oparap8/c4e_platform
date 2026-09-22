@@ -8,7 +8,7 @@ import {
 
 export function AppSidebar() {
   return (
-    <Sidebar collapsible="icon" className="border-r-0 bg-[#112652] text-slate-200">
+    <Sidebar collapsible="icon" className="bg-sidebar text-sidebar-foreground border-r-0">
       <SidebarHeader className="border-b border-white/10 p-4 group-data-[collapsible=icon]:p-2">
         <SidebarHeaderContent />
       </SidebarHeader>

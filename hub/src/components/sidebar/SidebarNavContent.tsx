@@ -1,4 +1,4 @@
-import { FileText, Folder, LayoutDashboard } from 'lucide-react'
+import { FileText, Folder, Lightbulb } from 'lucide-react'
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -22,8 +22,8 @@ export default function SidebarNavContent() {
               isActive
               className="relative rounded-l-none bg-white/10 text-white before:absolute before:top-0 before:bottom-0 before:left-0 before:w-1 before:bg-red-500 hover:bg-white/15"
             >
-              <LayoutDashboard className="size-4" />
-              <span>Dashboard</span>
+              <Lightbulb className="size-4" />
+              <span>Ideas</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>

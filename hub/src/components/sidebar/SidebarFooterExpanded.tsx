@@ -10,7 +10,7 @@ export default function SidebarFooterExpanded() {
         defaultOpen
         className="group/collapsible rounded-xl border border-white/10 bg-white/5"
       >
-        <CollapsibleTrigger asChild className="w-full">
+        <CollapsibleTrigger className="w-full">
           <div className="flex cursor-pointer items-center justify-between rounded-t-xl p-3 text-sm font-medium text-white hover:bg-white/5">
             <div className="flex items-center gap-2">
               <Paperclip className="size-4" />
@@ -27,7 +27,7 @@ export default function SidebarFooterExpanded() {
       </Collapsible>
 
       <Collapsible className="group/collapsible rounded-xl border border-white/10 bg-white/5">
-        <CollapsibleTrigger asChild className="w-full">
+        <CollapsibleTrigger className="w-full">
           <div className="flex cursor-pointer items-center justify-between rounded-xl p-3 text-sm font-bold tracking-wider text-slate-300 uppercase hover:bg-white/5">
             <div className="flex items-center gap-2">
               <Bell className="size-4" />

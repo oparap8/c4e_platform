@@ -1,11 +1,11 @@
 import { Banner } from '@/components/Banner'
-import { IdeaCard, IdeaCardSkeleton, NewIdeaCard } from '@/components/studentIdea'
+import { CreateIdeaDialog, IdeaCard, IdeaCardSkeleton, NewIdeaCard } from '@/components/studentIdea'
 import { Button } from '@/components/ui/button'
 import type { C4EStudentIdea } from '@/types/C4EPlatform/C4EStudentIdea'
 import { useFrappeAuth, useFrappeGetDocList, type GetDocListArgs } from 'frappe-react-sdk'
 import { PlusCircle } from 'lucide-react'
 
-const Dashboard = () => {
+const IdeaListPage = () => {
   const { currentUser } = useFrappeAuth()
 
   const args: GetDocListArgs<C4EStudentIdea> = {
@@ -25,10 +25,14 @@ const Dashboard = () => {
             {data ? `${data.length} idea${data.length === 1 ? ' of 3' : 's of 3'}` : 'Loading...'}
           </p>
         </div>
-        <Button size={'lg'}>
-          <PlusCircle className="mr-2 h-4 w-4" />
-          Add New Idea
-        </Button>
+        <CreateIdeaDialog
+          render={
+            <Button size={'lg'}>
+              <PlusCircle className="mr-2 h-4 w-4" />
+              Add New Idea
+            </Button>
+          }
+        />
       </div>
 
       {error ? (
@@ -54,4 +58,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default IdeaListPage
