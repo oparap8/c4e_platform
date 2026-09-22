@@ -92,6 +92,28 @@ const activeSec = computed(() => MEMO_SECTIONS.find(s => s.key === active.value)
 const text      = computed(() => data.value[active.value] || '')
 const mentorComments = ref([])
 
+const sidePanels   = ref({ resources: false, expert: false })
+const draftLoading = ref(false)
+
+function togglePanel(key) {
+  sidePanels.value = { ...sidePanels.value, [key]: !sidePanels.value[key] }
+}
+
+async function viewDraft() {
+  if (!memoName.value || draftLoading.value) return
+  draftLoading.value = true
+  try {
+    const result = await frappeCall('c4e_platform.api.company_memo.get_print_format', {
+      doc_name: memoName.value,
+    })
+    if (result?.url) window.open(result.url, '_blank')
+  } catch (e) {
+    console.error('Failed to load print preview', e)
+  } finally {
+    draftLoading.value = false
+  }
+}
+
 function formatDate(dt) {
   if (!dt) return ''
   // Frappe datetime strings are UTC — normalise for consistent parsing across browsers
@@ -339,21 +361,72 @@ async function saveAndFeedback() {
         <div v-if="isLoading" style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--stone);padding:12px 0">
           <div class="spinner"></div> Getting AI feedback…
         </div>
+      </div>
+    </div>
 
-        <!-- Mentor feedback card -->
-        <div v-if="mentorComments.length" class="card" style="margin-top:20px;border-left:3px solid var(--navy)">
-          <div style="font-size:11px;font-weight:600;color:var(--navy);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">Mentor Feedback</div>
-          <div
-            v-for="(c, i) in mentorComments" :key="i"
-            :style="i > 0 ? 'margin-top:12px;padding-top:12px;border-top:1px solid var(--border)' : ''"
+    <aside class="memo-story">
+      <div class="story-panel">
+
+        <!-- Resources -->
+        <div class="card" style="margin-bottom:10px">
+          <button
+            style="all:unset;cursor:pointer;display:flex;align-items:center;justify-content:space-between;width:100%;font-size:12px;font-weight:600;color:var(--stone);letter-spacing:.05em;text-transform:uppercase"
+            @click="togglePanel('resources')"
           >
-            <div style="font-size:13px;color:var(--dark);line-height:1.7;white-space:pre-line">{{ c.content }}</div>
-            <div style="font-size:11px;color:var(--stone);margin-top:5px">{{ c.comment_by }} · {{ formatDate(c.modified) }}</div>
+            Resources
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+              :style="{ transform: sidePanels.resources ? 'rotate(180deg)' : 'none', transition: 'transform .15s' }">
+              <path d="M2 4l4 4 4-4" stroke="var(--stone)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div v-if="sidePanels.resources" style="margin-top:12px">
+            <!-- TODO: populate later -->
           </div>
         </div>
 
+        <!-- Expert Feedback -->
+        <div class="card" style="margin-bottom:10px">
+          <button
+            style="all:unset;cursor:pointer;display:flex;align-items:center;justify-content:space-between;width:100%;font-size:12px;font-weight:600;color:var(--stone);letter-spacing:.05em;text-transform:uppercase"
+            @click="togglePanel('expert')"
+          >
+            Expert Feedback
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+              :style="{ transform: sidePanels.expert ? 'rotate(180deg)' : 'none', transition: 'transform .15s' }">
+              <path d="M2 4l4 4 4-4" stroke="var(--stone)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div v-if="sidePanels.expert" style="margin-top:12px">
+            <template v-if="mentorComments.length">
+              <div
+                v-for="(c, i) in mentorComments" :key="i"
+                :style="i > 0 ? 'margin-top:12px;padding-top:12px;border-top:1px solid var(--border)' : ''"
+              >
+                <div style="font-size:13px;color:var(--dark);line-height:1.7;white-space:pre-line">{{ c.content }}</div>
+                <div style="font-size:11px;color:var(--stone);margin-top:5px">{{ c.comment_by }} · {{ formatDate(c.modified) }}</div>
+              </div>
+            </template>
+            <div v-else style="font-size:12px;color:var(--stone)">No expert feedback yet.</div>
+          </div>
+        </div>
+
+        <!-- View Draft -->
+        <div class="card">
+          <button
+            style="all:unset;cursor:pointer;display:flex;align-items:center;justify-content:space-between;width:100%;font-size:12px;font-weight:600;color:var(--stone);letter-spacing:.05em;text-transform:uppercase"
+            :disabled="draftLoading || !memoName"
+            @click="viewDraft"
+          >
+            {{ draftLoading ? 'Preparing…' : 'View Draft' }}
+            <div v-if="draftLoading" class="spinner"></div>
+            <svg v-else width="14" height="14" viewBox="0 0 24 24" fill="none">
+              <path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="var(--stone)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+
       </div>
-    </div>
+    </aside>    
 
   </div>
 </template>
