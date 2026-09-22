@@ -17,7 +17,7 @@ export default function HubLayout() {
     <SidebarProvider>
       <AppSidebar />
       <main className="w-full">
-        <div className="bg-secondary text-secondary-foreground flex h-16 items-center gap-2 md:h-20">
+        <div className="bg-accent text-accent-foreground flex h-16 items-center gap-2 md:h-20">
           <SidebarTrigger />
           <h1 className="text-lg font-bold md:text-2xl">
             <Greeting /> {user?.first_name} {user?.last_name}

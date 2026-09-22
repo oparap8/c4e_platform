@@ -9,9 +9,9 @@ export const STAGE_OPTIONS = [
 ] as const
 
 export const ideaSchema = z.object({
-  student_idea: z.string().min(2, 'Idea must be at least 2 characters'),
-  onboarding_problem: z.string().min(10, 'Problem must be at least 10 characters'),
-  onboarding_solution: z.string().min(10, 'Solution must be at least 10 characters'),
+  student_idea: z.string().min(2, 'Venture name must be at least 2 characters'),
+  onboarding_problem: z.string().min(10, 'Problem statement must be at least 10 characters'),
+  onboarding_solution: z.string().min(10, 'Proposed solution must be at least 10 characters'),
   stage: z.enum(STAGE_OPTIONS, {
     message: 'Please select a valid stage from the list.'
   })

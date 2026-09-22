@@ -20,7 +20,7 @@ export default function SidebarFooterExpanded() {
           </div>
         </CollapsibleTrigger>
         <CollapsibleContent className="p-3 pt-0">
-          <Button variant="outline" className="w-full">
+          <Button variant="outline" className="w-full" size={'xs'}>
             Add files
           </Button>
         </CollapsibleContent>
