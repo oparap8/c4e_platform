@@ -1,6 +1,8 @@
 import frappe
 import json
 from c4e_platform.api.ai_config import get_client
+from frappe.utils import get_url
+from urllib.parse import urlencode
 
 def generate_system_prompt(key):
     templates = {
@@ -149,3 +151,22 @@ def check_memo():
         return result
     except json.JSONDecodeError:
         frappe.throw("AI response is not valid JSON: " + response)
+
+@frappe.whitelist()
+def get_print_format(doc_name):
+    doctype = "C4E Company Memo"
+    print_format = "Company Memo"
+
+    params = {
+        "doctype": doctype,
+        "name": doc_name,
+        "format": print_format,
+        "no_letterhead": 0,
+        "_lang": frappe.local.lang or "en"
+    }
+
+    frappe.has_permission(doctype, "read", doc_name, throw=True)
+
+    url = get_url(f"/printview?{urlencode(params)}")
+
+    return {"url": url}

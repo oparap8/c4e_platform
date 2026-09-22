@@ -6,6 +6,7 @@
  "engine": "InnoDB",
  "field_order": [
   "student",
+  "full_name",
   "student_idea",
   "onboarding_problem",
   "onboarding_solution",
@@ -101,12 +102,18 @@
    "fieldname": "student_idea",
    "fieldtype": "Data",
    "label": "Student Idea"
+  },
+  {
+   "fetch_from": "student.full_name",
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "label": "Full Name"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-07-13 17:14:40.271781",
+ "modified": "2026-09-22 16:57:02.397674",
  "modified_by": "Administrator",
  "module": "C4E Platform",
  "name": "C4E Student Idea",
@@ -139,6 +146,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
