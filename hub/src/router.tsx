@@ -4,7 +4,7 @@ import ErrorPage from '@/components/ErrorPage'
 import { C4ELogo } from './components/C4ELogo'
 
 const HubLayout = lazy(() => import('@/layouts/HubLayout'))
-const IdeaLisitPage = lazy(() => import('@/pages/IdeaLisitPage'))
+const IdeaLisitPage = lazy(() => import('@/pages/IdeaListPage'))
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
