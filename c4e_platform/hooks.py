@@ -263,5 +263,11 @@ fixtures = [
             "name": ["in", ["Total Student Ideas", "Total Company Memos", "Total Data Rooms"]]
         }
     },
-    "Swift Theme Settings"
+    "Swift Theme Settings",
+    {
+        "doctype": "Print Format",
+        "filters": {
+            "name": ["in", ["Company Memo"]]
+        }
+    },
 ]
