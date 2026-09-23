@@ -29,13 +29,11 @@ export async function frappeCall(method, args = {}) {
 		headers: headers(),
 		body: JSON.stringify(args),
 	})
-	// console.log(res)
 	const data = await handleResponse(res)
 	return data.message
 }
 
 export async function frappeSignUp(args = {}) {
-	console.log(JSON.stringify(args))
 	const res = await fetch(`/api/method/c4e_platform.api.auth.register`, {
 		method: 'POST',
 		credentials: 'omit',
