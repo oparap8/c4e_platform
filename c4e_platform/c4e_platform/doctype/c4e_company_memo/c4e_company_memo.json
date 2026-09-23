@@ -10,6 +10,8 @@
   "amended_from",
   "section_break_kbtd",
   "idea",
+  "idea_name",
+  "full_name",
   "purpose_tab",
   "purpose",
   "purpose_checklist_section",
@@ -627,13 +629,25 @@
    "fieldtype": "Tab Break",
    "hidden": 1,
    "label": "Details"
+  },
+  {
+   "fetch_from": "idea.student_idea",
+   "fieldname": "idea_name",
+   "fieldtype": "Data",
+   "label": "Idea Name"
+  },
+  {
+   "fetch_from": "idea.full_name",
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "label": "Full Name"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-09-14 23:08:22.899480",
+ "modified": "2026-09-24 00:13:46.417639",
  "modified_by": "Administrator",
  "module": "C4E Platform",
  "name": "C4E Company Memo",

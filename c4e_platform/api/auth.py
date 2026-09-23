@@ -9,8 +9,7 @@ def get_current_user_roles():
 @frappe.whitelist(allow_guest=True)
 def register(first_name=None, last_name=None, email=None, password=None):
 	first_name = frappe.form_dict.get('first_name')
-	return ({"message": first_name})
-	last_name = frappe.form_dict.get('last_name')
+	last_name = frappe.form_dict.get('last_name', "")
 	email = frappe.form_dict.get('email') 
 	password = frappe.form_dict.get('password') 
 
