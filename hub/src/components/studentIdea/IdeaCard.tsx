@@ -1,6 +1,7 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { formatDate } from '@/lib/utils'
 import type { C4EStudentIdea } from '@/types/C4EPlatform/C4EStudentIdea'
+import { Link } from 'react-router-dom'
 
 export default function IdeaCard({ idea }: { idea: C4EStudentIdea }) {
   return (
@@ -8,10 +9,7 @@ export default function IdeaCard({ idea }: { idea: C4EStudentIdea }) {
       asChild
       className="group hover:border-primary focus-visible:ring-ring h-full transition-all duration-300 hover:shadow-md focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
     >
-      <button
-        onClick={() => console.log('Idea Card clicked', idea.name)}
-        className="flex w-full flex-col text-left"
-      >
+      <Link to={`/idea/${idea.name}`} className="flex w-full flex-col text-left">
         <CardHeader className="w-full pb-3 text-left">
           <div className="mb-2 flex items-start">
             <span className="bg-secondary text-secondary-foreground inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium">
@@ -30,7 +28,7 @@ export default function IdeaCard({ idea }: { idea: C4EStudentIdea }) {
         <CardFooter className="text-muted-foreground mt-auto w-full border-t py-3 text-xs">
           Last modified: {formatDate(idea.modified || '')}
         </CardFooter>
-      </button>
+      </Link>
     </Card>
   )
 }

@@ -2,6 +2,7 @@ import { createBrowserRouter, createRoutesFromElements, Route } from 'react-rout
 import { Suspense, lazy } from 'react'
 import ErrorPage from '@/components/ErrorPage'
 import { C4ELogo } from './components/C4ELogo'
+import IdeaDetailsPage from './pages/IdeaDetailsPage'
 
 const HubLayout = lazy(() => import('@/layouts/HubLayout'))
 const IdeaLisitPage = lazy(() => import('@/pages/IdeaListPage'))
@@ -27,6 +28,7 @@ export const router = createBrowserRouter(
       <Route path="idea">
         <Route index element={<IdeaLisitPage />} />
         <Route path="new" element={<NewIdeaPage />} />
+        <Route path=":id" element={<IdeaDetailsPage />} />
       </Route>
     </Route>
   )

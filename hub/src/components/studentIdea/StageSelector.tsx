@@ -2,7 +2,7 @@ import { Controller, type Control } from 'react-hook-form'
 import { Label } from '@/components/ui/label'
 import { cn } from '@/lib/utils'
 import { type IdeaFormData } from '@/schemas/ideaSchema'
-import { STAGE_OPTIONS } from '@/contants'
+import { STAGE_OPTIONS } from '@/constants'
 
 export function StageSelector({ control }: { control: Control<IdeaFormData> }) {
   return (
@@ -12,7 +12,7 @@ export function StageSelector({ control }: { control: Control<IdeaFormData> }) {
       render={({ field }) => (
         <div className="space-y-3 pt-2">
           <Label>Maturity Lifecycle Stage</Label>
-          <div className="flex w-full items-center justify-between gap-1 rounded-lg p-2 dark:bg-slate-900">
+          <div className="flex w-full items-center justify-between gap-1 rounded-lg p-1 md:p-2 dark:bg-slate-900">
             {STAGE_OPTIONS.map((option) => {
               const Icon = option.icon
               const isActive = field.value === option.value
@@ -29,7 +29,7 @@ export function StageSelector({ control }: { control: Control<IdeaFormData> }) {
                       : 'hover:text-primary dark:hover:text-primary text-slate-500 dark:text-slate-400'
                   )}
                 >
-                  <Icon className="mb-0.5 h-5 w-5" strokeWidth={isActive ? 2.5 : 2} />
+                  <Icon className="mb-0.5 h-3 w-3 md:h-5 md:w-5" strokeWidth={isActive ? 2.5 : 2} />
                   {option.label}
                 </button>
               )
