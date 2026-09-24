@@ -19,7 +19,7 @@ export function PageHeader({ title, subtitle, action }: PageHeaderProps) {
         <h3 className="text-primary text-xl font-semibold">{title}</h3>
         <p className="text-muted-foreground text-sm">{subtitle}</p>
       </div>
-      <div className="flex flex-col gap-2 md:flex-row">{action}</div>
+      <div className="flex flex-col gap-2 md:flex-row md:items-center">{action}</div>
     </div>
   )
 }

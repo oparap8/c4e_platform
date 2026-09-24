@@ -2,11 +2,13 @@ import { createBrowserRouter, createRoutesFromElements, Route } from 'react-rout
 import { Suspense, lazy } from 'react'
 import ErrorPage from '@/components/ErrorPage'
 import { C4ELogo } from './components/C4ELogo'
-import IdeaDetailsPage from './pages/IdeaDetailsPage'
 
 const HubLayout = lazy(() => import('@/layouts/HubLayout'))
+const CompanyMemoLayout = lazy(() => import('@/layouts/CompanyMemoLayout'))
 const IdeaLisitPage = lazy(() => import('@/pages/IdeaListPage'))
 const NewIdeaPage = lazy(() => import('@/pages/NewIdeaPage'))
+const IdeaDetailsPage = lazy(() => import('@/pages/IdeaDetailsPage'))
+const CompanyMemoListPage = lazy(() => import('@/pages/CompanyMemoListPage'))
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,6 +31,10 @@ export const router = createBrowserRouter(
         <Route index element={<IdeaLisitPage />} />
         <Route path="new" element={<NewIdeaPage />} />
         <Route path=":id" element={<IdeaDetailsPage />} />
+      </Route>
+      <Route path="company-memo" element={<CompanyMemoLayout />}>
+        <Route index element={<CompanyMemoListPage />} />
+        <Route path="1" element={<div>test</div>} />
       </Route>
     </Route>
   )

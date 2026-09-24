@@ -2,6 +2,7 @@ import { Paperclip, Bell, Calendar, ChevronDown, ChevronUp } from 'lucide-react'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { Button } from '@/components/ui/button'
 import { AuthAvatar } from '@/components/auth'
+import ThemeSwitcher from '../ThemeSwitcher'
 
 export default function SidebarFooterExpanded() {
   return (
@@ -49,14 +50,15 @@ export default function SidebarFooterExpanded() {
         </div>
       </div>
 
-      <div className="mt-2 flex items-center justify-between rounded-xl border border-white/10 bg-white/5 p-3">
-        <div className="flex items-center gap-3">
-          <AuthAvatar />
-          <div className="flex flex-col">
-            <span className="text-sm leading-tight font-semibold text-white">Student</span>
-            <span className="text-xs text-slate-400">C4E Builder</span>
-          </div>
+      <div className="mt-2 flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 p-3">
+        <AuthAvatar />
+
+        <div className="min-w-0 flex-1">
+          <span className="block text-sm leading-tight font-semibold text-white">Student</span>
+          <span className="block text-xs text-slate-400">C4E Builder</span>
         </div>
+
+        <ThemeSwitcher />
       </div>
     </div>
   )

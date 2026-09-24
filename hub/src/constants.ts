@@ -63,3 +63,24 @@ export const STAGE_OPTIONS = [
     icon: TrendingUp
   }
 ]
+
+export const MEMO_STATUS_COLORS = {
+  complete: 'bg-green-500',
+  'needs-work': 'bg-destructive',
+  edited: 'bg-yellow-500',
+  'not-started': 'bg-border'
+} as const
+
+export const MEMO_SECTIONS = [
+  { name: 'Purpose', status: 'complete' },
+  { name: 'Problem', status: 'edited' },
+  { name: 'Solution', status: 'needs-work' },
+  { name: 'Why Now', status: 'complete' },
+  { name: 'Market Potential', status: 'not-started' },
+  { name: 'Competition', status: 'complete' },
+  { name: 'Business Model', status: 'edited' },
+  { name: 'Team', status: 'not-started' },
+  { name: 'Traction', status: 'needs-work' },
+  { name: 'What You Need', status: 'not-started' },
+  { name: 'Vision', status: 'complete' }
+] as const
