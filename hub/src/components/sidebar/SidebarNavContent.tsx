@@ -7,20 +7,23 @@ import {
   SidebarMenuButton,
   SidebarMenuItem
 } from '@/components/ui/sidebar'
+import { NavLink, useLocation } from 'react-router-dom'
 
 export default function SidebarNavContent() {
+  const { pathname } = useLocation()
+
   return (
     <SidebarGroup>
       <SidebarGroupLabel className="mb-2 text-xs font-semibold tracking-wider text-slate-400 uppercase group-data-[collapsible=icon]:hidden">
         Navigation
       </SidebarGroupLabel>
       <SidebarGroupContent>
-        <SidebarMenu>
+        <SidebarMenu className="space-y-1">
           <SidebarMenuItem>
             <SidebarMenuButton
               tooltip="Dashboard"
-              isActive
-              className="relative rounded-l-none bg-white/10 text-white before:absolute before:top-0 before:bottom-0 before:left-0 before:w-1 before:bg-red-500 hover:bg-white/15"
+              render={<NavLink to="/idea" />}
+              isActive={pathname.startsWith('/idea')}
             >
               <Lightbulb className="size-4" />
               <span>Ideas</span>
@@ -29,7 +32,8 @@ export default function SidebarNavContent() {
           <SidebarMenuItem>
             <SidebarMenuButton
               tooltip="Company Memo"
-              className="text-slate-300 hover:bg-white/5 hover:text-white"
+              render={<NavLink to="/company-memo" />}
+              isActive={pathname.startsWith('/company-memo')}
             >
               <FileText className="size-4" />
               <span>Company Memo</span>
@@ -38,7 +42,8 @@ export default function SidebarNavContent() {
           <SidebarMenuItem>
             <SidebarMenuButton
               tooltip="Data Room"
-              className="text-slate-300 hover:bg-white/5 hover:text-white"
+              render={<NavLink to="/data-room" />}
+              isActive={pathname.startsWith('/data-room')}
             >
               <Folder className="size-4" />
               <span>Data Room</span>
