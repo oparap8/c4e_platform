@@ -1,4 +1,4 @@
-import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom'
+import { createBrowserRouter, createRoutesFromElements, Navigate, Route } from 'react-router-dom'
 import { Suspense, lazy } from 'react'
 import ErrorPage from '@/components/ErrorPage'
 import { C4ELogo } from './components/C4ELogo'
@@ -32,7 +32,12 @@ export const router = createBrowserRouter(
         <Route path=":id" element={<IdeaDetailsPage />} />
       </Route>
       <Route path="company-memo" element={<CompanyMemoLayout />}>
-        <Route path=":id" element={<div>test</div>} />
+        <Route path=":id">
+          <Route index element={<Navigate to="purpose" replace />} />
+          <Route path="purpose" element={<h1>purpose</h1>} />
+          <Route path="problem" element={<h1>problem</h1>} />
+          <Route path="solution" element={<h1>solution</h1>} />
+        </Route>
       </Route>
     </Route>
   )

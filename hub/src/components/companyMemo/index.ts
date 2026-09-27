@@ -1,2 +1,2 @@
 export { default as CompanyMemoNav } from './CompanyMemoNav'
-export { default as CompanyMemoNavPopover } from './CompanyMemoNavDrawer'
+export { default as CompanyMemoNavDrawer } from './CompanyMemoNavDrawer'

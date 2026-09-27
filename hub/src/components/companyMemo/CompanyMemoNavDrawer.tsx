@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button'
+import { Progress } from '@/components/ui/progress'
 import { MEMO_SECTIONS } from '@/constants'
 import {
   Drawer,
@@ -14,56 +15,74 @@ import { Circle, CircleAlert, CircleCheck, CircleDashed } from 'lucide-react'
 const StatusIcon = ({ status }: { status: string }) => {
   switch (status) {
     case 'complete':
-      return <CircleCheck className="size-4 text-emerald-500" />
+      return <CircleCheck className="size-4 shrink-0 text-emerald-500" />
     case 'needs-work':
-      return <CircleAlert className="text-destructive size-4" /> // or text-red-500
+      return <CircleAlert className="text-destructive size-4 shrink-0" />
     case 'edited':
-      return <CircleDashed className="size-4 text-amber-500" />
+      return <CircleDashed className="size-4 shrink-0 text-amber-500" />
     case 'not-started':
     default:
-      return <Circle className="text-muted-foreground size-4" />
+      return <Circle className="text-muted-foreground size-4 shrink-0" />
   }
 }
 
-export default function CompanyMemoNavDrawer() {
+export default function CompanyMemoNavDrawer({ className }: { className?: string }) {
+  const completedCount = MEMO_SECTIONS.filter((s) => s.status === 'complete').length
+  const progressPercentage = Math.round((completedCount / MEMO_SECTIONS.length) * 100)
+
   return (
     <Drawer>
-      <DrawerTrigger render={<Button variant="outline" />}>Open</DrawerTrigger>
+      <DrawerTrigger
+        render={
+          <Button variant="outline" className={className || ''}>
+            Open Memo Nav
+          </Button>
+        }
+      />
       <DrawerContent>
-        <DrawerHeader>
-          <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-          <DrawerDescription>This action cannot be undone.</DrawerDescription>
+        <DrawerHeader className="space-y-3">
+          <div className="flex items-center justify-between">
+            <div>
+              <DrawerTitle>Company Memo Sections</DrawerTitle>
+              <DrawerDescription>Navigate through your memo draft sections.</DrawerDescription>
+            </div>
+            <span className="text-primary bg-primary/10 rounded-full px-2.5 py-1 text-xs font-bold">
+              {progressPercentage}% Done
+            </span>
+          </div>
+
+          <Progress value={progressPercentage} className="h-2 w-full" />
         </DrawerHeader>
+
         <div className="p-4">
-          <nav className="bg-muted mb-6 flex scrollbar-none flex-col flex-nowrap items-center gap-1 overflow-x-auto rounded-xl p-1.5 [&::-webkit-scrollbar]:hidden">
+          <nav
+            data-vaul-no-drag
+            className="bg-muted flex max-h-[55vh] scrollbar-none flex-col gap-1.5 overflow-y-auto rounded-xl p-2 [&::-webkit-scrollbar]:hidden"
+          >
+            {/* 🧭 Rendered directly as NavLink elements */}
             {MEMO_SECTIONS.map((section) => (
-              <Button
+              <NavLink
                 key={section.name}
-                variant="outline"
-                className="h-auto w-full justify-start p-0"
-                render={
-                  <NavLink
-                    to={section.name.toLowerCase().replace(/\s+/g, '-')}
-                    className={({ isActive }) =>
-                      `flex w-full shrink-0 items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium whitespace-nowrap transition-all duration-200 ${
-                        isActive
-                          ? 'bg-background text-primary ring-border/50 shadow-sm ring-1'
-                          : 'text-muted-foreground hover:text-foreground hover:bg-accent/50'
-                      }`
-                    }
-                  />
+                to={section.name.toLowerCase().replace(/\s+/g, '-')}
+                className={({ isActive }) =>
+                  `flex w-full items-center gap-3 rounded-lg border-l-4 px-3.5 py-2.5 text-sm font-medium transition-all duration-200 ${
+                    isActive
+                      ? 'bg-primary/10 text-primary border-primary font-semibold shadow-sm'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-accent/60 border-transparent'
+                  }`
                 }
               >
                 <StatusIcon status={section.status} />
-                {section.name}
-              </Button>
+                <div className="flex flex-col text-left">
+                  <span>{section.name}</span>
+                  <span className="text-muted-foreground text-xs font-normal capitalize">
+                    {section.status.replace('-', ' ')}
+                  </span>
+                </div>
+              </NavLink>
             ))}
           </nav>
         </div>
-        {/* <DrawerFooter>
-          <Button>Submit</Button>
-          <DrawerClose render={<Button variant="outline" />}>Cancel</DrawerClose>
-        </DrawerFooter> */}
       </DrawerContent>
     </Drawer>
   )

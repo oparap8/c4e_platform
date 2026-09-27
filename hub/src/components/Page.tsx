@@ -6,10 +6,11 @@ interface PageHeaderProps {
 
 interface PageContainerProps {
   children: React.ReactNode
+  className?: string
 }
 
-export function PageContainer({ children }: PageContainerProps): React.JSX.Element {
-  return <div className="p-2 md:p-5">{children}</div>
+export function PageContainer({ children, className }: PageContainerProps): React.JSX.Element {
+  return <div className={`p-2 md:p-5 ${className ? className : ''}`}>{children}</div>
 }
 
 export function PageHeader({ title, subtitle, action }: PageHeaderProps) {

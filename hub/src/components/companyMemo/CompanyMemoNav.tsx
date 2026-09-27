@@ -1,72 +1,86 @@
-import { MEMO_SECTIONS, MEMO_STATUS_COLORS } from '@/constants'
-import { NavLink } from 'react-router-dom'
-import CompanyMemoNavPopover from './CompanyMemoNavDrawer'
+import { Progress } from '@/components/ui/progress'
+import { MEMO_SECTIONS } from '@/constants'
+import { NavLink, useParams } from 'react-router-dom'
+import { Circle, CircleAlert, CircleCheck, CircleDashed } from 'lucide-react'
+
+const StatusIcon = ({ status }: { status: string }) => {
+  switch (status) {
+    case 'complete':
+      return <CircleCheck className="size-4 shrink-0 text-emerald-500" />
+    case 'needs-work':
+      return <CircleAlert className="text-destructive size-4 shrink-0" />
+    case 'edited':
+      return <CircleDashed className="size-4 shrink-0 text-amber-500" />
+    case 'not-started':
+    default:
+      return <Circle className="text-muted-foreground size-4 shrink-0" />
+  }
+}
 
 export default function CompanyMemoNav() {
+  const { id } = useParams()
   const completedSections = MEMO_SECTIONS.filter((s) => s.status === 'complete').length
   const totalSections = MEMO_SECTIONS.length
-  const progressPercentage = (completedSections / totalSections) * 100
+  const progressPercentage = Math.round((completedSections / totalSections) * 100)
 
   return (
-    <>
-      <div className="mt-2 mb-4 flex flex-col items-start justify-between gap-4 px-1 md:flex-row md:items-center">
-        {/* Progress Bar */}
-        <div className="flex w-full items-center gap-3 md:max-w-sm">
-          <div className="bg-muted ring-border/50 h-2 flex-1 overflow-hidden rounded-full ring-1 ring-inset">
-            <div
-              className="bg-primary h-full transition-all duration-500 ease-in-out"
-              style={{ width: `${progressPercentage}%` }}
-            />
-          </div>
-          <span className="text-sm font-medium whitespace-nowrap">
-            {completedSections} of {totalSections} sections complete
+    <aside className="sticky top-20 hidden w-64 shrink-0 space-y-4 self-start md:block">
+      <div className="bg-card border-border space-y-2.5 rounded-xl border p-4 shadow-sm">
+        <div className="flex items-center justify-between text-xs">
+          <span className="text-muted-foreground font-semibold tracking-wider uppercase">
+            Progress
           </span>
+          <span className="text-primary font-bold">{progressPercentage}%</span>
         </div>
+        <Progress value={progressPercentage} className="h-2" />
+        <p className="text-muted-foreground text-xs">
+          <strong className="text-foreground">{completedSections}</strong> of {totalSections}{' '}
+          sections complete
+        </p>
+      </div>
 
-        {/* Status Legend */}
-        <div className="text-muted-foreground flex flex-wrap items-center gap-3 text-xs font-medium md:gap-4 md:text-sm">
+      <nav className="bg-muted/50 border-border flex max-h-[calc(100vh-18rem)] scrollbar-none flex-col gap-1 overflow-y-auto rounded-xl border p-1.5 [&::-webkit-scrollbar]:hidden">
+        {MEMO_SECTIONS.map((section) => (
+          <NavLink
+            key={section.name}
+            to={`${id}/${section.name.toLowerCase().replace(/\s+/g, '-')}`}
+            className={({ isActive }: { isActive: boolean }) =>
+              `flex w-full items-center gap-3 rounded-lg border-l-4 px-3.5 py-2.5 text-sm font-medium transition-all duration-200 ${
+                isActive
+                  ? 'bg-primary/10 text-primary border-primary font-semibold shadow-sm'
+                  : 'text-muted-foreground hover:text-foreground hover:bg-accent/60 border-transparent'
+              }`
+            }
+          >
+            <StatusIcon status={section.status} />
+            <span className="truncate">{section.name}</span>
+          </NavLink>
+        ))}
+      </nav>
+
+      <div className="bg-card border-border space-y-2 rounded-xl border p-3.5 text-xs">
+        <span className="text-muted-foreground block text-[10px] font-semibold tracking-wider uppercase">
+          Status Key
+        </span>
+        <div className="text-muted-foreground grid grid-cols-2 gap-2">
           <div className="flex items-center gap-1.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-green-500 shadow-sm" />
+            <CircleCheck className="size-3.5 text-emerald-500" />
             <span>Complete</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="bg-destructive h-2.5 w-2.5 rounded-full shadow-sm" />
+            <CircleAlert className="text-destructive size-3.5" />
             <span>Needs work</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-yellow-500 shadow-sm" />
-            <span>Edited, not reviewed</span>
+            <CircleDashed className="size-3.5 text-amber-500" />
+            <span>Edited</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="bg-border h-2.5 w-2.5 rounded-full shadow-sm" />
+            <Circle className="text-muted-foreground size-3.5" />
             <span>Not started</span>
           </div>
         </div>
       </div>
-
-      <nav className="bg-muted mb-6 flex scrollbar-none flex-nowrap items-center gap-1 overflow-x-auto rounded-xl p-1.5 [&::-webkit-scrollbar]:hidden">
-        {MEMO_SECTIONS.map((section) => {
-          return (
-            <NavLink
-              key={section.name}
-              to={section.name.toLowerCase().replace(/\s+/g, '-')}
-              className={({ isActive }: { isActive: boolean }) =>
-                `flex shrink-0 items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium whitespace-nowrap transition-all duration-200 ${
-                  isActive
-                    ? 'bg-background text-primary ring-border/50 shadow-sm ring-1'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-border/50'
-                }`
-              }
-            >
-              <span
-                className={`h-2 w-2 rounded-full shadow-sm ${MEMO_STATUS_COLORS[section.status]}`}
-              />
-              {section.name}
-            </NavLink>
-          )
-        })}
-      </nav>
-      <CompanyMemoNavPopover />
-    </>
+    </aside>
   )
 }
