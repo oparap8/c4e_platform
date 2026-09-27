@@ -3,12 +3,14 @@ import AIAssistantPanel from '@/components/studentIdea/AIAssistantPanel'
 import IdeaForm from '@/components/studentIdea/IdeaForm'
 import { useEffect, useState } from 'react'
 import mockData from '../ai_response.json'
-import { useParams } from 'react-router-dom'
-import { useFrappeGetDoc } from 'frappe-react-sdk'
+import { Link, useParams } from 'react-router-dom'
+import { useFrappeGetDoc, useFrappeGetDocList } from 'frappe-react-sdk'
 import type { C4EStudentIdea } from '@/types/C4EPlatform/C4EStudentIdea'
 import { DeleteIdeaAlertDialog } from '@/components/studentIdea'
 import { formatDate } from '@/lib/utils'
 import type { IdeaFormData } from '@/schemas/ideaSchema'
+import { Button } from '@/components/ui/button'
+import type { C4ECompanyMemo } from '@/types/C4EPlatform/C4ECompanyMemo'
 
 interface IdeaFeedback {
   industry_tag: string
@@ -25,6 +27,14 @@ export default function IdeaDetailsPage() {
     error,
     isLoading: isFetchingDoc
   } = useFrappeGetDoc<C4EStudentIdea>('C4E Student Idea', id)
+
+  const { data: memoList } = useFrappeGetDocList<C4ECompanyMemo>('C4E Company Memo', {
+    fields: ['name'],
+    filters: data?.name ? [['idea', '=', data.name]] : undefined,
+    limit: 1
+  })
+
+  const memoData = memoList?.[0]
 
   const values: IdeaFormData & { last_modified: string } = {
     onboarding_problem: data?.onboarding_problem || '',
@@ -65,7 +75,14 @@ export default function IdeaDetailsPage() {
       <PageHeader
         title="Idea Details"
         subtitle="Review your idea and get AI-powered feedback, tips and next steps"
-        action={<DeleteIdeaAlertDialog id={id || ''} />}
+        action={
+          <>
+            <Button variant={'link'} render={<Link to={`/company-memo/${memoData?.name || ''}`} />}>
+              Company Memo
+            </Button>
+            <DeleteIdeaAlertDialog id={id || ''} />
+          </>
+        }
       />
       <div className="grid gap-5 md:grid-cols-5">
         <div className="md:col-span-2">

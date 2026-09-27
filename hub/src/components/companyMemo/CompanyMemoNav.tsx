@@ -1,5 +1,6 @@
 import { MEMO_SECTIONS, MEMO_STATUS_COLORS } from '@/constants'
 import { NavLink } from 'react-router-dom'
+import CompanyMemoNavPopover from './CompanyMemoNavDrawer'
 
 export default function CompanyMemoNav() {
   const completedSections = MEMO_SECTIONS.filter((s) => s.status === 'complete').length
@@ -50,7 +51,6 @@ export default function CompanyMemoNav() {
               key={section.name}
               to={section.name.toLowerCase().replace(/\s+/g, '-')}
               className={({ isActive }: { isActive: boolean }) =>
-                // Added flex, items-center, and gap-2 to align the dot and text
                 `flex shrink-0 items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium whitespace-nowrap transition-all duration-200 ${
                   isActive
                     ? 'bg-background text-primary ring-border/50 shadow-sm ring-1'
@@ -58,7 +58,6 @@ export default function CompanyMemoNav() {
                 }`
               }
             >
-              {/* Render the corresponding status dot */}
               <span
                 className={`h-2 w-2 rounded-full shadow-sm ${MEMO_STATUS_COLORS[section.status]}`}
               />
@@ -67,6 +66,7 @@ export default function CompanyMemoNav() {
           )
         })}
       </nav>
+      <CompanyMemoNavPopover />
     </>
   )
 }

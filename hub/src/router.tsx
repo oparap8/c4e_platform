@@ -8,7 +8,6 @@ const CompanyMemoLayout = lazy(() => import('@/layouts/CompanyMemoLayout'))
 const IdeaLisitPage = lazy(() => import('@/pages/IdeaListPage'))
 const NewIdeaPage = lazy(() => import('@/pages/NewIdeaPage'))
 const IdeaDetailsPage = lazy(() => import('@/pages/IdeaDetailsPage'))
-const CompanyMemoListPage = lazy(() => import('@/pages/CompanyMemoListPage'))
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,8 +32,7 @@ export const router = createBrowserRouter(
         <Route path=":id" element={<IdeaDetailsPage />} />
       </Route>
       <Route path="company-memo" element={<CompanyMemoLayout />}>
-        <Route index element={<CompanyMemoListPage />} />
-        <Route path="1" element={<div>test</div>} />
+        <Route path=":id" element={<div>test</div>} />
       </Route>
     </Route>
   )
