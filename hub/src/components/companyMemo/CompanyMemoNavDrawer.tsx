@@ -9,7 +9,7 @@ import {
   DrawerTitle,
   DrawerTrigger
 } from '@/components/ui/drawer'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 import { Circle, CircleAlert, CircleCheck, CircleDashed } from 'lucide-react'
 
 const StatusIcon = ({ status }: { status: string }) => {
@@ -27,6 +27,7 @@ const StatusIcon = ({ status }: { status: string }) => {
 }
 
 export default function CompanyMemoNavDrawer({ className }: { className?: string }) {
+  const { id } = useParams()
   const completedCount = MEMO_SECTIONS.filter((s) => s.status === 'complete').length
   const progressPercentage = Math.round((completedCount / MEMO_SECTIONS.length) * 100)
 
@@ -34,8 +35,8 @@ export default function CompanyMemoNavDrawer({ className }: { className?: string
     <Drawer>
       <DrawerTrigger
         render={
-          <Button variant="outline" className={className || ''}>
-            Open Memo Nav
+          <Button variant="secondary" className={className || ''}>
+            View Sections
           </Button>
         }
       />
@@ -59,12 +60,11 @@ export default function CompanyMemoNavDrawer({ className }: { className?: string
             data-vaul-no-drag
             className="bg-muted flex max-h-[55vh] scrollbar-none flex-col gap-1.5 overflow-y-auto rounded-xl p-2 [&::-webkit-scrollbar]:hidden"
           >
-            {/* 🧭 Rendered directly as NavLink elements */}
             {MEMO_SECTIONS.map((section) => (
               <NavLink
                 key={section.name}
-                to={section.name.toLowerCase().replace(/\s+/g, '-')}
-                className={({ isActive }) =>
+                to={`${id}/${section.name.toLowerCase().replace(/\s+/g, '-')}`}
+                className={({ isActive }: { isActive: boolean }) =>
                   `flex w-full items-center gap-3 rounded-lg border-l-4 px-3.5 py-2.5 text-sm font-medium transition-all duration-200 ${
                     isActive
                       ? 'bg-primary/10 text-primary border-primary font-semibold shadow-sm'

@@ -15,7 +15,7 @@ export default function CompanyMemoLayout() {
         action={
           <>
             <Badge variant="outline">In Review</Badge>
-            <Button>
+            <Button variant={'secondary'}>
               <Download className="mr-2 h-4 w-4" />
               Download Draft
             </Button>

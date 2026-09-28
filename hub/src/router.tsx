@@ -8,6 +8,7 @@ const CompanyMemoLayout = lazy(() => import('@/layouts/CompanyMemoLayout'))
 const IdeaLisitPage = lazy(() => import('@/pages/IdeaListPage'))
 const NewIdeaPage = lazy(() => import('@/pages/NewIdeaPage'))
 const IdeaDetailsPage = lazy(() => import('@/pages/IdeaDetailsPage'))
+const CompanyMemoSection = lazy(() => import('@/components/companyMemo/CompanyMemoSection'))
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -34,9 +35,26 @@ export const router = createBrowserRouter(
       <Route path="company-memo" element={<CompanyMemoLayout />}>
         <Route path=":id">
           <Route index element={<Navigate to="purpose" replace />} />
-          <Route path="purpose" element={<h1>purpose</h1>} />
-          <Route path="problem" element={<h1>problem</h1>} />
-          <Route path="solution" element={<h1>solution</h1>} />
+          <Route path="purpose" element={<CompanyMemoSection sectionKey={'purpose'} />} />
+          <Route path="problem" element={<CompanyMemoSection sectionKey={'problem'} />} />
+          <Route path="solution" element={<CompanyMemoSection sectionKey={'solution'} />} />
+          <Route path="why-now" element={<CompanyMemoSection sectionKey={'why_now'} />} />
+          <Route
+            path="market-potential"
+            element={<CompanyMemoSection sectionKey={'market_potential'} />}
+          />
+          <Route path="competition" element={<CompanyMemoSection sectionKey={'competition'} />} />
+          <Route
+            path="business-model"
+            element={<CompanyMemoSection sectionKey={'business_model'} />}
+          />
+          <Route path="team" element={<CompanyMemoSection sectionKey={'team'} />} />
+          <Route path="traction" element={<CompanyMemoSection sectionKey={'traction'} />} />
+          <Route
+            path="what-you-need"
+            element={<CompanyMemoSection sectionKey={'what_you_need'} />}
+          />
+          <Route path="vision" element={<CompanyMemoSection sectionKey={'vision'} />} />
         </Route>
       </Route>
     </Route>

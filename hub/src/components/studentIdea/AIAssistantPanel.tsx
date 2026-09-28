@@ -1,6 +1,6 @@
 import { Sparkles, Tag, Compass, CheckSquare, Lightbulb } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card'
-import { AI_FEATURES } from '@/constants'
+import { IDEA_AI_FEATURES } from '@/constants'
 import ReactMarkdown from 'react-markdown'
 
 interface AIAssistantPanelProps {
@@ -78,7 +78,7 @@ export default function AIAssistantPanel({ isLoading, response }: AIAssistantPan
       ) : (
         <CardContent className="space-y-4">
           <div className="flex flex-col gap-6 rounded-2xl bg-white p-6 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)]">
-            {AI_FEATURES.map((feature, index) => {
+            {IDEA_AI_FEATURES.map((feature, index) => {
               const Icon = feature.icon
               return (
                 <div key={index} className="flex items-start gap-4">
