@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { MEMO_SECTIONS, type MemoSectionName } from '@/constants'
-import { useCompanyMemoSection } from '@/hooks/useCompanyMemoSection'
+import { useCompanyMemoSection } from '@/hooks'
 import { ChevronLeft, ChevronRight, Loader2 } from 'lucide-react'
 import CompanyMemoAiFeedbackCard from './CompanyMemoAiFeedbackCard'
 import CompanyMemoEditorCard from './CompanyMemoEditorCard'
