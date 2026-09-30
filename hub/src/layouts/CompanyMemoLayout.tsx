@@ -1,5 +1,6 @@
 import { CompanyMemoComment, CompanyMemoNav } from '@/components/companyMemo'
 import CompanyMemoNavDrawer from '@/components/companyMemo/CompanyMemoNavDrawer'
+import CompanyMemoResources from '@/components/companyMemo/CompanyMemoResources'
 import { PageContainer, PageHeader } from '@/components/Page'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -29,6 +30,7 @@ export default function CompanyMemoLayout() {
         <main className="min-w-0 flex-1 pb-20 md:pb-0">
           <Outlet />
           <CompanyMemoComment />
+          <CompanyMemoResources />
         </main>
       </div>
 
