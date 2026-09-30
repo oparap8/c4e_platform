@@ -1,22 +1,32 @@
+import { FolderOpen } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { VideoPlayer } from '../videoPlayer'
+import CompanyMemoAttachments from './CompanyMemoAttachments'
 
 export default function CompanyMemoResources() {
   return (
-    <Card className="shadow-xs">
+    <Card className="my-5 shadow-xs">
       <CardHeader className="pb-3">
-        <CardTitle className="flex items-center gap-2 text-base font-semibold">Resources</CardTitle>
+        <CardTitle className="flex items-center gap-2 text-base font-semibold">
+          <FolderOpen className="text-muted-foreground h-4 w-4" />
+          <span>Resources from your coach</span>
+        </CardTitle>
       </CardHeader>
-      <CardContent className="flex gap-4">
-        <div className="flex-2/5">
+      <CardContent className="flex flex-col gap-6 pb-5 md:flex-row md:gap-4">
+        <div className="flex w-full flex-col justify-start md:w-2/5">
           <VideoPlayer
-            src="/files/Screencast from 2026-06-11 17-48-43.webm"
-            poster="/files/Screenshot from 2026-08-28 11-50-51.png"
-            className="border-border max-h-70 border shadow-md"
+            src="https://samplelib.com/mp4/sample-5s.mp4"
+            poster="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg"
+            title="How to size your market in ten minutes"
+            description="A walk-through of top-down and bottom-up estimates, and where to find a source you can cite. Shared by Claudine for Market Potential."
+            className="border-border aspect-video w-full rounded-lg border shadow-xs"
             autoPlay={false}
           />
         </div>
-        <div className="flex-3/5"></div>
+
+        <div className="w-full md:w-3/5">
+          <CompanyMemoAttachments />
+        </div>
       </CardContent>
     </Card>
   )
