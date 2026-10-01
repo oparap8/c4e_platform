@@ -8,7 +8,7 @@ const CompanyMemoLayout = lazy(() => import('@/layouts/CompanyMemoLayout'))
 const IdeaLisitPage = lazy(() => import('@/pages/IdeaListPage'))
 const NewIdeaPage = lazy(() => import('@/pages/NewIdeaPage'))
 const IdeaDetailsPage = lazy(() => import('@/pages/IdeaDetailsPage'))
-const CompanyMemoSection = lazy(() => import('@/components/companyMemo/CompanyMemoSection'))
+const CompanyMemoSection = lazy(() => import('@/components/company-memo/CompanyMemoSection'))
 
 export const router = createBrowserRouter(
   createRoutesFromElements(

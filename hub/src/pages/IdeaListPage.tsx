@@ -1,5 +1,5 @@
 import { Banner } from '@/components/Banner'
-import { IdeaCard, IdeaCardSkeleton, NewIdeaCard } from '@/components/studentIdea'
+import { IdeaCard, IdeaCardSkeleton, NewIdeaCard } from '@/components/student-idea'
 import { Button } from '@/components/ui/button'
 import type { C4EStudentIdea } from '@/types/C4EPlatform/C4EStudentIdea'
 import { useFrappeAuth, useFrappeGetDocList, type GetDocListArgs } from 'frappe-react-sdk'

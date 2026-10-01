@@ -1,6 +1,6 @@
 import { FolderOpen } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
-import { VideoPlayer } from '../videoPlayer'
+import { VideoPlayer } from '../video-player'
 import CompanyMemoAttachments from './CompanyMemoAttachments'
 
 export default function CompanyMemoResources() {
