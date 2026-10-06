@@ -1,17 +1,20 @@
 // Copyright (c) 2026, Udo and contributors
 // For license information, please see license.txt
 
-const charCheckFields = [
-	"onboarding_idea",
-	"onboarding_problem",
-	"onboarding_target_customer",
-	"onboarding_differentiation",
-];
+// const charCheckFields = [
+// 	"onboarding_idea",
+// 	"onboarding_problem",
+// 	"onboarding_target_customer",
+// 	"onboarding_differentiation",
+// ];
 
-// frappe.markdown("**Hi**");
-{/* <div class="alert alert-warning" role="alert">
-	You have not received <strong>AI feedback</strong> for your idea
-</div> */}
+const charCheckFields = [
+	"student_idea",
+	"onboarding_problem",
+	"onboarding_solution",
+	"stage"
+]
+
 
 frappe.ui.form.on("C4E Student Idea", {
 	refresh(frm) {
@@ -51,19 +54,25 @@ frappe.ui.form.on("C4E Student Idea", {
 });
 
 function validate_char_length(frm) {
-    charCheckFields.forEach((fieldname) => {
-		const field_wrapper = frm.fields_dict[fieldname].$wrapper;
+	charCheckFields.forEach((fieldname) => {
+		const field = frm.fields_dict[fieldname];
+
+		if (!field) {
+			console.warn(`Field "${fieldname}" not found on the form.`);
+			return;
+		}
+
+		const field_wrapper = field.$wrapper;
 
 		field_wrapper
 			.find("input, textarea")
 			.off("input")
 			.on("input", function () {
-				let value = $(this).val() || "";
-				let length = value.length;
+				const value = $(this).val() || "";
+				const length = value.length;
 
-				let wrapper = $(this).closest(".control-input-wrapper");
-
-				let help_box = wrapper.find(".help-box");
+				const wrapper = $(this).closest(".control-input-wrapper");
+				const help_box = wrapper.find(".help-box");
 
 				if (length < 10) {
 					$(this).css("border", "1px solid red");
@@ -75,7 +84,10 @@ function validate_char_length(frm) {
 				} else {
 					$(this).css("border", "");
 
-					help_box.addClass("text-muted").css("color", "").text("");
+					help_box
+						.addClass("text-muted")
+						.css("color", "")
+						.text("");
 				}
 			});
 	});
