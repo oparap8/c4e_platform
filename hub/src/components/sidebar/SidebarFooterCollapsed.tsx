@@ -1,6 +1,7 @@
-import { Paperclip, Bell, Calendar } from 'lucide-react'
+import { Paperclip, Calendar } from 'lucide-react'
 import { AuthAvatar } from '@/components/auth'
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar'
+import { NotificationBell } from '../notification'
 
 export default function SidebarFooterCollapsed() {
   return (
@@ -20,7 +21,7 @@ export default function SidebarFooterCollapsed() {
             tooltip="Notifications"
             className="text-slate-300 hover:bg-white/5 hover:text-white"
           >
-            <Bell />
+            <NotificationBell />
           </SidebarMenuButton>
         </SidebarMenuItem>
 

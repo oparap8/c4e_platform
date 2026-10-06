@@ -1,8 +1,9 @@
-import { Paperclip, Bell, Calendar, ChevronDown, ChevronUp } from 'lucide-react'
+import { Paperclip, Calendar, ChevronDown, ChevronUp } from 'lucide-react'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { Button } from '@/components/ui/button'
 import { AuthAvatar } from '@/components/auth'
 import ThemeSwitcher from '../ThemeSwitcher'
+import { NotificationBell } from '../notification'
 
 export default function SidebarFooterExpanded() {
   return (
@@ -28,7 +29,7 @@ export default function SidebarFooterExpanded() {
         <CollapsibleTrigger className="w-full">
           <div className="tracking-wideruppercase flex cursor-pointer items-center justify-between rounded-xl p-3 text-sm font-bold hover:bg-white/5">
             <div className="flex items-center gap-2">
-              <Bell className="size-4" />
+              <NotificationBell />
               <span>Notifications</span>
             </div>
             <ChevronDown className="size-4 transition-transform group-data-[state=open]/collapsible:rotate-180" />
