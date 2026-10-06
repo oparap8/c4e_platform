@@ -29,10 +29,10 @@ frappe.ui.form.on("C4E Student Idea", {
 			method: "c4e_platform.api.ai_feedback.get_idea_feedback",
 
 			args: {
-				onboarding_idea: frm.doc.onboarding_idea,
+				doc_name: frm.doc.name,
+				student_idea: frm.doc.student_idea,
 				onboarding_problem: frm.doc.onboarding_problem,
-				onboarding_target_customer: frm.doc.onboarding_target_customer,
-				onboarding_differentiation: frm.doc.onboarding_differentiation,
+				onboarding_solution: frm.doc.onboarding_solution,
 			},
 
 			freeze: true,

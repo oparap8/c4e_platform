@@ -8,36 +8,37 @@ def get_idea_feedback():
 	student_idea = frappe.form_dict.get('student_idea')
 	onboarding_problem = frappe.form_dict.get('onboarding_problem') 
 	onboarding_solution = frappe.form_dict.get('onboarding_solution')
+	doc_name = frappe.form_dict.get('doc_name')
 
 
 	system_prompt = """You are a startup advisor at a university Center for Entrepreneurship in Rwanda.
-    Your job is to encourage students and help them think clearly about their idea.
-    You are reading a student's first submission — treat it as the beginning of a conversation, not an evaluation.
+	Your job is to encourage students and help them think clearly about their idea.
+	You are reading a student's first submission — treat it as the beginning of a conversation, not an evaluation.
 
-    Respond ONLY with a valid JSON object. No preamble. No markdown. Just JSON.
+	Respond ONLY with a valid JSON object. No preamble. No markdown. Just JSON.
 
-    Return this exact structure:
-    {
-    "overview_paragraph": "string — under 100 words, warm and specific to their idea",
-    "overview_bullets": ["string", "string", "string"],
-    "industry_tag": "string — one word or short phrase, e.g. fintech, agritech, health",
-    "approach": "Problem first | Solution first | unclear",
-    "ai_stage_recommendation": "string — one sentence on what to focus on next"
-    }
+	Return this exact structure:
+	{
+	"overview_paragraph": "string — under 100 words, warm and specific to their idea",
+	"overview_bullets": ["string", "string", "string"],
+	"industry_tag": "string — one word or short phrase, e.g. fintech, agritech, health",
+	"approach": "Problem first | Solution first | unclear",
+	"ai_stage_recommendation": "string — one sentence on what to focus on next"
+	}
 
-    Rules:
-    - overview_paragraph must feel personal, not generic. Reference their specific idea.
-    - overview_bullets: 3 to 5 bullets. Each under 20 words. Frame as things to explore, not problems to fix.
-    - Never start a bullet with 'However' or 'Unfortunately'. Never use the word 'Unfortunately'.
-    - If the idea sounds very early, say so positively: it is a good start.
-    - If the idea sounds advanced, acknowledge that too.
-    - Never mention scores, ratings, or maturity levels."""
+	Rules:
+	- overview_paragraph must feel personal, not generic. Reference their specific idea.
+	- overview_bullets: 3 to 5 bullets. Each under 20 words. Frame as things to explore, not problems to fix.
+	- Never start a bullet with 'However' or 'Unfortunately'. Never use the word 'Unfortunately'.
+	- If the idea sounds very early, say so positively: it is a good start.
+	- If the idea sounds advanced, acknowledge that too.
+	- Never mention scores, ratings, or maturity levels."""
 
 	user_prompt = f"""Here is a student's business idea submission:
 
-    Idea Title: {student_idea}
-    Problem: {onboarding_problem}
-    Solution: {onboarding_solution}"""
+	Idea Title: {student_idea}
+	Problem: {onboarding_problem}
+	Solution: {onboarding_solution}"""
 
 	client = get_client()
 	message = client.messages.create(
@@ -61,6 +62,17 @@ def get_idea_feedback():
 		paragraph = result.pop("overview_paragraph", "")
 		result["overview"] = f"### Overview\n\n{paragraph}\n\n### Key Insights\n\n{bullets}"
 
+		frappe.db.set_value(
+			"C4E Student Idea", 
+			doc_name, 
+			{
+				"ai_feedback": result["overview"], 
+				"approach": result["approach"],
+				"industry": result["industry_tag"],
+				"ai_stage_recommendation": result["ai_stage_recommendation"],
+			}
+		)
+
 		return result
 	except json.JSONDecodeError:
 		frappe.throw("AI response is not valid JSON: " + response)
@@ -69,40 +81,40 @@ def get_idea_feedback():
 @frappe.whitelist()
 def check_memo(purpose, problem, solution):
 	system_prompt = """
-    You are screening a student proposal for a university entrepreneurship program.
+	You are screening a student proposal for a university entrepreneurship program.
 
-    Return ONLY a valid JSON object. No preamble. No markdown. No extra text.
+	Return ONLY a valid JSON object. No preamble. No markdown. No extra text.
 
-    Each checklist item must have two fields:
-    - "pass": true or false
-    - "reason": null if pass is true, or a short friendly suggestion (under 15 words) if false
+	Each checklist item must have two fields:
+	- "pass": true or false
+	- "reason": null if pass is true, or a short friendly suggestion (under 15 words) if false
 
-    Respond using EXACTLY this structure:
+	Respond using EXACTLY this structure:
 
-    {{
-    "purpose": {{
-        "person_named": {{ "pass": true, "reason": null }},
-        "outcome_clear": {{ "pass": true, "reason": null }},
-        "one_sentence": {{ "pass": true, "reason": null }}
-    }},
-    "problem": {{
-        "concrete": {{ "pass": true, "reason": null }},
-        "who_affected": {{ "pass": true, "reason": null }},
-        "significance_shown": {{ "pass": true, "reason": null }}
-    }},
-    "solution": {{
-        "what_it_does_clear": {{ "pass": true, "reason": null }},
-        "links_to_problem": {{ "pass": true, "reason": null }},
-        "user_benefit_not_just_tech": {{ "pass": true, "reason": null }}
-    }}
-    }}
-    """
+	{{
+	"purpose": {{
+		"person_named": {{ "pass": true, "reason": null }},
+		"outcome_clear": {{ "pass": true, "reason": null }},
+		"one_sentence": {{ "pass": true, "reason": null }}
+	}},
+	"problem": {{
+		"concrete": {{ "pass": true, "reason": null }},
+		"who_affected": {{ "pass": true, "reason": null }},
+		"significance_shown": {{ "pass": true, "reason": null }}
+	}},
+	"solution": {{
+		"what_it_does_clear": {{ "pass": true, "reason": null }},
+		"links_to_problem": {{ "pass": true, "reason": null }},
+		"user_benefit_not_just_tech": {{ "pass": true, "reason": null }}
+	}}
+	}}
+	"""
 
 	user_prompt = f"""
-        Purpose: {purpose}
-        Problem: {problem}
-        Solution: {solution}
-    """
+		Purpose: {purpose}
+		Problem: {problem}
+		Solution: {solution}
+	"""
 
 	client = get_client()
 	message = client.messages.create(

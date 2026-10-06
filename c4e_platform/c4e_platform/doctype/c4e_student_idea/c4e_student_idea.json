@@ -47,13 +47,15 @@
   {
    "fieldname": "ai_feedback_tab",
    "fieldtype": "Tab Break",
-   "label": "AI Feedback"
+   "label": "AI Feedback",
+   "read_only": 1
   },
   {
    "fieldname": "ai_feedback",
    "fieldtype": "Markdown Editor",
    "hidden": 1,
-   "label": "AI Feedback"
+   "label": "AI Feedback",
+   "read_only": 1
   },
   {
    "fieldname": "ai_feedback_html",
@@ -106,7 +108,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-07-13 17:14:40.271781",
+ "modified": "2026-10-06 13:38:35.701761",
  "modified_by": "Administrator",
  "module": "C4E Platform",
  "name": "C4E Student Idea",
@@ -139,6 +141,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
