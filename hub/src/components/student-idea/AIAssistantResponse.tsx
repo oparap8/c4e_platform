@@ -1,7 +1,7 @@
 import { CheckSquare, Compass, Lightbulb, Tag } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
 
-interface Response {
+interface ResponseData {
   industry_tag: string
   approach: string
   ai_stage_recommendation: string
@@ -23,8 +23,13 @@ const RESPONSE_STYLE_MAP: Record<string, { icon: React.ElementType; colorClass: 
   }
 }
 
-export default function AIAssistantReponse({ response }: { response: Response }) {
-  const { overview, ...shortData } = response || {}
+export default function AIAssistantReponse({
+  response
+}: {
+  response: ResponseData | { message: ResponseData } | null
+}) {
+  const data = response && 'message' in response ? response.message : response
+  const { overview, ...shortData } = data || {}
 
   return (
     <>
@@ -48,6 +53,7 @@ export default function AIAssistantReponse({ response }: { response: Response })
                   {key.replace(/_/g, ' ')}
                 </h4>
                 <p className="text-xs leading-relaxed whitespace-pre-wrap text-slate-600 dark:text-slate-400">
+                  {/* value is now guaranteed to be a string, not the nested object */}
                   {value as string}
                 </p>
               </div>
@@ -56,11 +62,13 @@ export default function AIAssistantReponse({ response }: { response: Response })
         })}
       </div>
 
-      <div className="flex flex-col rounded-2xl bg-slate-50 p-6 shadow-inner dark:border dark:border-slate-800 dark:bg-slate-900/50 dark:shadow-none">
-        <div className="w-full text-left text-sm text-slate-600 dark:text-slate-300 [&>h3]:mt-6 [&>h3]:mb-3 [&>h3]:text-base [&>h3]:font-semibold [&>h3]:text-slate-900 first:[&>h3]:mt-0 dark:[&>h3]:text-slate-100 [&>li]:leading-relaxed [&>p]:mb-4 [&>p]:leading-relaxed last:[&>p]:mb-0 [&>strong]:font-semibold [&>strong]:text-slate-900 dark:[&>strong]:text-slate-100 [&>ul]:mb-4 [&>ul]:list-outside [&>ul]:list-disc [&>ul]:space-y-2 [&>ul]:pl-5 last:[&>ul]:mb-0">
-          <ReactMarkdown>{overview}</ReactMarkdown>
+      {overview && (
+        <div className="flex flex-col rounded-2xl bg-slate-50 p-6 shadow-inner dark:border dark:border-slate-800 dark:bg-slate-900/50 dark:shadow-none">
+          <div className="w-full text-left text-sm text-slate-600 dark:text-slate-300 [&>h3]:mt-6 [&>h3]:mb-3 [&>h3]:text-base [&>h3]:font-semibold [&>h3]:text-slate-900 first:[&>h3]:mt-0 dark:[&>h3]:text-slate-100 [&>li]:leading-relaxed [&>p]:mb-4 [&>p]:leading-relaxed last:[&>p]:mb-0 [&>strong]:font-semibold [&>strong]:text-slate-900 dark:[&>strong]:text-slate-100 [&>ul]:mb-4 [&>ul]:list-outside [&>ul]:list-disc [&>ul]:space-y-2 [&>ul]:pl-5 last:[&>ul]:mb-0">
+            <ReactMarkdown>{overview}</ReactMarkdown>
+          </div>
         </div>
-      </div>
+      )}
     </>
   )
 }

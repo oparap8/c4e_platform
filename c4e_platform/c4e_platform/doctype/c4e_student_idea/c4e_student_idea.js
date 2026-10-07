@@ -30,9 +30,6 @@ frappe.ui.form.on("C4E Student Idea", {
 
 			args: {
 				doc_name: frm.doc.name,
-				// student_idea: frm.doc.student_idea,
-				// onboarding_problem: frm.doc.onboarding_problem,
-				// onboarding_solution: frm.doc.onboarding_solution,
 			},
 
 			freeze: true,
@@ -47,6 +44,7 @@ frappe.ui.form.on("C4E Student Idea", {
 						indicator: "green",
 						is_html: true,
 					});
+					frm.reload_doc()
 				}
 			},
 		});
@@ -112,6 +110,10 @@ function are_all_fields_valid(frm) {
 
 function display_analyze_idea_button(frm){
 	frm.add_custom_button("Analyze Idea", () => {
+		if (frm.is_dirty()) {
+            frappe.throw(__("Please save the document before analyzing your idea."));
+        }
+
 		if (!are_all_fields_valid(frm)) {
 			frappe.msgprint({
 				title: "Validation Error",

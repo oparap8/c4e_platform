@@ -1,10 +1,9 @@
 import { PageContainer, PageHeader } from '@/components/Page'
 import AIAssistantPanel from '@/components/student-idea/AIAssistantPanel'
 import IdeaForm from '@/components/student-idea/IdeaForm'
-import { useEffect, useState } from 'react'
-import mockData from '../ai_response.json'
+import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { useFrappeGetDoc, useFrappeGetDocList } from 'frappe-react-sdk'
+import { useFrappeGetDoc, useFrappeGetDocList, useFrappePostCall } from 'frappe-react-sdk'
 import type { C4EStudentIdea } from '@/types/C4EPlatform/C4EStudentIdea'
 import { DeleteIdeaAlertDialog } from '@/components/student-idea'
 import { formatDate } from '@/lib/utils'
@@ -44,23 +43,34 @@ export default function IdeaDetailsPage() {
     last_modified: formatDate(data?.modified || '')
   }
 
+  const existingAiResponse: IdeaFeedback | undefined = data?.ai_feedback
+    ? {
+        ai_stage_recommendation: data.ai_stage_recommendation || '',
+        approach: data.approach || '',
+        industry_tag: data.industry || '',
+        overview: data.ai_feedback || ''
+      }
+    : undefined
+
   const [isCreating, setIsCreating] = useState(false)
-  const [isResponseLoading, setIsResponseLoading] = useState(true)
-  const [response, setResponse] = useState<IdeaFeedback | undefined>(undefined)
 
-  useEffect(() => {
-    const fetchFeedback = async () => {
-      const mockDataResponse = mockData.get_idea_feedback
-      await new Promise((resolve) => setTimeout(resolve, 3000))
+  const {
+    call,
+    loading: aiLoading,
+    result
+  } = useFrappePostCall<IdeaFeedback>('c4e_platform.api.ai_feedback.get_idea_feedback')
 
-      setResponse(mockDataResponse)
-      setIsResponseLoading(false)
+  const handleAIFeedback = async () => {
+    try {
+      await call({
+        doc_name: id
+      })
+    } catch (err) {
+      console.error('AI Feedback failed: ', err)
     }
+  }
 
-    fetchFeedback()
-  }, [])
-
-  const isLoading = isCreating || isResponseLoading
+  const isLoading = isCreating || aiLoading
 
   if (error) {
     return (
@@ -96,11 +106,12 @@ export default function IdeaDetailsPage() {
               docName={id}
               setIsLoading={setIsCreating}
               defaultValues={values}
+              onSuccess={handleAIFeedback}
             />
           )}
         </div>
         <div className="md:col-span-3">
-          <AIAssistantPanel isLoading={isLoading} response={response} />
+          <AIAssistantPanel isLoading={isLoading} response={result ?? existingAiResponse} />
         </div>
       </div>
     </PageContainer>
