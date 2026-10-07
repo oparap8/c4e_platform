@@ -4,78 +4,86 @@ from c4e_platform.api.ai_config import get_client
 
 
 @frappe.whitelist()
-def get_idea_feedback():
-	student_idea = frappe.form_dict.get('student_idea')
-	onboarding_problem = frappe.form_dict.get('onboarding_problem') 
-	onboarding_solution = frappe.form_dict.get('onboarding_solution')
-	doc_name = frappe.form_dict.get('doc_name')
+def get_idea_feedback(doc_name):
 
+    doc = frappe.db.exists("C4E Student Idea", doc_name)
+    if not doc:
+        frappe.throw(f"Student Idea {doc_name} does not exist")
+    
+    doc_values = frappe.db.get_value(
+        "C4E Student Idea", 
+        doc_name,
+        ["student_idea", "onboarding_problem", "onboarding_solution"],
+        as_dict=True
+    )
 
-	system_prompt = """You are a startup advisor at a university Center for Entrepreneurship in Rwanda.
-	Your job is to encourage students and help them think clearly about their idea.
-	You are reading a student's first submission — treat it as the beginning of a conversation, not an evaluation.
+    system_prompt = """You are a startup advisor at a university Center for Entrepreneurship in Rwanda.
+    Your job is to encourage students and help them think clearly about their idea.
+    You are reading a student's first submission — treat it as the beginning of a conversation, not an evaluation.
 
-	Respond ONLY with a valid JSON object. No preamble. No markdown. Just JSON.
+    Respond ONLY with a valid JSON object. No preamble. No markdown. Just JSON.
 
-	Return this exact structure:
-	{
-	"overview_paragraph": "string — under 100 words, warm and specific to their idea",
-	"overview_bullets": ["string", "string", "string"],
-	"industry_tag": "string — one word or short phrase, e.g. fintech, agritech, health",
-	"approach": "Problem first | Solution first | unclear",
-	"ai_stage_recommendation": "string — one sentence on what to focus on next"
-	}
+    Return this exact structure:
+    {
+    "overview_paragraph": "string — under 100 words, warm and specific to their idea",
+    "overview_bullets": ["string", "string", "string"],
+    "industry_tag": "string — one word or short phrase, e.g. fintech, agritech, health",
+    "approach": "Problem first | Solution first | unclear",
+    "ai_stage_recommendation": "string — one sentence on what to focus on next"
+    }
 
-	Rules:
-	- overview_paragraph must feel personal, not generic. Reference their specific idea.
-	- overview_bullets: 3 to 5 bullets. Each under 20 words. Frame as things to explore, not problems to fix.
-	- Never start a bullet with 'However' or 'Unfortunately'. Never use the word 'Unfortunately'.
-	- If the idea sounds very early, say so positively: it is a good start.
-	- If the idea sounds advanced, acknowledge that too.
-	- Never mention scores, ratings, or maturity levels."""
+    Rules:
+    - overview_paragraph must feel personal, not generic. Reference their specific idea.
+    - overview_bullets: 3 to 5 bullets. Each under 20 words. Frame as things to explore, not problems to fix.
+    - Never start a bullet with 'However' or 'Unfortunately'. Never use the word 'Unfortunately'.
+    - If the idea sounds very early, say so positively: it is a good start.
+    - If the idea sounds advanced, acknowledge that too.
+    - Never mention scores, ratings, or maturity levels."""
 
-	user_prompt = f"""Here is a student's business idea submission:
+    user_prompt = f"""
+    Here is a student's business idea submission:
 
-	Idea Title: {student_idea}
-	Problem: {onboarding_problem}
-	Solution: {onboarding_solution}"""
+    Idea Title: {doc_values.get("student_idea", "")}
+    Problem: {doc_values.get("onboarding_problem", "")}
+    Solution: {doc_values.get("onboarding_solution", "")}
+    """
 
-	client = get_client()
-	message = client.messages.create(
-		model="claude-sonnet-4-6",
-		max_tokens=1024,
-		system=system_prompt,
-		messages=[{"role": "user", "content": user_prompt}],
-	)
+    client = get_client()
+    message = client.messages.create(
+        model="claude-sonnet-5-5", 
+        max_tokens=1024,
+        system=system_prompt,
+        messages=[{"role": "user", "content": user_prompt}],
+    )
 
-	response = message.content[0].text.strip()
+    response = message.content[0].text.strip()
 
-	if response.startswith("```") and response.endswith("```"):
-		response = response[3:-3].strip()
-		if response.startswith("json"):
-			response = response[4:].strip()
+    if response.startswith("```") and response.endswith("```"):
+        response = response[3:-3].strip()
+        if response.startswith("json"):
+            response = response[4:].strip()
 
-	try:
-		result = json.loads(response)
+    try:
+        result = json.loads(response)
 
-		bullets = "\n".join(f"- {b}" for b in result.pop("overview_bullets", []))
-		paragraph = result.pop("overview_paragraph", "")
-		result["overview"] = f"### Overview\n\n{paragraph}\n\n### Key Insights\n\n{bullets}"
+        bullets = "\n".join(f"- {b}" for b in result.pop("overview_bullets", []))
+        paragraph = result.pop("overview_paragraph", "")
+        result["overview"] = f"### Overview\n\n{paragraph}\n\n### Key Insights\n\n{bullets}"
 
-		frappe.db.set_value(
-			"C4E Student Idea", 
-			doc_name, 
-			{
-				"ai_feedback": result["overview"], 
-				"approach": result["approach"],
-				"industry": result["industry_tag"],
-				"ai_stage_recommendation": result["ai_stage_recommendation"],
-			}
-		)
+        frappe.db.set_value(
+            "C4E Student Idea", 
+            doc_name, 
+            {
+                "ai_feedback": result["overview"], 
+                "approach": result["approach"],
+                "industry": result["industry_tag"],
+                "ai_stage_recommendation": result["ai_stage_recommendation"],
+            }
+        )
 
-		return result
-	except json.JSONDecodeError:
-		frappe.throw("AI response is not valid JSON: " + response)
+        return result
+    except json.JSONDecodeError:
+        frappe.throw("AI response is not valid JSON: " + response)
 
 
 @frappe.whitelist()

@@ -30,9 +30,9 @@ frappe.ui.form.on("C4E Student Idea", {
 
 			args: {
 				doc_name: frm.doc.name,
-				student_idea: frm.doc.student_idea,
-				onboarding_problem: frm.doc.onboarding_problem,
-				onboarding_solution: frm.doc.onboarding_solution,
+				// student_idea: frm.doc.student_idea,
+				// onboarding_problem: frm.doc.onboarding_problem,
+				// onboarding_solution: frm.doc.onboarding_solution,
 			},
 
 			freeze: true,
